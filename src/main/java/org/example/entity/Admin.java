@@ -6,7 +6,8 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class User {
+public class Admin {
+    private int adminId;
     private String username;
     private String email;
     private String password;
