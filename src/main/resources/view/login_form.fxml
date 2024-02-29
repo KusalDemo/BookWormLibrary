@@ -28,7 +28,7 @@
                <font>
                   <Font size="20.0" />
                </font></Button>
-            <Button fx:id="btnSignUp" layoutX="177.0" layoutY="547.0" mnemonicParsing="false" onAction="#btnSignUpOnAction" prefHeight="59.0" prefWidth="289.0" styleClass="btn-30" text="SIGN UP" />
+            <Button fx:id="btnSignUp" layoutX="174.0" layoutY="546.0" mnemonicParsing="false" onAction="#btnSignUpOnAction" prefHeight="59.0" prefWidth="289.0" styleClass="btn-30" text="SIGN UP" />
             <Text layoutX="244.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN" textAlignment="CENTER" wrappingWidth="181.011474609375">
                <font>
                   <Font name="System Bold" size="46.0" />
