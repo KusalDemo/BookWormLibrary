@@ -1,0 +1,59 @@
+/*
+.btn-20 {
+    -fx-background-color: #000;
+    -fx-text-fill: #fff;
+}*/
+.btn-20 {
+    -fx-background-color: #3498db;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-text-transform: uppercase;
+    -fx-border-radius: 99;
+    -fx-border-width: 2;
+    -fx-padding: 0.8em 3em;
+    -fx-background-radius: 99;
+    -fx-cursor: hand;
+}
+
+.btn-20:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
+
+.btn-20:hover {
+    -fx-background-color: #3498db;
+    -fx-border-color: #00FFFF; /* Neon green border */
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #00FFFF, 10, 0.5, 0, 0); /* Neon green shadow */
+}
+.btn-30 {
+    -fx-background-color: #34495e;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-text-transform: uppercase;
+    -fx-border-radius: 99;
+    -fx-border-width: 2;
+    -fx-padding: 0.8em 3em;
+    -fx-background-radius: 99;
+    -fx-cursor: hand;
+}
+
+.btn-30:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
+
+.btn-30:hover {
+    -fx-background-color: #34495e;
+    -fx-border-color: #00FFFF; /* Neon green border */
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #00FFFF, 10, 0.5, 0, 0); /* Neon green shadow */
+}
+
+
+
+

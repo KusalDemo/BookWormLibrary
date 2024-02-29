@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.controller.LoginFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../assets/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.LoginFormController">
+   <children>
+      <ImageView fitHeight="1082.0" fitWidth="1922.0">
+         <image>
+            <Image url="@../assets/images/Animated-login-background.gif" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="1100.0" layoutY="223.0" prefHeight="631.0" prefWidth="625.0" style="-fx-background-color: #aed5ff; -fx-background-radius: 25;">
+         <children>
+            <TextField fx:id="txtEmail" layoutX="68.0" layoutY="283.0" prefHeight="36.0" prefWidth="506.0" styleClass="text-field">
+               <font>
+                  <Font size="16.0" />
+               </font></TextField>
+            <Button fx:id="btnLogin" layoutX="168.0" layoutY="443.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="55.0" prefWidth="297.0" styleClass="btn-20" text="LOGIN">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
+            <Button fx:id="btnSignUp" layoutX="177.0" layoutY="547.0" mnemonicParsing="false" onAction="#btnSignUpOnAction" prefHeight="59.0" prefWidth="289.0" styleClass="btn-30" text="SIGN UP" />
+            <Text layoutX="244.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN" textAlignment="CENTER" wrappingWidth="181.011474609375">
+               <font>
+                  <Font name="System Bold" size="46.0" />
+               </font>
+            </Text>
+            <Text layoutX="131.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="email" wrappingWidth="149.01153564453125">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="128.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="149.01153564453125">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Line endX="-33.6666259765625" layoutX="318.0" layoutY="524.0" startX="-197.66668701171875" />
+            <PasswordField fx:id="txtPassword" layoutX="69.0" layoutY="378.0" prefHeight="37.0" prefWidth="505.0" />
+            <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="190.0" layoutY="138.0">
+               <image>
+                  <Image url="@../assets/icons/icons8-login-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="44.0" fitWidth="42.0" layoutX="75.0" layoutY="328.0">
+               <image>
+                  <Image url="@../assets/icons/icons8-password-100.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="78.0" layoutY="239.0">
+               <image>
+                  <Image url="@../assets/icons/icons8-email-100.png" />
+               </image>
+            </ImageView>
+            <Line endX="-33.6666259765625" layoutX="551.0" layoutY="524.0" startX="-197.66668701171875" />
+            <Label layoutX="309.0" layoutY="517.0" text="OR" />
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
