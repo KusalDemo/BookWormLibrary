@@ -3,6 +3,7 @@ package org.example.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.util.List;
@@ -19,7 +20,6 @@ public class Book {
     private String author;
     private String genre;
     private boolean availability;
-
-    @ManyToMany(mappedBy = "books")
-    private List<User> users;
+    @ManyToOne
+    Branch branch;
 }

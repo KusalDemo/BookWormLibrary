@@ -10,4 +10,6 @@ public interface CrudDAO<T> extends SuperDAO{
 
     List<T> getAll() throws ClassNotFoundException;
 
+    T search(int id) throws ClassNotFoundException;
+
 }

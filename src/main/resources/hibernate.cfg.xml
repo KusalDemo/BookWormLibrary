@@ -6,7 +6,6 @@
   <session-factory>
     <mapping class="org.example.entity.User"/>
     <mapping class="org.example.entity.Book"/>
-    <mapping class="org.example.entity.BorrowingBook"/>
     <mapping class="org.example.entity.Branch"/>
     <mapping class="org.example.entity.Admin"/>
   </session-factory>

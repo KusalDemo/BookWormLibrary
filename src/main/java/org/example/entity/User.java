@@ -3,6 +3,7 @@ package org.example.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.util.List;
@@ -13,11 +14,11 @@ import java.util.List;
 @Setter
 @Entity
 public class User {
+    private String userName;
     @Id
-    private String username;
     private String email;
     private String password;
 
-    @ManyToMany
-    private List<Book> books;
+   @ManyToOne
+   private Branch branch;
 }

@@ -8,28 +8,43 @@ import org.hibernate.query.Query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class HQLUtil {
-    public static <T> T execute(String hql, Object... args) throws ClassNotFoundException {
+    public static <T> List<T> select(String hql, Object... args) {
 
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            Query<T> query = session.createQuery(hql);
 
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        Query query = session.createQuery(hql);
+            for (int i = 0; i < args.length; i++) {
+                query.setParameter(i + 1, args[i]);
+            }
 
-        for (int i = 0; i < args.length; i++) {
-            query.setParameter(i + 1, args[i]);
-        }
-
-        if (hql.startsWith("SELECT") || hql.startsWith("select")) {
-            transaction.commit();
-            session.close();
-            return (T) query.list();
-        } else {
-            transaction.commit();
-            session.close();
-            return (T) (Boolean) (query.executeUpdate() > 0);
+            return query.list();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to execute select query", e);
         }
     }
 
+    public static boolean executeUpdate(String hql, Object... args) {
+
+        Transaction transaction = null;
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery(hql);
+
+            for (int i = 0; i < args.length; i++) {
+                query.setParameter(i + 1, args[i]);
+            }
+
+            int result = query.executeUpdate();
+            transaction.commit();
+            return result > 0;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Failed to execute update query", e);
+        }
+    }
 }

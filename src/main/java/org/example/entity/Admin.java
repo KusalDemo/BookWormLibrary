@@ -1,8 +1,6 @@
 package org.example.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -14,6 +12,7 @@ import java.util.List;
 @Entity
 public class Admin {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int adminId;
     private String username;
     private String email;

@@ -15,7 +15,8 @@ public class BoFactory {
         USER,
         BOOK,
         BRANCH,
-        ADMIN
+        ADMIN,
+        BORROWBOOKS
     }
     public SuperBO getBO(BOType boType){
         switch (boType){
@@ -27,6 +28,8 @@ public class BoFactory {
                 return new BranchBOImpl();
             case ADMIN:
                 return new AdminBOImpl();
+            case BORROWBOOKS:
+                return new BorrowBooksBOImpl();
             default:
                 return null;
         }

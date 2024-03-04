@@ -12,7 +12,7 @@ public class DAOFactory {
     }
 
     public enum DAOType{
-        USER, BOOK, BRANCH,ADMIN
+        USER, BOOK, BRANCH,ADMIN,BORROWBOOKS
     }
     public SuperDAO getDAO(DAOType daoType){
         switch (daoType){
@@ -22,8 +22,10 @@ public class DAOFactory {
                 return new BookDAOImpl();
             case BRANCH:
                 return new BranchDAOImpl();
-                case ADMIN:
-                    return new AdminDAOImpl();
+            case ADMIN:
+                return new AdminDAOImpl();
+            case BORROWBOOKS:
+                return new BorrowBooksDAOImpl();
             default:
                 return null;
         }
