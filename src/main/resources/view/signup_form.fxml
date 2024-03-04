@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -25,13 +26,13 @@
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Button fx:id="btnSignUp" layoutX="168.0" layoutY="524.0" mnemonicParsing="false" onAction="#btnSignUpOnAction" prefHeight="55.0" prefWidth="297.0" styleClass="btn-20" text="SIGN UP">
+            <Button fx:id="btnSignUp" layoutX="168.0" layoutY="664.0" mnemonicParsing="false" onAction="#btnSignUpOnAction" prefHeight="55.0" prefWidth="297.0" styleClass="btn-20" text="SIGN UP">
                <font>
                   <Font size="35.0" />
                </font>
             </Button>
-            <Button fx:id="btnAlreadyHaveAnAccount" layoutX="172.0" layoutY="628.0" mnemonicParsing="false" onAction="#btnAlreadyHaveAnAccountOnAction" prefHeight="59.0" prefWidth="289.0" styleClass="btn-30" text="Already have an account" />
-            <Text layoutX="237.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" textAlignment="CENTER" wrappingWidth="216.75">
+            <Button fx:id="btnAlreadyHaveAnAccount" layoutX="172.0" layoutY="768.0" mnemonicParsing="false" onAction="#btnAlreadyHaveAnAccountOnAction" prefHeight="59.0" prefWidth="289.0" styleClass="btn-30" text="Already have an account" />
+            <Text layoutX="237.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN UP" textAlignment="CENTER" wrappingWidth="216.75">
                <font>
                   <Font name="System Bold" size="46.0" />
                </font>
@@ -46,9 +47,9 @@
                   <Font size="20.0" />
                </font>
             </Text>
-            <Line endX="-33.6666259765625" layoutX="318.0" layoutY="605.0" startX="-197.66668701171875" />
+            <Line endX="-33.6666259765625" layoutX="318.0" layoutY="745.0" startX="-197.66668701171875" />
             <PasswordField fx:id="txtPassword" layoutX="68.0" layoutY="364.0" prefHeight="37.0" prefWidth="505.0" />
-            <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="181.0" layoutY="76.0">
+            <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="181.0" layoutY="25.0">
                <image>
                   <Image url="@../assets/icons/icons8-login-100.png" />
                </image>
@@ -63,8 +64,8 @@
                   <Image url="@../assets/icons/icons8-email-100.png" />
                </image>
             </ImageView>
-            <Line endX="-33.6666259765625" layoutX="551.0" layoutY="605.0" startX="-197.66668701171875" />
-            <Label layoutX="309.0" layoutY="598.0" text="OR" />
+            <Line endX="-33.6666259765625" layoutX="551.0" layoutY="745.0" startX="-197.66668701171875" />
+            <Label layoutX="309.0" layoutY="738.0" text="OR" />
             <TextField fx:id="txtUserName" layoutX="68.0" layoutY="194.0" prefHeight="36.0" prefWidth="506.0" promptText="Kusal Gunasekara" styleClass="text-field">
                <font>
                   <Font size="16.0" />
@@ -89,6 +90,22 @@
             <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="75.0" layoutY="406.0">
                <image>
                   <Image url="@../assets/icons/icons8-password-100.png" />
+               </image>
+            </ImageView>
+            <ComboBox layoutX="259.0" layoutY="119.0" prefHeight="24.0" prefWidth="163.0" />
+            <Label layoutX="79.0" layoutY="123.0" prefHeight="16.0" prefWidth="195.0" text="Select Your Role :">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Text layoutX="131.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Branch" wrappingWidth="149.01153564453125">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="78.0" layoutY="507.0">
+               <image>
+                  <Image url="@../assets/icons/icons8-email-100.png" />
                </image>
             </ImageView>
          </children>

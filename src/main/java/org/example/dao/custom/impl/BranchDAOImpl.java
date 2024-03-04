@@ -17,7 +17,7 @@ public class BranchDAOImpl implements BranchDAO {
     }
 
     @Override
-    public boolean delete(int id) throws ClassNotFoundException {
+    public boolean delete(String id) throws ClassNotFoundException {
         return false;
     }
 
@@ -27,7 +27,7 @@ public class BranchDAOImpl implements BranchDAO {
     }
 
     @Override
-    public Branch search(int id) throws ClassNotFoundException {
+    public Branch search(String id) throws ClassNotFoundException {
         return null;
     }
 }

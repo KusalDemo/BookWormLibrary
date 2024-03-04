@@ -17,7 +17,7 @@ public class BorrowBooksDAOImpl implements BorrowBooksDAO {
     }
 
     @Override
-    public boolean delete(int id) throws ClassNotFoundException {
+    public boolean delete(String id) throws ClassNotFoundException {
         return false;
     }
 
@@ -27,7 +27,7 @@ public class BorrowBooksDAOImpl implements BorrowBooksDAO {
     }
 
     @Override
-    public BorrowBooks search(int id) throws ClassNotFoundException {
+    public BorrowBooks search(String id) throws ClassNotFoundException {
         return null;
     }
 }

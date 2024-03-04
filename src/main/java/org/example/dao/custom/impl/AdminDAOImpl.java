@@ -27,7 +27,7 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public boolean delete(int id) throws ClassNotFoundException {
+    public boolean delete(String id) throws ClassNotFoundException {
         return false;
     }
 
@@ -37,7 +37,7 @@ public class AdminDAOImpl implements AdminDAO {
     }
 
     @Override
-    public Admin search(int id) throws ClassNotFoundException {
+    public Admin search(String id) throws ClassNotFoundException {
         return null;
     }
 }

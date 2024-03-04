@@ -35,10 +35,6 @@ public class UserDAOImpl implements UserDAO {
         return isUpdated > 0;
     }
 
-    @Override
-    public boolean delete(int id) throws ClassNotFoundException {
-        return false;
-    }
 
     @Override
     public boolean delete(String email) throws ClassNotFoundException {
@@ -68,10 +64,5 @@ public class UserDAOImpl implements UserDAO {
         transaction.commit();
         session.close();
         return users;
-    }
-
-    @Override
-    public User search(int id) throws ClassNotFoundException {
-        return null;
     }
 }

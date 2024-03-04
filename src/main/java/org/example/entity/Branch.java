@@ -1,10 +1,9 @@
 package org.example.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +16,11 @@ public class Branch {
     private int branchId;
     private String branchName;
     private String location;
+    private String email;
 
-    @ManyToOne
-    private Admin admin;
+    @OneToMany(mappedBy = "branch",cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Book> books;
+
+    @OneToMany(mappedBy = "branch",cascade = CascadeType.ALL, orphanRemoval = true)
+    List<User> users;
 }
