@@ -1,9 +1,9 @@
 package org.example.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,6 +17,10 @@ public class Book {
     private String author;
     private String genre;
     private boolean availability;
+
     @ManyToOne
     private Branch branch;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BorrowBooks> borrowBooks;
 }

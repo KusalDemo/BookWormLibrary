@@ -3,10 +3,14 @@ package org.example.bo.custom;
 import org.example.bo.SuperBO;
 import org.example.dto.UserDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public interface UserBO extends SuperBO {
     boolean saveUser(UserDto userDto) throws ClassNotFoundException;
-    boolean updateUser(UserDto userDto);
-    boolean deleteUser(String username);
-    UserDto searchUser(String username);
+    boolean updateUser(UserDto userDto) throws ClassNotFoundException;
+    boolean deleteUser(String username) throws ClassNotFoundException;
+
+    List<UserDto> getAllUsers() throws ClassNotFoundException;
     boolean updatePassword(String username, String password);
 }

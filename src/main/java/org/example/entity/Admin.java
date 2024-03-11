@@ -1,9 +1,7 @@
 package org.example.entity;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
-
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,12 +10,9 @@ import java.util.List;
 @Entity
 public class Admin {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int adminId;
+    private String adminId;
     private String username;
     private String email;
     private String password;
 
-    @OneToMany
-    private List<Branch> branches;
 }

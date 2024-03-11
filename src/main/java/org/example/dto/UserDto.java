@@ -3,6 +3,8 @@ package org.example.dto;
 import jakarta.persistence.Entity;
 import lombok.*;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -12,4 +14,8 @@ public class UserDto {
     private String userName;
     private String email;
     private String password;
+    // Assuming you want to transfer the ID of the branch associated with the user
+    private String branchId;
+    // Assuming you want to transfer the IDs of the books borrowed by the user
+    private List<String> borrowBookIds;
 }

@@ -1,0 +1,65 @@
+ #userManagePane ,#bookManagePane , #borrowBookManagePane , #branchManagePane{
+     -fx-background-color: #ecf0f1;
+     -fx-background-radius: 10px;
+     -fx-border-radius: 10px;
+     -fx-border-width: 1px;
+     transition: transform 0.5s ease-in-out;
+ }
+ #userManagePane ,#bookManagePane , #borrowBookManagePane , #branchManagePane:hover{
+     transform: scale(1.1);
+ }
+
+ #userManagePane:hover{
+     -fx-border-color: #00FFFF;
+     -fx-background-color: #bdc3c7;
+ }
+ #bookManagePane:hover{
+     -fx-border-color: #00FFFF;
+     -fx-background-color: #bdc3c7;
+ }
+ #borrowBookManagePane:hover{
+     -fx-border-color: #00FFFF;
+     -fx-background-color: #bdc3c7;
+ }
+ #branchManagePane:hover{
+     -fx-border-color: #00FFFF;
+     -fx-background-color: #bdc3c7;
+ }
+ .btn-40 {
+     -fx-background-color: #3498db;
+     -fx-text-fill: #fff;
+     -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+     -fx-font-size: 14px;
+     -fx-font-weight: 900;
+     -fx-text-transform: uppercase;
+     -fx-border-radius: 99;
+     -fx-border-width: 2;
+     -fx-padding: 0.8em 3em;
+     -fx-background-radius: 99;
+     -fx-cursor: hand;
+ }
+
+ .btn-40:disabled {
+     -fx-opacity: 0.5;
+     -fx-cursor: default;
+ }
+
+ .btn-40:hover {
+     -fx-background-color: #ff7979;
+     -fx-border-color: #eb4d4b; /* Neon green border */
+     -fx-border-width: 2;
+     -fx-effect: dropshadow(gaussian, #ff7979, 10, 0.5, 0, 0); /* Neon green shadow */
+ }
+ .btn-40 {
+     -fx-background-color: #ff7979;
+     -fx-text-fill: #fff;
+     -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+     -fx-font-size: 14px;
+     -fx-font-weight: 900;
+     -fx-text-transform: uppercase;
+     -fx-border-radius: 99;
+     -fx-border-width: 2;
+     -fx-padding: 0.8em 3em;
+     -fx-background-radius: 99;
+     -fx-cursor: hand;
+ }

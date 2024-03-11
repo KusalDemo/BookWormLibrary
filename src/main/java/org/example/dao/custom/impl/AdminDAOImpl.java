@@ -7,6 +7,7 @@ import org.example.entity.Admin;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -23,21 +24,49 @@ public class AdminDAOImpl implements AdminDAO {
 
     @Override
     public boolean update(Admin dto) throws ClassNotFoundException {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(dto);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean delete(String id) throws ClassNotFoundException {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "delete from Admin where id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        int isDeleted = query.executeUpdate();
+        transaction.commit();
+        session.close();
+        return isDeleted > 0;
     }
 
     @Override
     public List<Admin> getAll() throws ClassNotFoundException {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Admin";
+        Query query = session.createQuery(hql);
+        List<Admin> admins = query.list();
+        transaction.commit();
+        session.close();
+        return admins;
     }
 
     @Override
     public Admin search(String id) throws ClassNotFoundException {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Admin where id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        Admin admin = (Admin) query.uniqueResult();
+        transaction.commit();
+        session.close();
+        return admin;
     }
 }

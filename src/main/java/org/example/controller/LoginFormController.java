@@ -5,21 +5,94 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.bo.BoFactory;
+import org.example.bo.custom.AdminBO;
+import org.example.bo.custom.UserBO;
+import org.example.dto.AdminDto;
+import org.example.dto.UserDto;
+
+import java.io.IOException;
+import java.util.List;
+
 
 public class LoginFormController {
     public TextField txtEmail;
     public PasswordField txtPassword;
     public Button btnLogin;
     public Button btnSignUp;
+    public ComboBox cmbRole;
 
-    public void btnLoginOnAction(ActionEvent actionEvent) {
+    AdminBO adminBO=(AdminBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.ADMIN);
+    UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
+
+    public void initialize(){
+        cmbRole.getItems().addAll("User", "Admin");
+        cmbRole.getSelectionModel().select(0);
+    }
+
+    public void btnLoginOnAction(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
+        List<UserDto> allUsers = userBO.getAllUsers();
+        for (UserDto userDto : allUsers) {
+            System.out.println(userDto.getEmail());
+            if (userDto.getEmail().equals(txtEmail.getText()) && userDto.getPassword().equals(txtPassword.getText())) {
+                Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+                Scene scene1 = new Scene(root);
+                Stage stage1 = (Stage) btnLogin.getScene().getWindow();
+                stage1.setScene(scene1);
+                stage1.setTitle("DASHBOARD");
+                stage1.centerOnScreen();
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
+            }
+        }
+        /*if (cmbRole.getValue().equals("User")) {
+            try {
+                List<UserDto> allUsers = userBO.getAllUsers();
+                for (UserDto userDto : allUsers) {
+                    System.out.println(userDto.getEmail());
+                    if (userDto.getEmail().equals(txtEmail.getText()) && userDto.getPassword().equals(txtPassword.getText())) {
+                        Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+                        Scene scene1 = new Scene(root);
+                        Stage stage1 = (Stage) btnLogin.getScene().getWindow();
+                        stage1.setScene(scene1);
+                        stage1.setTitle("DASHBOARD");
+                        stage1.centerOnScreen();
+                    }else{
+                        new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
+                    }
+                }
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+                System.out.println("User Error bng");
+                System.out.println(e.getMessage());
+            }
+        } else if (cmbRole.getValue().equals("Admin")) {
+            try {
+                AdminDto searchedAdmin = adminBO.getAdmin(txtEmail.getText());
+                    if (searchedAdmin.getEmail().equals(txtEmail.getText()) && searchedAdmin.getPassword().equals(txtPassword.getText())) {
+                        Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+                        Scene scene1 = new Scene(root);
+                        Stage stage1 = (Stage) btnLogin.getScene().getWindow();
+                        stage1.setScene(scene1);
+                        stage1.setTitle("DASHBOARD");
+                        stage1.centerOnScreen();
+                    }else{
+                        new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
+                    }
+            } catch (Exception e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+                System.out.println("Admin Error bng");
+                System.out.println(e.getMessage());
+            }
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Invalid Role").show();
+        }*/
     }
 
     public void btnSignUpOnAction(ActionEvent actionEvent) {
+
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/signup_form.fxml"));
             Scene scene1 = new Scene(root);

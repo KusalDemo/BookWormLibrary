@@ -38,8 +38,13 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean delete(String email) throws ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
         String hql = "delete from User where email=:email";
-        return HQLUtil.executeUpdate(hql, email);
+        Query query = session.createQuery(hql);
+        query.setParameter("email", email);
+        int isDeleted = query.executeUpdate();
+        return isDeleted > 0;
     }
     @Override
     public User search(String email) throws ClassNotFoundException {

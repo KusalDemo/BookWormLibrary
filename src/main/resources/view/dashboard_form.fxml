@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="920.0" prefWidth="1520.0" stylesheets="@../assets/dashboardStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.DashBoardFormController">
+   <children>
+      <Label layoutX="59.0" layoutY="50.0" prefHeight="35.0" prefWidth="278.0" text="WELCOME">
+         <font>
+            <Font name="System Bold" size="39.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="userManagePane" layoutX="60.0" layoutY="168.0" onMouseClicked="#userManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <ImageView fitHeight="214.0" fitWidth="294.0" layoutX="14.0" layoutY="25.0">
+               <image>
+                  <Image url="@../assets/images/user-management.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <AnchorPane fx:id="bookManagePane" layoutX="416.0" layoutY="168.0" onMouseClicked="#bookManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <ImageView fitHeight="203.0" fitWidth="285.0" layoutX="19.0" layoutY="30.0">
+               <image>
+                  <Image url="@../assets/images/book-management.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <AnchorPane fx:id="branchManagePane" layoutX="777.0" layoutY="168.0" onMouseClicked="#branchManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <ImageView fitHeight="194.0" fitWidth="285.0" layoutX="20.0" layoutY="36.0">
+               <image>
+                  <Image url="@../assets/images/borrowBooks-management.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <AnchorPane fx:id="borrowBookManagePane" layoutX="1138.0" layoutY="168.0" onMouseClicked="#borrowBookManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <ImageView fitHeight="194.0" fitWidth="302.0" layoutX="15.0" layoutY="40.0">
+               <image>
+                  <Image url="@../assets/images/branch-management.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+      <Button fx:id="btnLogOut" layoutX="60.0" layoutY="858.0" mnemonicParsing="false" onAction="#btnLogOutOnAction" prefHeight="24.0" prefWidth="112.0" text="LOG OUT" />
+   </children>
+</AnchorPane>

@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.BookManagementFormController">
    <children>
       <Label layoutX="737.0" layoutY="96.0" text="Book Management ">
@@ -38,7 +37,7 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <TextField layoutX="623.0" layoutY="687.0" prefHeight="24.0" prefWidth="658.0" />
+      <TextField fx:id="txtAvailability" layoutX="623.0" layoutY="687.0" prefHeight="24.0" prefWidth="658.0" />
       <Label layoutX="623.0" layoutY="758.0" prefHeight="24.0" prefWidth="210.0" text="Branch :">
          <font>
             <Font size="19.0" />
@@ -53,6 +52,7 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <TextField fx:id="txtBookId" layoutX="623.0" layoutY="267.0" prefHeight="24.0" prefWidth="658.0" />
+      <TextField fx:id="txtBookId" layoutX="623.0" layoutY="267.0" onMouseClicked="#txtBookIdOnAction" prefHeight="24.0" prefWidth="658.0" />
+      <TextField fx:id="txtSearchBook" layoutX="1465.0" layoutY="240.0" onKeyReleased="#txtSearchBookOnAction" prefHeight="24.0" prefWidth="353.0" promptText="Search" />
    </children>
 </AnchorPane>
