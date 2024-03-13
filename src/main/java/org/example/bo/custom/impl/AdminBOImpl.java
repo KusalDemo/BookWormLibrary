@@ -6,6 +6,9 @@ import org.example.dao.custom.AdminDAO;
 import org.example.dto.AdminDto;
 import org.example.entity.Admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdminBOImpl implements AdminBO {
 
     AdminDAO adminDAO = (AdminDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.ADMIN);
@@ -28,5 +31,15 @@ public class AdminBOImpl implements AdminBO {
     public AdminDto getAdmin(String email) throws ClassNotFoundException {
         Admin admin = adminDAO.search(email);
         return new AdminDto(admin.getAdminId(),admin.getEmail(),admin.getPassword(),admin.getUsername());
+    }
+
+    @Override
+    public List<AdminDto> getAllAdmins() throws ClassNotFoundException {
+        List<Admin> allAdmins = adminDAO.getAll();
+        List<AdminDto> adminDtos = new ArrayList<>();
+        for (Admin admin : allAdmins) {
+            adminDtos.add(new AdminDto(admin.getAdminId(),admin.getEmail(),admin.getPassword(),admin.getUsername()));
+        }
+        return adminDtos;
     }
 }

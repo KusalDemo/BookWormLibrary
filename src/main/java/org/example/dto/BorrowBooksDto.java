@@ -17,8 +17,9 @@ import java.time.LocalDate;
 @ToString
 public class BorrowBooksDto {
     private String id;
-    private User user;
-    private Book book;
+    private UserDto user;
+    private BookDto book;
     private LocalDate borrowDate;
     private LocalDate returnDate;
+    private String status;
 }

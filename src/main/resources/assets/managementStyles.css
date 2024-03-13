@@ -1,0 +1,105 @@
+#txtUserName,#txtEmail,#cmbBranch,#txtSearchUser ,#txtSearchBook, #txtBookId ,#txtBookName,#txtAuthor,#txtGenre,#txtAvailability,#cmbBranch,#cmbBranches,#txtSearch,#txtId,#txtName,#txtToday,#txtReturnDate,#txtBorrowId,#txtUserId,#txtLocation{
+    -fx-background-color: transparent;
+    -fx-border-color: #316FF6;
+    -fx-text-fill: black;
+    -fx-font-size: 16px;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-style: solid;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+.btn-20 {
+    -fx-background-color: #3498db;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-text-transform: uppercase;
+    -fx-border-radius: 99;
+    -fx-border-width: 2;
+    -fx-padding: 0.8em 3em;
+    -fx-background-radius: 99;
+    -fx-cursor: hand;
+}
+
+.btn-20:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
+
+.btn-20:hover {
+    -fx-background-color: #3498db;
+    -fx-border-color: #00FFFF; /* Neon green border */
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #00FFFF, 10, 0.5, 0, 0); /* Neon green shadow */
+}
+.btn-30 {
+    -fx-background-color: #34495e;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-text-transform: uppercase;
+    -fx-border-radius: 99;
+    -fx-border-width: 2;
+    -fx-padding: 0.8em 3em;
+    -fx-background-radius: 99;
+    -fx-cursor: hand;
+}
+
+.btn-30:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
+
+.btn-30:hover {
+    -fx-background-color: #34495e;
+    -fx-border-color: #00FFFF; /* Neon green border */
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #00FFFF, 10, 0.5, 0, 0); /* Neon green shadow */
+}
+.btn-40 {
+    -fx-background-color: #3498db;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-text-transform: uppercase;
+    -fx-border-radius: 99;
+    -fx-border-width: 2;
+    -fx-padding: 0.8em 3em;
+    -fx-background-radius: 99;
+    -fx-cursor: hand;
+}
+
+.btn-40:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
+
+.btn-40:hover {
+    -fx-background-color: #ff7979;
+    -fx-border-color: #eb4d4b; /* Neon green border */
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #ff7979, 10, 0.5, 0, 0); /* Neon green shadow */
+}
+.btn-40 {
+    -fx-background-color: #ff7979;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-text-transform: uppercase;
+    -fx-border-radius: 99;
+    -fx-border-width: 2;
+    -fx-padding: 0.8em 3em;
+    -fx-background-radius: 99;
+    -fx-cursor: hand;
+}
+#tblUsers ,#tblBook ,#tblBranch ,#tblBorrowBooks .column-header-background .label {
+    -fx-text-fill: white; /* Set text color of the table headers to white */
+    -fx-font-size: 14px; /* Set font size of the table headers */
+}
+#tblUsers ,#tblBook ,#tblBranch ,#tblBorrowBooks .column-header {
+    -fx-background-color: #316FF6; /* Remove the background color of the table headers */
+}

@@ -2,44 +2,54 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="597.0" prefWidth="918.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.BranchManagementFormController">
+<AnchorPane prefHeight="920.0" prefWidth="1520.0" stylesheets="@../assets/managementStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.BranchManagementFormController">
    <children>
-      <Label layoutX="307.0" layoutY="70.0" text="Branch Managemennt">
+      <Label layoutX="37.0" layoutY="31.0" text="Branch Managemennt">
          <font>
-            <Font name="System Bold" size="23.0" />
+            <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="241.0" layoutY="138.0" text="Branch ID :">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtId" layoutX="240.0" layoutY="167.0" onMouseClicked="#txtIdOnAction" prefHeight="24.0" prefWidth="428.0" />
-      <Label layoutX="242.0" layoutY="203.0" text="Branch Name :">
+      <Label layoutX="92.0" layoutY="238.0" text="Branch ID :">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtName" layoutX="241.0" layoutY="232.0" prefHeight="24.0" prefWidth="428.0" />
-      <Label layoutX="243.0" layoutY="270.0" text="Location :">
+      <TextField fx:id="txtId" layoutX="90.0" layoutY="263.0" onMouseClicked="#txtIdOnAction" prefHeight="24.0" prefWidth="428.0" />
+      <Label layoutX="92.0" layoutY="305.0" text="Branch Name :">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtLocation" layoutX="242.0" layoutY="299.0" prefHeight="24.0" prefWidth="428.0" />
-      <Label layoutX="244.0" layoutY="337.0" text="email :">
+      <TextField fx:id="txtName" layoutX="91.0" layoutY="332.0" prefHeight="24.0" prefWidth="428.0" />
+      <Label layoutX="93.0" layoutY="376.0" text="Location :">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEmail" layoutX="243.0" layoutY="366.0" prefHeight="24.0" prefWidth="428.0" />
-      <Button layoutX="239.0" layoutY="447.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="36.0" prefWidth="122.0" text="SAVE" />
-      <Button layoutX="389.0" layoutY="447.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="36.0" prefWidth="122.0" text="UPDATE" />
-      <Button layoutX="539.0" layoutY="447.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="36.0" prefWidth="122.0" text="DELETE" />
+      <TextField fx:id="txtLocation" layoutX="92.0" layoutY="405.0" prefHeight="24.0" prefWidth="428.0" />
+      <Label layoutX="94.0" layoutY="444.0" text="email :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtEmail" layoutX="93.0" layoutY="473.0" prefHeight="24.0" prefWidth="428.0" />
+      <Button layoutX="77.0" layoutY="547.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="40.0" prefWidth="136.0" styleClass="btn-20" text="SAVE" />
+      <Button layoutX="221.0" layoutY="547.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="160.0" styleClass="btn-30" text="UPDATE" />
+      <Button layoutX="389.0" layoutY="547.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="151.0" styleClass="btn-40" text="DELETE" />
+      <TableView fx:id="tblBranch" layoutX="594.0" layoutY="104.0" prefHeight="746.0" prefWidth="854.0" stylesheets="@../assets/managementStyles.css">
+        <columns>
+          <TableColumn fx:id="colId" prefWidth="90.0" text="Id" />
+          <TableColumn fx:id="colName" prefWidth="200.0" text="name" />
+            <TableColumn fx:id="colLocation" prefWidth="299.0" text="Location" />
+            <TableColumn fx:id="colEmail" prefWidth="264.0" text="Email" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtSearch" layoutX="92.0" layoutY="175.0" onMouseClicked="#txtIdOnAction" prefHeight="24.0" prefWidth="428.0" promptText="Search" />
    </children>
 </AnchorPane>

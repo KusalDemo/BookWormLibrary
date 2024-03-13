@@ -1,10 +1,10 @@
 package org.example.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import org.example.bo.BoFactory;
@@ -13,6 +13,7 @@ import org.example.bo.custom.BranchBO;
 import org.example.bo.custom.UserBO;
 import org.example.dto.BookDto;
 import org.example.dto.BranchDto;
+import org.example.dto.tm.BookTM;
 import org.example.entity.Branch;
 
 import java.util.ArrayList;
@@ -26,6 +27,13 @@ public class BookManagementFormController {
     public TextField txtBookId;
     public TextField txtSearchBook;
     public TextField txtAvailability;
+    public TableView<BookTM> tblBook;
+    public TableColumn<?,?> colId;
+    public TableColumn<?,?> colTitle;
+    public TableColumn<?,?> colAuthor;
+    public TableColumn<?,?> colGenre;
+    public TableColumn<?,?> colAvailability;
+    public TableColumn<?,?> colBranch;
 
     private Branch branch;
 
@@ -33,7 +41,7 @@ public class BookManagementFormController {
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
     BranchBO branchBO=(BranchBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BRANCH);
 
-    public void initialize(){
+    public void initialize() throws ClassNotFoundException {
         try {
             ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
             for(BranchDto branchDto:allBranches){
@@ -43,6 +51,30 @@ public class BookManagementFormController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
             System.out.println(e.getMessage());
         }
+        loadAllBooks();
+        setCellValueFactory();
+
+        tblBook.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.intValue()>=0){
+                BookTM selectedItem = tblBook.getItems().get(newValue.intValue());
+                txtBookId.setText(selectedItem.getId());
+                txtBookName.setText(selectedItem.getTitle());
+                txtAuthor.setText(selectedItem.getAuthor());
+                txtGenre.setText(selectedItem.getGenre());
+                txtAvailability.setText(selectedItem.getAvailability());
+                cmbBranches.setValue(selectedItem.getBranchId());
+            }
+        });
+
+    }
+
+    private void setCellValueFactory(){
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
+        colGenre.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        colAvailability.setCellValueFactory(new PropertyValueFactory<>("availability"));
+        colBranch.setCellValueFactory(new PropertyValueFactory<>("branchId"));
     }
     public void btnSaveOnAction(ActionEvent actionEvent) throws ClassNotFoundException {
         String bookId = generateBookId();
@@ -51,11 +83,11 @@ public class BookManagementFormController {
         String bookName = txtBookName.getText();
         String branchName = (String) cmbBranches.getValue();
 
-        String branchId = "";
+        BranchDto branch = null ;
         ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
         for(BranchDto branchDto:allBranches){
             if(branchDto.getBranchName().equalsIgnoreCase(branchName)){
-                branchId = branchDto.getBranchId();
+                branch = branchDto;
                 break;
             }
         }
@@ -78,7 +110,8 @@ public class BookManagementFormController {
                     }
                 }
                 if(!isBookAlreadyExist){
-                    boolean isSaved = bookBO.saveBook(new BookDto(bookId, bookName, author, genre, true, branchId));
+                    boolean isSaved = bookBO.saveBook(new BookDto(bookId, bookName, author, genre, true, branch));
+                    loadAllBooks();
                     if (isSaved) {
                         new Alert(Alert.AlertType.INFORMATION, "Book Saved").show();
                         clearFields();
@@ -94,10 +127,12 @@ public class BookManagementFormController {
     }
 
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    public void btnUpdateOnAction(ActionEvent actionEvent) throws ClassNotFoundException {
+        BranchDto branchDto = branchBO.searchBranch((String) cmbBranches.getValue().toString());
         if(!txtBookName.getText().equals("")){
             try {
-                boolean isUpdated = bookBO.updateBook(new BookDto(txtBookId.getText(), txtBookName.getText(), txtAuthor.getText(), txtGenre.getText(), true, (String)cmbBranches.getValue()));
+                boolean isUpdated = bookBO.updateBook(new BookDto(txtBookId.getText(), txtBookName.getText(), txtAuthor.getText(), txtGenre.getText(), true, branchDto));
+                loadAllBooks();
                 if (isUpdated) {
                     new Alert(Alert.AlertType.INFORMATION, "Book Updated").show();
                     clearFields();
@@ -129,6 +164,7 @@ public class BookManagementFormController {
                 if (response == buttonTypeYes) {
                     try {boolean isDeleted = bookBO.deleteBook(txtBookName.getText());
                         if (isDeleted) {
+                            loadAllBooks();
                             new Alert(Alert.AlertType.INFORMATION, "Book Deleted").show();
                             clearFields();
                         }else{
@@ -177,8 +213,18 @@ public class BookManagementFormController {
                 txtAuthor.setText(book.getAuthor());
                 txtGenre.setText(book.getGenre());
                 txtAvailability.setText(book.isAvailability()?"Available":"Not Available");
-                cmbBranches.setValue(book.getBranchId());
+                cmbBranches.setValue(book.getBranch().getBranchName());
             }
         }
+    }
+    private void loadAllBooks() throws ClassNotFoundException {
+        ArrayList<BookDto> allBooks = bookBO.getAllBooks();
+        ObservableList<BookTM> obList = FXCollections.observableArrayList();
+        for (BookDto book:allBooks){
+            BranchDto branch = book.getBranch();
+            obList.add(new BookTM(book.getId(),book.getTitle(),book.getAuthor(),book.getGenre(),String.valueOf(book.isAvailability()),branch.getBranchId()));
+        }
+        tblBook.setItems(obList);
+        tblBook.refresh();
     }
 }

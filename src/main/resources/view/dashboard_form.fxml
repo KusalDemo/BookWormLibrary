@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="920.0" prefWidth="1520.0" stylesheets="@../assets/dashboardStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.DashBoardFormController">
    <children>
-      <Label layoutX="59.0" layoutY="50.0" prefHeight="35.0" prefWidth="278.0" text="WELCOME">
+      <Label layoutX="59.0" layoutY="50.0" prefHeight="47.0" prefWidth="231.0" text="WELCOME">
          <font>
             <Font name="System Bold" size="39.0" />
          </font>
@@ -59,6 +59,11 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <Button fx:id="btnLogOut" layoutX="60.0" layoutY="858.0" mnemonicParsing="false" onAction="#btnLogOutOnAction" prefHeight="24.0" prefWidth="112.0" text="LOG OUT" />
+      <Button fx:id="btnLogOut" layoutX="60.0" layoutY="858.0" mnemonicParsing="false" onAction="#btnLogOutOnAction" prefHeight="40.0" prefWidth="203.0" styleClass="btn-40" text="LOG OUT" />
+      <Label fx:id="lblLoggedPersonName" layoutX="297.0" layoutY="71.0" prefHeight="19.0" prefWidth="251.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

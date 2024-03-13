@@ -15,7 +15,6 @@ public class UserDto {
     private String email;
     private String password;
     // Assuming you want to transfer the ID of the branch associated with the user
-    private String branchId;
+    BranchDto branchDto;
     // Assuming you want to transfer the IDs of the books borrowed by the user
-    private List<String> borrowBookIds;
 }

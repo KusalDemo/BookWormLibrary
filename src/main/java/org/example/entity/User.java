@@ -28,6 +28,6 @@ public class User {
     private Branch branch;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BorrowBooks> borrowBooks;
+    List<BorrowBooks> borrowBooks;
 }
 

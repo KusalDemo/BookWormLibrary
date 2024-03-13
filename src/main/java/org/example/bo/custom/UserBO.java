@@ -9,6 +9,8 @@ import java.util.List;
 public interface UserBO extends SuperBO {
     boolean saveUser(UserDto userDto) throws ClassNotFoundException;
     boolean updateUser(UserDto userDto) throws ClassNotFoundException;
+
+    boolean updateUserMinor(UserDto userDto) throws ClassNotFoundException;
     boolean deleteUser(String username) throws ClassNotFoundException;
 
     List<UserDto> getAllUsers() throws ClassNotFoundException;

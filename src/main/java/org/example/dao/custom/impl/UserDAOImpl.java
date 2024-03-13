@@ -32,9 +32,23 @@ public class UserDAOImpl implements UserDAO {
         query.setParameter("password", dto.getPassword());
         query.setParameter("email", dto.getEmail());
         int isUpdated = query.executeUpdate();
+        transaction.commit();
+        session.close();
         return isUpdated > 0;
     }
-
+    @Override
+    public boolean updateMinor(User dto) throws ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "update User set userName=:name where email=:email";
+        Query query = session.createQuery(hql);
+        query.setParameter("name", dto.getUserName());
+        query.setParameter("email", dto.getEmail());
+        int isUpdated = query.executeUpdate();
+        transaction.commit();
+        session.close();
+        return isUpdated > 0;
+    }
 
     @Override
     public boolean delete(String email) throws ClassNotFoundException {
@@ -44,6 +58,8 @@ public class UserDAOImpl implements UserDAO {
         Query query = session.createQuery(hql);
         query.setParameter("email", email);
         int isDeleted = query.executeUpdate();
+        transaction.commit();
+        session.close();
         return isDeleted > 0;
     }
     @Override
@@ -58,6 +74,8 @@ public class UserDAOImpl implements UserDAO {
         session.close();
         return user;
     }
+
+
 
     @Override
     public List<User> getAll() throws ClassNotFoundException {

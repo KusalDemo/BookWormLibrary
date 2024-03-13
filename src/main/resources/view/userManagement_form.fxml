@@ -1,37 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.UserManagementFormController">
+<AnchorPane prefHeight="920.0" prefWidth="1520.0" stylesheets="@../assets/managementStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.UserManagementFormController">
    <children>
-      <ComboBox layoutX="833.0" layoutY="147.0" prefHeight="25.0" prefWidth="315.0" />
-      <Label layoutX="718.0" layoutY="150.0" text="Search User :">
+      <Label layoutX="75.0" layoutY="179.0" text="Search User :">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="730.0" layoutY="287.0" prefHeight="24.0" prefWidth="409.0" />
-      <Label layoutX="728.0" layoutY="262.0" text="User Name :">
+      <TextField fx:id="txtUserName" layoutX="75.0" layoutY="397.0" prefHeight="24.0" prefWidth="409.0" />
+      <Label layoutX="73.0" layoutY="376.0" text="User Name :">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="730.0" layoutY="357.0" prefHeight="24.0" prefWidth="409.0" />
-      <Label layoutX="730.0" layoutY="332.0" text="Email :">
+      <TextField fx:id="txtEmail" layoutX="76.0" layoutY="317.0" prefHeight="24.0" prefWidth="409.0" />
+      <Label layoutX="76.0" layoutY="293.0" text="Email :">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="730.0" layoutY="402.0" text="Branch:">
+      <Label layoutX="75.0" layoutY="442.0" text="Branch:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ComboBox layoutX="728.0" layoutY="433.0" prefHeight="25.0" prefWidth="411.0" />
+      <ComboBox fx:id="cmbBranch" layoutX="73.0" layoutY="473.0" prefHeight="25.0" prefWidth="411.0" />
+      <TextField fx:id="txtSearchUser" layoutX="74.0" layoutY="210.0" onKeyReleased="#txtSearchUserOnAction" prefHeight="24.0" prefWidth="409.0" promptText="Search User" />
+      <Button fx:id="btnUpdate" layoutX="165.0" layoutY="540.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="204.0" styleClass="btn-20" text="UPDATE" />
+      <Button fx:id="btnDelete" layoutX="164.0" layoutY="642.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="204.0" styleClass="btn-40" text="DELETE" />
+      <Label layoutX="67.0" layoutY="58.0" prefHeight="16.0" prefWidth="347.0" text="User Management">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tblUsers" layoutX="654.0" layoutY="103.0" prefHeight="756.0" prefWidth="803.0">
+        <columns>
+          <TableColumn fx:id="colUserEmail" prefWidth="273.0" text="User email" />
+          <TableColumn fx:id="colUserName" prefWidth="267.0" text="User Name" />
+            <TableColumn fx:id="colBranch" prefWidth="262.0" text="Branch" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnBack" layoutX="33.0" layoutY="854.0" mnemonicParsing="false" onAction="#btnBackOnAction" prefHeight="40.0" prefWidth="204.0" styleClass="btn-30" text="BACK" />
    </children>
 </AnchorPane>

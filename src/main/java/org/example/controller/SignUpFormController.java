@@ -50,14 +50,21 @@ public class SignUpFormController {
         cmbBranch.getSelectionModel().select(0);
 
 
-        if(cmbRole.getValue().equals("User")){
-            cmbBranch.setVisible(true);
-            lblBranch.setVisible(true);
-            imgBranch.setVisible(true);
-        }
+        cmbRole.setOnAction(event -> {
+            String selectedOption = (String) cmbRole.getValue();
+            if(cmbRole.getValue().equals("User")){
+                cmbBranch.setVisible(true);
+                lblBranch.setVisible(true);
+                imgBranch.setVisible(true);
+            } else if (cmbRole.getValue().equals("Admin")) {
+                cmbBranch.setVisible(false);
+                lblBranch.setVisible(false);
+                imgBranch.setVisible(false);
+            }
+        });
     }
 
-    public void btnSignUpOnAction(ActionEvent actionEvent) {
+    public void btnSignUpOnAction(ActionEvent actionEvent) throws ClassNotFoundException {
         String userName = txtUserName.getText();
         String email = txtEmail.getText();
         String password = txtPassword.getText();
@@ -92,7 +99,8 @@ public class SignUpFormController {
         } else if (role.equals("User")) {
             if (Regex.isEmailValid(email) && Regex.isPasswordValid(password)) {
                 if (password.equals(rePassword)) {
-                    UserDto userDto = new UserDto(userName, email, password, branchId, null);
+                    BranchDto branchDto = branchBO.searchBranch(branchId);
+                    UserDto userDto = new UserDto(userName, email, password, branchDto);
                     try {
                         if (userBO.saveUser(userDto)) {
                             new Alert(Alert.AlertType.INFORMATION, "Sign Up Successful").show();

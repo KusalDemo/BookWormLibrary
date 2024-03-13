@@ -15,6 +15,6 @@ public class BranchDto {
     private String location;
     private String email;
     // Assuming you want to transfer the IDs of the books and users associated with the branch
-    private List<String> bookIds;
-    private List<String> userIds;
+    /*private List<String> bookIds;
+    private List<String> userIds;*/
 }

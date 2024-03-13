@@ -42,14 +42,21 @@ public class BranchBOImpl implements BranchBO {
         ArrayList<Branch> branches = (ArrayList<Branch>) branchDAO.getAll();
         ArrayList<BranchDto> branchDtos = new ArrayList<>();
         for (Branch branch : branches) {
-            List<String> bookIds = branch.getBooks().stream()
+            /*List<String> bookIds = branch.getBooks().stream()
                     .map(Book::getId)
                     .collect(Collectors.toList());
             List<String> userIds = branch.getUsers().stream()
                     .map(User::getEmail)
                     .collect(Collectors.toList());
-            branchDtos.add(new BranchDto(branch.getBranchId(), branch.getBranchName(), branch.getLocation(), branch.getEmail(), bookIds, userIds));
+            branchDtos.add(new BranchDto(branch.getBranchId(), branch.getBranchName(), branch.getLocation(), branch.getEmail(), bookIds, userIds));*/
+            branchDtos.add(new BranchDto(branch.getBranchId(), branch.getBranchName(), branch.getLocation(), branch.getEmail()));
         }
         return branchDtos;
+    }
+
+    @Override
+    public BranchDto searchBranch(String branchId) throws ClassNotFoundException {
+        Branch branch = branchDAO.search(branchId);
+        return new BranchDto(branch.getBranchId(), branch.getBranchName(), branch.getLocation(), branch.getEmail());
     }
 }

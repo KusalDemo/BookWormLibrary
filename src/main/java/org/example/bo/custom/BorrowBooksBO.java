@@ -13,4 +13,9 @@ public interface BorrowBooksBO extends SuperBO {
     boolean deleteBorrowBook(String id) throws ClassNotFoundException;
 
     List<BorrowBooksDto> getAllBorrowBooks() throws ClassNotFoundException;
+
+    List<BorrowBooksDto> getAllBorrowBooksFromUserId(String id) throws ClassNotFoundException;
+
+    List<BorrowBooksDto> getAllAvailableBooksFromBranchId(String id) throws ClassNotFoundException;
+
 }

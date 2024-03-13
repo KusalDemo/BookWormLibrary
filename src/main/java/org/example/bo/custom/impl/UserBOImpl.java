@@ -5,6 +5,7 @@ import org.example.dao.DAOFactory;
 import org.example.dao.custom.BorrowBooksDAO;
 import org.example.dao.custom.BranchDAO;
 import org.example.dao.custom.UserDAO;
+import org.example.dto.BranchDto;
 import org.example.dto.UserDto;
 import org.example.entity.BorrowBooks;
 import org.example.entity.Branch;
@@ -25,7 +26,7 @@ public class UserBOImpl implements UserBO {
         List<Branch> all = branchDAO.getAll();
         Branch selectedBranch = null;
         for (Branch branch : all) {
-            if(branch.getBranchId().equals(userDto.getBranchId())){
+            if(branch.getBranchId().equals(userDto.getBranchDto().getBranchId())){
                 selectedBranch = branch;
             }
         }
@@ -38,7 +39,7 @@ public class UserBOImpl implements UserBO {
         List<Branch> all = branchDAO.getAll();
         Branch selectedBranch = null;
         for (Branch branch : all) {
-            if(branch.getBranchId().equals(userDto.getBranchId())){
+            if(branch.getBranchId().equals(userDto.getBranchDto().getBranchId())){
                 selectedBranch = branch;
             }
         }
@@ -54,6 +55,26 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
+    public boolean updateUserMinor(UserDto userDto) throws ClassNotFoundException {
+        List<Branch> all = branchDAO.getAll();
+        Branch selectedBranch = null;
+        for (Branch branch : all) {
+            if(branch.getBranchId().equals(userDto.getBranchDto().getBranchId())){
+                selectedBranch = branch;
+            }
+        }
+        List<BorrowBooks> allBorrowedBooks = borrowBooksDAO.getAll();
+        List<BorrowBooks> filteredBorrowBooks = null;
+        for(BorrowBooks borrowBooks : allBorrowedBooks){
+            if(borrowBooks.getUser().getUserName().equals(userDto.getUserName())){
+                /*filteredBorrowBooks = allBorrowedBooks.stream().filter(borrowBooks1 -> borrowBooks1.getUser().getUserName().equals(userDto.getUserName())).collect(Collectors.toList());*/
+                filteredBorrowBooks.add(borrowBooks);
+            }
+        }
+        return userDAO.updateMinor(new User(userDto.getUserName(),userDto.getEmail(),userDto.getPassword(),selectedBranch,filteredBorrowBooks));
+    }
+
+    @Override
     public boolean deleteUser(String userEmail) throws ClassNotFoundException {
         return userDAO.delete(userEmail);
     }
@@ -63,23 +84,10 @@ public class UserBOImpl implements UserBO {
         List<User> all = userDAO.getAll();
         List<UserDto> userDtos = new ArrayList<>();
 
-        List<BorrowBooks> allBorrowedBooks = borrowBooksDAO.getAll();
-
-        for (User user : all) {
-            List<String> collectionOfBookIds = new ArrayList<>();
-            for(BorrowBooks borrowBooks : allBorrowedBooks){
-                if(borrowBooks.getUser().getEmail().equals(user.getEmail())){
-                    collectionOfBookIds.add(borrowBooks.getId());
-                    System.out.println(borrowBooks.getId());
-                }
-            }
-            userDtos.add(new UserDto(user.getUserName(),user.getEmail(),user.getPassword(),user.getBranch().getBranchId(),collectionOfBookIds));
-            /*List<BorrowBooks> filteredBorrowBooks = allBorrowBooks.stream()
-                    .filter(borrowBooks -> borrowBooks.getUser().getUserName().equals(user.getUserName()))
-                    .collect(Collectors.toList());
-            List<String> bookIdList = filteredBorrowBooks.stream()
-                    .map(BorrowBooks::getId)
-                    .collect(Collectors.toList());*/
+        for(User user : all){
+            Branch branch = user.getBranch();
+            BranchDto branchDto = new BranchDto(branch.getBranchId(),branch.getBranchName(),branch.getLocation(), branch.getEmail());
+            userDtos.add(new UserDto(user.getUserName(),user.getEmail(),user.getPassword(),branchDto));
         }
         return userDtos;
     }

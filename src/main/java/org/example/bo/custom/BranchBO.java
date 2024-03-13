@@ -13,4 +13,6 @@ public interface BranchBO extends SuperBO {
     boolean deleteBranch(String branchId) throws ClassNotFoundException;
 
     ArrayList<BranchDto> getAllBranches() throws ClassNotFoundException;
+
+    BranchDto searchBranch(String branchId) throws ClassNotFoundException;
 }

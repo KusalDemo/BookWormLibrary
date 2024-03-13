@@ -6,6 +6,7 @@ import org.example.dao.custom.BookDAO;
 import org.example.dao.custom.BorrowBooksDAO;
 import org.example.dao.custom.BranchDAO;
 import org.example.dto.BookDto;
+import org.example.dto.BranchDto;
 import org.example.entity.Book;
 import org.example.entity.BorrowBooks;
 import org.example.entity.Branch;
@@ -22,7 +23,7 @@ public class BookBOImpl implements BookBO {
         Branch selectedBranch = null;
         List<Branch> all = branchDAO.getAll();
         for (Branch branch : all) {
-            if(branch.getBranchId().equals(bookDto.getBranchId())){
+            if(branch.getBranchId().equals(bookDto.getBranch().getBranchId())){
                 selectedBranch = branch;
             }
         }
@@ -35,7 +36,7 @@ public class BookBOImpl implements BookBO {
         Branch selectedBranch = null;
         List<Branch> all = branchDAO.getAll();
         for (Branch branch : all) {
-            if(branch.getBranchId().equals(bookDto.getBranchId())){
+            if(branch.getBranchId().equals(bookDto.getBranch().getBranchId())){
                 selectedBranch = branch;
             }
         }
@@ -58,11 +59,21 @@ public class BookBOImpl implements BookBO {
         ArrayList<Book> books = (ArrayList<Book>) bookDAO.getAll();
         ArrayList<BookDto> bookDtos = new ArrayList<>();
         for (Book book : books) {
-            String branchId = null;
-            if (book.getBranch() != null) {
-                branchId = book.getBranch().getBranchId();
-            }
-            bookDtos.add(new BookDto(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.isAvailability(), branchId));
+            Branch branch = book.getBranch();
+            BranchDto branchDto = new BranchDto(branch.getBranchId(), branch.getBranchName(), branch.getLocation(), branch.getEmail());
+            bookDtos.add(new BookDto(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.isAvailability(),branchDto));
+        }
+        return bookDtos;
+    }
+
+    @Override
+    public ArrayList<BookDto> getAllAvailableBooksFromBranchId(String branchId) throws ClassNotFoundException {
+        ArrayList<Book> books = (ArrayList<Book>) bookDAO.getAllAvailableBooksFromBranchId(branchId);
+        ArrayList<BookDto> bookDtos = new ArrayList<>();
+        for (Book book : books) {
+            Branch branch = book.getBranch();
+            BranchDto branchDto = new BranchDto(branch.getBranchId(), branch.getBranchName(), branch.getLocation(), branch.getEmail());
+            bookDtos.add(new BookDto(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.isAvailability(),branchDto));
         }
         return bookDtos;
     }

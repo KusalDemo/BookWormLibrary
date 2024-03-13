@@ -9,10 +9,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @Table(name = "borrow_books")
 @Entity
-public class BorrowBooks {
+public class BorrowBooks{
     @Id
     private String id;
     @ManyToOne
@@ -21,4 +20,5 @@ public class BorrowBooks {
     private Book book;
     private LocalDate borrowDate;
     private LocalDate returnDate;
+    private String status;
 }

@@ -24,6 +24,9 @@ public class LoginFormController {
     public Button btnSignUp;
     public ComboBox cmbRole;
 
+    public static String loggedPerson;
+    public static UserDto currentUserDto;
+
     AdminBO adminBO=(AdminBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.ADMIN);
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
 
@@ -33,7 +36,7 @@ public class LoginFormController {
     }
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
-        List<UserDto> allUsers = userBO.getAllUsers();
+       /* List<UserDto> allUsers = userBO.getAllUsers();
         for (UserDto userDto : allUsers) {
             System.out.println(userDto.getEmail());
             if (userDto.getEmail().equals(txtEmail.getText()) && userDto.getPassword().equals(txtPassword.getText())) {
@@ -45,23 +48,28 @@ public class LoginFormController {
                 stage1.centerOnScreen();
             }else{
                 new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
-            }
-        }
-        /*if (cmbRole.getValue().equals("User")) {
+            }*/
+        Boolean isFoundInDB = false;
+        if (cmbRole.getValue().equals("User")) {
             try {
                 List<UserDto> allUsers = userBO.getAllUsers();
                 for (UserDto userDto : allUsers) {
                     System.out.println(userDto.getEmail());
                     if (userDto.getEmail().equals(txtEmail.getText()) && userDto.getPassword().equals(txtPassword.getText())) {
-                        Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
-                        Scene scene1 = new Scene(root);
-                        Stage stage1 = (Stage) btnLogin.getScene().getWindow();
-                        stage1.setScene(scene1);
-                        stage1.setTitle("DASHBOARD");
-                        stage1.centerOnScreen();
-                    }else{
-                        new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
+                        isFoundInDB = true;
+                        loggedPerson=userDto.getUserName();
+                        currentUserDto=userDto;
                     }
+                }
+                if(isFoundInDB == true){
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+                    Scene scene1 = new Scene(root);
+                    Stage stage1 = (Stage) btnLogin.getScene().getWindow();
+                    stage1.setScene(scene1);
+                    stage1.setTitle("DASHBOARD");
+                    stage1.centerOnScreen();
+                }else{
+                    new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
                 }
             } catch (Exception e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -70,17 +78,23 @@ public class LoginFormController {
             }
         } else if (cmbRole.getValue().equals("Admin")) {
             try {
-                AdminDto searchedAdmin = adminBO.getAdmin(txtEmail.getText());
-                    if (searchedAdmin.getEmail().equals(txtEmail.getText()) && searchedAdmin.getPassword().equals(txtPassword.getText())) {
-                        Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
-                        Scene scene1 = new Scene(root);
-                        Stage stage1 = (Stage) btnLogin.getScene().getWindow();
-                        stage1.setScene(scene1);
-                        stage1.setTitle("DASHBOARD");
-                        stage1.centerOnScreen();
-                    }else{
-                        new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
+                List<AdminDto> allAdmins = adminBO.getAllAdmins();
+                for(AdminDto searchedAdmin : allAdmins){
+                    if(searchedAdmin.getEmail().equals(txtEmail.getText()) && searchedAdmin.getPassword().equals(txtPassword.getText())){
+                        isFoundInDB = true;
+                        loggedPerson=searchedAdmin.getUsername();
                     }
+                }
+                if(isFoundInDB == true){
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+                    Scene scene1 = new Scene(root);
+                    Stage stage1 = (Stage) btnLogin.getScene().getWindow();
+                    stage1.setScene(scene1);
+                    stage1.setTitle("DASHBOARD");
+                    stage1.centerOnScreen();
+                }else{
+                    new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
+                }
             } catch (Exception e) {
                 new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
                 System.out.println("Admin Error bng");
@@ -88,11 +102,10 @@ public class LoginFormController {
             }
         }else{
             new Alert(Alert.AlertType.ERROR, "Invalid Role").show();
-        }*/
+        }
     }
 
     public void btnSignUpOnAction(ActionEvent actionEvent) {
-
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/signup_form.fxml"));
             Scene scene1 = new Scene(root);
