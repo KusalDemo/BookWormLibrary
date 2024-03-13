@@ -1,17 +1,24 @@
 package org.example.controller;
 
+import animatefx.animation.FadeIn;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.BookBO;
 import org.example.bo.custom.BorrowBooksBO;
 import org.example.bo.custom.BranchBO;
+import org.example.bo.custom.UserBO;
 import org.example.dto.BookDto;
 import org.example.dto.BorrowBooksDto;
 import org.example.dto.BranchDto;
+import org.example.dto.UserDto;
 import org.example.dto.tm.BookTM;
 import org.example.dto.tm.BorrowBookTM;
 
@@ -40,13 +47,19 @@ public class BorrowBooksManagementFormController {
     public TableColumn<?,?> colAuthor;
     public TableColumn<?,?> colGenre;
 
+    public UserDto loggedUser=LoginFormController.currentUserDto;
+    public Button btnBack;
+
 
     BorrowBooksBO borrowBooksBO=(BorrowBooksBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BORROWBOOKS);
     BookBO bookBO=(BookBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BOOK);
     BranchBO branchBO=(BranchBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BRANCH);
+    UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
 
     public void initialize() throws ClassNotFoundException {
-        //txtUserId.setText(LoginFormController.currentUserDto.getEmail());
+        txtUserId.setText("gunasekarakusal@gmail.com");
+        /*txtUserId.setText(loggedUser.getEmail());*/
+        checkEligible();
         ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
         for(BranchDto branchDto : allBranches){
             cmbBranch.getItems().add(branchDto.getBranchId()+" - "+branchDto.getBranchName());
@@ -85,7 +98,55 @@ public class BorrowBooksManagementFormController {
         colAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
         colGenre.setCellValueFactory(new PropertyValueFactory<>("genre"));
     }
-    public void btnBorrowOnAction(ActionEvent actionEvent) {
+    public void btnBorrowOnAction(ActionEvent actionEvent) throws ClassNotFoundException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("You have chosen : " + txtBookName.getText());
+        alert.setContentText("Do you want to Borrow ?");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == buttonTypeYes) {
+                try {
+                    UserDto selectedUserDto = new UserDto();
+                    List<UserDto> allUsers = userBO.getAllUsers();
+                    for(UserDto userDto : allUsers){
+                        if(userDto.getEmail().equals(txtUserId.getText())){
+                            selectedUserDto = userDto;
+                        }
+                    }
+                    BookDto selectedBookDto = new BookDto();
+                    String selectedBranch = (String)cmbBranch.getValue();
+                    String[] parts = selectedBranch.split(" - ");
+                    String branchId = parts[0];
+                    ArrayList<BookDto> allAvailableBooksFromBranchId = bookBO.getAllAvailableBooksFromBranchId(branchId);
+                    for(BookDto bookDto : allAvailableBooksFromBranchId){
+                        if(bookDto.getId().equals(txtBookId.getText())){
+                            selectedBookDto = bookDto;
+                        }
+                    }
+
+                    LocalDate today = LocalDate.parse(txtToday.getText());
+                    LocalDate returnDate = LocalDate.parse(txtReturnDate.getText());
+                    boolean isSaved = borrowBooksBO.saveBorrowBook(new BorrowBooksDto(txtBorrowId.getText(), loggedUser, selectedBookDto, today, returnDate, "Pending"));
+                    if(isSaved){
+                        tblBorrowBooks.refresh();
+                        new Alert(Alert.AlertType.INFORMATION, "Your Book borrowing request has been accepted.. Return your book within 2 weeks. Thank you").show();
+                    }
+                    else{
+                        new Alert(Alert.AlertType.ERROR, "Something went wrong. Please try again").show();
+                    }
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+            } else if (response == buttonTypeNo) {
+                System.out.println("User cancelled the operation.");
+            }
+        });
 
     }
 
@@ -114,5 +175,35 @@ public class BorrowBooksManagementFormController {
         DateTimeFormatter formatStyle = DateTimeFormatter.ofPattern("yyMMddHHmmss");
         String formattedDate = now.format(formatStyle);
         return "Bor-"+formattedDate;
+    }
+
+    private void checkEligible(){
+        try {
+            List<BorrowBooksDto> returnDateExceededBooks = borrowBooksBO.getReturnDateExceededBooks(txtUserId.getText());
+            if (returnDateExceededBooks.size() > 0) {
+                lblNotice.setText("Sorry.. we found some books which are not returned yet.. Please return them for your next borrow");
+                btnBorrow.setVisible(false);
+            }else{
+                lblNotice.setText("Select Book and Click Borrow Button..");
+                btnBorrow.setVisible(true);
+            }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnBackOnAction(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+            Scene scene1 = new Scene(root);
+            Stage stage1 = (Stage) btnBack.getScene().getWindow();
+            stage1.setScene(scene1);
+            stage1.setTitle("Dashboard");
+            stage1.centerOnScreen();
+
+            new FadeIn(root).play();
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 }

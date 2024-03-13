@@ -1,6 +1,7 @@
 package org.example.bo.custom;
 
 import org.example.bo.SuperBO;
+import org.example.dto.BookDto;
 import org.example.dto.BorrowBooksDto;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface BorrowBooksBO extends SuperBO {
     List<BorrowBooksDto> getAllBorrowBooksFromUserId(String id) throws ClassNotFoundException;
 
     List<BorrowBooksDto> getAllAvailableBooksFromBranchId(String id) throws ClassNotFoundException;
+
+    List<BorrowBooksDto> getReturnDateExceededBooks(String id) throws ClassNotFoundException;
 
 }

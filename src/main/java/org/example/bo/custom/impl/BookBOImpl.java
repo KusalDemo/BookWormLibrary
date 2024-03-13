@@ -50,8 +50,8 @@ public class BookBOImpl implements BookBO {
     }
 
     @Override
-    public boolean updateAvailability(String title, boolean availability) {
-        return false;
+    public boolean updateAvailability(String id, boolean availability) {
+        return bookDAO.updateAvailability(id, availability);
     }
 
     @Override

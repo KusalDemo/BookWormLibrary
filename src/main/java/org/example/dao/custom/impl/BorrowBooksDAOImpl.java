@@ -22,12 +22,25 @@ public class BorrowBooksDAOImpl implements BorrowBooksDAO {
 
     @Override
     public boolean update(BorrowBooks dto) throws ClassNotFoundException {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(dto);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
     public boolean delete(String id) throws ClassNotFoundException {
-        return false;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "delete from BorrowBooks where id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        int isDeleted = query.executeUpdate();
+        transaction.commit();
+        session.close();
+        return isDeleted > 0;
     }
 
     @Override
@@ -60,6 +73,19 @@ public class BorrowBooksDAOImpl implements BorrowBooksDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         String hql = "from BorrowBooks where user=:userId";
+        Query query = session.createQuery(hql);
+        query.setParameter("userId", id);
+        List<BorrowBooks> borrowBooks = query.list();
+        transaction.commit();
+        session.close();
+        return borrowBooks;
+    }
+
+    @Override
+    public List<BorrowBooks> getReturnDateExceededBooks(String id) throws ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from BorrowBooks where user.email=:userId and returnDate<current_date()";
         Query query = session.createQuery(hql);
         query.setParameter("userId", id);
         List<BorrowBooks> borrowBooks = query.list();

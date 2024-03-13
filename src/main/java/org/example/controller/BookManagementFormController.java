@@ -1,12 +1,17 @@
 package org.example.controller;
 
+import animatefx.animation.FadeIn;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.BookBO;
 import org.example.bo.custom.BranchBO;
@@ -34,6 +39,7 @@ public class BookManagementFormController {
     public TableColumn<?,?> colGenre;
     public TableColumn<?,?> colAvailability;
     public TableColumn<?,?> colBranch;
+    public Button btnBack;
 
     private Branch branch;
 
@@ -226,5 +232,20 @@ public class BookManagementFormController {
         }
         tblBook.setItems(obList);
         tblBook.refresh();
+    }
+
+    public void btnBackOnAction(ActionEvent actionEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
+            Scene scene1 = new Scene(root);
+            Stage stage1 = (Stage) btnBack.getScene().getWindow();
+            stage1.setScene(scene1);
+            stage1.setTitle("Dashboard");
+            stage1.centerOnScreen();
+
+            new FadeIn(root).play();
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 }

@@ -12,5 +12,7 @@ public interface BookDAO extends CrudDAO<Book> {
 
     boolean delete(String title) throws ClassNotFoundException;
 
+    boolean updateAvailability(String title, boolean availability);
+
     List<Book> getAllAvailableBooksFromBranchId(String id) throws ClassNotFoundException;
 }

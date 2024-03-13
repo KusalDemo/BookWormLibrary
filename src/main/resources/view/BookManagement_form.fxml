@@ -84,5 +84,6 @@
             <TableColumn fx:id="colBranch" prefWidth="116.3333740234375" text="Branch" />
         </columns>
       </TableView>
+      <Button fx:id="btnBack" layoutX="45.0" layoutY="869.0" mnemonicParsing="false" onAction="#btnBackOnAction" styleClass="btn-30" text="BACK" />
    </children>
 </AnchorPane>

@@ -77,6 +77,18 @@ public class DashBoardFormController {
     }
 
     public void borrowBookManagePaneOnAction(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/BorrowBooksManagement_form.fxml"));
+            Scene scene1 = new Scene(root);
+            Stage stage1 = (Stage) borrowBookManagePane.getScene().getWindow();
+            stage1.setScene(scene1);
+            stage1.setTitle("Let's Borrow and Read Books");
+            stage1.centerOnScreen();
+
+            new FadeIn(root).play();
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     public void btnLogOutOnAction(ActionEvent actionEvent) {

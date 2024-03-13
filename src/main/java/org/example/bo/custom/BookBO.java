@@ -14,7 +14,7 @@ public interface BookBO extends SuperBO {
     boolean deleteBook(String title) throws ClassNotFoundException;
 
 
-    boolean updateAvailability(String title, boolean availability);
+    boolean updateAvailability(String id, boolean availability);
 
     ArrayList<BookDto> getAllBooks() throws ClassNotFoundException;
 

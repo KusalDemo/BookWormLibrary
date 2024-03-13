@@ -51,5 +51,6 @@
         </columns>
       </TableView>
       <TextField fx:id="txtSearch" layoutX="92.0" layoutY="175.0" onMouseClicked="#txtIdOnAction" prefHeight="24.0" prefWidth="428.0" promptText="Search" />
+      <Button fx:id="btnBack" layoutX="59.0" layoutY="846.0" mnemonicParsing="false" onAction="#btnBackOnAction" styleClass="btn-30" text="BACK" />
    </children>
 </AnchorPane>

@@ -46,6 +46,20 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
+    public boolean updateAvailability(String id, boolean availability) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "update Book set availability=:availability where id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("availability", availability);
+        query.setParameter("id", id);
+        int isUpdated = query.executeUpdate();
+        transaction.commit();
+        session.close();
+        return isUpdated > 0;
+    }
+
+    @Override
     public List<Book> getAllAvailableBooksFromBranchId(String id) throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
