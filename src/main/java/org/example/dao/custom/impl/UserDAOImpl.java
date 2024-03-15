@@ -45,6 +45,7 @@ public class UserDAOImpl implements UserDAO {
     public boolean updateMinor(User dto) throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
+        System.out.println(dto.getUserName()+" "+dto.getEmail());
         String hql = "update User set userName=:name where email=:email";
         Query query = session.createQuery(hql);
         query.setParameter("name", dto.getUserName());

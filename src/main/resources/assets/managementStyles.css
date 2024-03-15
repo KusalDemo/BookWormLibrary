@@ -103,3 +103,8 @@
 #tblUsers ,#tblBook ,#tblBranch ,#tblBorrowBooks .column-header {
     -fx-background-color: #316FF6; /* Remove the background color of the table headers */
 }
+#noticePane{
+    -fx-background-color: #ced6e0;
+    -fx-border-radius: 25;
+    -fx-background-radius: 25;
+}

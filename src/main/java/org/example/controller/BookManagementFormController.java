@@ -75,6 +75,7 @@ public class BookManagementFormController {
         }
         loadAllBooks();
         setCellValueFactory();
+        txtAvailability.setEditable(false);
 
         tblBook.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue()>=0){
@@ -153,7 +154,7 @@ public class BookManagementFormController {
         BranchDto branchDto = branchBO.searchBranch((String) cmbBranches.getValue().toString());
         if(!txtBookName.getText().equals("")){
             try {
-                boolean isUpdated = bookBO.updateBook(new BookDto(txtBookId.getText(), txtBookName.getText(), txtAuthor.getText(), txtGenre.getText(), true, branchDto));
+                boolean isUpdated = bookBO.updateBook(new BookDto(txtBookId.getText(), txtBookName.getText(), txtAuthor.getText(), txtGenre.getText(), Boolean.getBoolean(txtAvailability.getText()), branchDto));
                 loadAllBooks();
                 if (isUpdated) {
                     new Alert(Alert.AlertType.INFORMATION, "Book Updated").show();
@@ -229,7 +230,7 @@ public class BookManagementFormController {
         clearFields();
         ArrayList<BookDto> allBooks = bookBO.getAllBooks();
         for (BookDto book:allBooks){
-            if(book.getTitle().toLowerCase().equals(txtSearchBook.getText().toLowerCase())){
+            if(book.getTitle().toLowerCase().equals(txtSearchBook.getText().toLowerCase())||book.getAuthor().toLowerCase().equals(txtSearchBook.getText().toLowerCase())){
                 txtBookId.setText(book.getId());
                 txtBookName.setText(book.getTitle());
                 txtAuthor.setText(book.getAuthor());

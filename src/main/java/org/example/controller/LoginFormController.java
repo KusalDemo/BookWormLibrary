@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.AdminBO;
@@ -29,12 +30,22 @@ public class LoginFormController {
 
     public static AdminDto currentAdminDto;
     public static String whoIsLogged;
+    public Text lblCredential;
     AdminBO adminBO=(AdminBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.ADMIN);
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
 
     public void initialize(){
         cmbRole.getItems().addAll("User", "Admin");
         cmbRole.getSelectionModel().select(0);
+        lblCredential.setText("User Name");
+
+        cmbRole.setOnAction(event -> {
+            if(cmbRole.getValue().equals("User")){
+               lblCredential.setText("User Name");
+            } else if (cmbRole.getValue().equals("Admin")) {
+                lblCredential.setText("Admin ID");
+            }
+        });
     }
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
@@ -89,7 +100,7 @@ public class LoginFormController {
                     }
                 }*/
                 AdminDto admin = adminBO.getAdmin(txtEmail.getText());
-                if (admin.getEmail().equals(txtPassword.getText())) {
+                if (admin.getPassword().equals(txtPassword.getText())) {
                     isFoundInDB = true;
                     loggedPerson = admin.getUsername();
                     currentAdminDto = admin;

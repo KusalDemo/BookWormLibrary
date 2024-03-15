@@ -6,21 +6,23 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="920.0" prefWidth="1520.0" stylesheets="@../assets/managementStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.BorrowBooksManagementFormController">
    <children>
-      <TextField fx:id="txtSearch" layoutX="783.0" layoutY="61.0" onKeyReleased="#txtSearchOnAction" prefHeight="24.0" prefWidth="248.0" promptText="Search" />
-      <ComboBox fx:id="cmbBranch" layoutX="555.0" layoutY="61.0" prefHeight="24.0" prefWidth="203.0" />
-      <Label fx:id="lblNotice" layoutX="147.0" layoutY="135.0" prefHeight="16.0" prefWidth="1269.0" />
-      <TextField fx:id="txtBorrowId" layoutX="913.0" layoutY="243.0" prefHeight="24.0" prefWidth="483.0" />
-      <TextField fx:id="txtUserId" layoutX="915.0" layoutY="307.0" prefHeight="24.0" prefWidth="483.0" />
-      <TextField fx:id="txtBookId" layoutX="914.0" layoutY="365.0" prefHeight="24.0" prefWidth="483.0" />
-      <TextField fx:id="txtBookName" layoutX="913.0" layoutY="431.0" prefHeight="24.0" prefWidth="483.0" />
-      <TextField fx:id="txtLocation" layoutX="915.0" layoutY="495.0" prefHeight="24.0" prefWidth="483.0" />
-      <TextField fx:id="txtToday" layoutX="914.0" layoutY="553.0" prefHeight="24.0" prefWidth="483.0" />
-      <TextField fx:id="txtReturnDate" layoutX="915.0" layoutY="612.0" prefHeight="24.0" prefWidth="483.0" />
-      <Button fx:id="btnBorrow" layoutX="1072.0" layoutY="692.0" mnemonicParsing="false" onAction="#btnBorrowOnAction" prefHeight="40.0" prefWidth="163.0" styleClass="btn-30" text="Borrow" />
+      <TextField fx:id="txtSearch" layoutX="783.0" layoutY="89.0" onKeyReleased="#txtSearchOnAction" prefHeight="24.0" prefWidth="248.0" promptText="Search" />
+      <ComboBox fx:id="cmbBranch" layoutX="555.0" layoutY="89.0" prefHeight="24.0" prefWidth="203.0" />
+      <TextField fx:id="txtBorrowId" layoutX="913.0" layoutY="343.0" prefHeight="24.0" prefWidth="483.0" />
+      <TextField fx:id="txtUserId" layoutX="915.0" layoutY="407.0" prefHeight="24.0" prefWidth="483.0" />
+      <TextField fx:id="txtBookId" layoutX="914.0" layoutY="465.0" prefHeight="24.0" prefWidth="483.0" />
+      <TextField fx:id="txtBookName" layoutX="913.0" layoutY="531.0" prefHeight="24.0" prefWidth="483.0" />
+      <TextField fx:id="txtLocation" layoutX="915.0" layoutY="595.0" prefHeight="24.0" prefWidth="483.0" />
+      <TextField fx:id="txtToday" layoutX="914.0" layoutY="653.0" prefHeight="24.0" prefWidth="483.0" />
+      <TextField fx:id="txtReturnDate" layoutX="915.0" layoutY="712.0" prefHeight="24.0" prefWidth="483.0" />
+      <Button fx:id="btnBorrow" layoutX="1072.0" layoutY="792.0" mnemonicParsing="false" onAction="#btnBorrowOnAction" prefHeight="40.0" prefWidth="163.0" styleClass="btn-20" text="Borrow" />
       <TableView fx:id="tblBorrowBooks" layoutX="92.0" layoutY="262.0" prefHeight="527.0" prefWidth="748.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="145.6666717529297" text="Id" />
@@ -30,14 +32,39 @@
         </columns>
       </TableView>
       <Label layoutX="98.0" layoutY="235.0" prefHeight="16.0" prefWidth="119.0" text="Available Books :" />
-      <Label layoutX="444.0" layoutY="69.0" prefHeight="16.0" prefWidth="104.0" text="Select Branch :" />
-      <Label layoutX="912.0" layoutY="219.0" prefHeight="16.0" prefWidth="119.0" text="Borrow Id :" />
-      <Label layoutX="914.0" layoutY="286.0" prefHeight="16.0" prefWidth="119.0" text="User :" />
-      <Label layoutX="916.0" layoutY="344.0" prefHeight="16.0" prefWidth="119.0" text="Book Id :" />
-      <Label layoutX="916.0" layoutY="410.0" prefHeight="16.0" prefWidth="119.0" text="Book Name :" />
-      <Label layoutX="914.0" layoutY="475.0" prefHeight="16.0" prefWidth="119.0" text="Branch Location :" />
-      <Label layoutX="915.0" layoutY="533.0" prefHeight="16.0" prefWidth="119.0" text="Today :" />
-      <Label layoutX="917.0" layoutY="592.0" prefHeight="16.0" prefWidth="119.0" text="Return Date :" />
+      <Label layoutX="444.0" layoutY="97.0" prefHeight="16.0" prefWidth="104.0" text="Select Branch :" />
+      <Label layoutX="912.0" layoutY="319.0" prefHeight="16.0" prefWidth="119.0" text="Borrow Id :" />
+      <Label layoutX="914.0" layoutY="386.0" prefHeight="16.0" prefWidth="119.0" text="User :" />
+      <Label layoutX="916.0" layoutY="444.0" prefHeight="16.0" prefWidth="119.0" text="Book Id :" />
+      <Label layoutX="916.0" layoutY="510.0" prefHeight="16.0" prefWidth="119.0" text="Book Name :" />
+      <Label layoutX="914.0" layoutY="575.0" prefHeight="16.0" prefWidth="119.0" text="Branch Location :" />
+      <Label layoutX="915.0" layoutY="633.0" prefHeight="16.0" prefWidth="119.0" text="Today :" />
+      <Label layoutX="917.0" layoutY="692.0" prefHeight="16.0" prefWidth="119.0" text="Return Date :" />
       <Button fx:id="btnBack" layoutX="45.0" layoutY="864.0" mnemonicParsing="false" onAction="#btnBackOnAction" styleClass="btn-30" text="BACK" />
+      <ImageView fitHeight="32.0" fitWidth="36.0" layoutX="1032.0" layoutY="85.0">
+         <image>
+            <Image url="@../assets/icons/icons8-search-100.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="29.0" layoutY="23.0" prefHeight="16.0" prefWidth="366.0" text="Let's Borrow Books">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="noticePane" layoutX="122.0" layoutY="159.0" prefHeight="40.0" prefWidth="1271.0">
+         <children>
+            <Label layoutX="80.0" layoutY="10.0" text="Notice :">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblNotice" layoutX="160.0" layoutY="10.0" prefHeight="16.0" prefWidth="1087.0" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="1068.0" layoutY="250.0" prefHeight="24.0" prefWidth="142.0" text="Your Selection" textAlignment="CENTER" underline="true">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

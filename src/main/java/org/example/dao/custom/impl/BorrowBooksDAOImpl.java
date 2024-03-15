@@ -72,7 +72,7 @@ public class BorrowBooksDAOImpl implements BorrowBooksDAO {
     public List<BorrowBooks> getAllBorrowBooksFromUserId(String id) throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "from BorrowBooks where user=:userId";
+        String hql = "from BorrowBooks where user=:userId" ;
         Query query = session.createQuery(hql);
         query.setParameter("userId", id);
         List<BorrowBooks> borrowBooks = query.list();
@@ -85,7 +85,7 @@ public class BorrowBooksDAOImpl implements BorrowBooksDAO {
     public List<BorrowBooks> getReturnDateExceededBooks() throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "from BorrowBooks where returnDate<current_date() order by returnDate ASC ";
+        String hql = "from BorrowBooks where returnDate<current_date() and status='pending' order by returnDate ASC ";
         Query query = session.createQuery(hql);
         List<BorrowBooks> borrowBooks = query.list();
         transaction.commit();
@@ -97,7 +97,7 @@ public class BorrowBooksDAOImpl implements BorrowBooksDAO {
     public List<BorrowBooks> getReturnDateExceededBooks(String id) throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "from BorrowBooks where user.email=:userId and returnDate<current_date() order by returnDate ASC ";
+        String hql = "from BorrowBooks where user.email=:userId and returnDate<current_date() and status='pending' order by returnDate ASC ";
         Query query = session.createQuery(hql);
         query.setParameter("userId", id);
         List<BorrowBooks> borrowBooks = query.list();

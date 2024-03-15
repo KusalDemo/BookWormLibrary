@@ -47,12 +47,12 @@ public class UserManagementFormController {
         for(BranchDto branchDto:allBranches){
             cmbBranch.getItems().add(branchDto.getBranchId()+" - "+branchDto.getBranchName());
         }
-
+        //2...
         tblUsers.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue()>=0){
                 UserTM selectedItem = tblUsers.getItems().get(newValue.intValue());
-                txtUserName.setText(selectedItem.getUserName());
-                txtEmail.setText(selectedItem.getEmail());
+                txtUserName.setText(selectedItem.getEmail());
+                txtEmail.setText(selectedItem.getUserName());
                 cmbBranch.setValue(selectedItem.getBranchId());
             }
         });
@@ -102,7 +102,39 @@ public class UserManagementFormController {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("You are about to delete a User, User : "+txtUserName.getText()+". This action cannot be undone.");
+        alert.setContentText("Do you want to continue?");
 
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == buttonTypeYes) {
+                if(txtEmail.getText().isEmpty()||txtUserName.getText().isEmpty()||cmbBranch.getValue()==null){
+                    new Alert(Alert.AlertType.ERROR, "Please provide User Name and Branch").show();
+                }else{
+                    try{
+                        boolean isDeleted = userBO.updateUser(new UserDto(txtUserName.getText(), txtEmail.getText(), null, null));
+                        if(isDeleted){
+                            new Alert(Alert.AlertType.INFORMATION, "User Deleted Successfully").show();
+                            clearFields();
+                            loadAllUsers();
+                        }else{
+                            new Alert(Alert.AlertType.ERROR, "User Not Deleted").show();
+                        }
+                    }catch (Exception e){
+                        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+                        System.out.println(e.getMessage());
+                    }
+                }
+            } else if (response == buttonTypeNo) {
+                System.out.println("Admin cancelled the operation.");
+            }
+        });
     }
     private void loadAllUsers(){
         ObservableList<UserTM> obList = FXCollections.observableArrayList();

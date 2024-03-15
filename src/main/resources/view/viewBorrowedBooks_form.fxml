@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="920.0" prefWidth="1520.0" stylesheets="@../assets/managementStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ViewBorrowedBooksFormController">
    <children>
       <TableView fx:id="tblBorrowBooks" layoutX="57.0" layoutY="121.0" prefHeight="696.0" prefWidth="959.0">
@@ -27,37 +26,37 @@
          </font>
       </Label>
       <Button fx:id="btnBack" layoutX="68.0" layoutY="855.0" mnemonicParsing="false" onAction="#btnBackOnAction" prefHeight="40.0" prefWidth="163.0" styleClass="btn-30" text="BACK" />
-      <Label layoutX="1046.0" layoutY="205.0" prefHeight="16.0" prefWidth="163.0" text="Selected User :">
+      <Label layoutX="1046.0" layoutY="268.0" prefHeight="16.0" prefWidth="163.0" text="Selected User :">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label layoutX="1066.0" layoutY="244.0" prefHeight="16.0" prefWidth="114.0" text="User ID      : ">
+      <Label layoutX="1066.0" layoutY="307.0" prefHeight="16.0" prefWidth="114.0" text="User ID      : ">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="lblUserID" layoutX="1216.0" layoutY="245.0" prefHeight="21.0" prefWidth="273.0" textFill="#316ff6">
+      <Label fx:id="lblUserID" layoutX="1216.0" layoutY="308.0" prefHeight="21.0" prefWidth="273.0" textFill="#316ff6">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="1066.0" layoutY="274.0" prefHeight="16.0" prefWidth="114.0" text="User name :">
+      <Label layoutX="1066.0" layoutY="337.0" prefHeight="16.0" prefWidth="114.0" text="User name :">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="lblUserName" layoutX="1216.0" layoutY="275.0" prefHeight="21.0" prefWidth="272.0" textFill="#316ff6">
+      <Label fx:id="lblUserName" layoutX="1216.0" layoutY="338.0" prefHeight="21.0" prefWidth="272.0" textFill="#316ff6">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="1066.0" layoutY="304.0" prefHeight="21.0" prefWidth="135.0" text="User Branch :">
+      <Label layoutX="1066.0" layoutY="367.0" prefHeight="21.0" prefWidth="135.0" text="User Branch :">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <Label fx:id="lblUserEmail" layoutX="1216.0" layoutY="305.0" prefHeight="21.0" prefWidth="269.0" textFill="#316ff6">
+      <Label fx:id="lblUserEmail" layoutX="1216.0" layoutY="367.0" prefHeight="21.0" prefWidth="269.0" textFill="#316ff6">
          <font>
             <Font size="15.0" />
          </font>
@@ -112,10 +111,18 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="1216.0" layoutY="146.0" text="Details" textAlignment="CENTER">
+      <Label layoutX="1216.0" layoutY="128.0" text="Details" textAlignment="CENTER">
          <font>
             <Font size="21.0" />
          </font>
       </Label>
+      <Button fx:id="btnReturn" layoutX="1092.0" layoutY="710.0" mnemonicParsing="false" onAction="#btnReturnOnAction" prefHeight="40.0" prefWidth="163.0" styleClass="btn-20" text="Return" />
+      <Button fx:id="btnInform" layoutX="1300.0" layoutY="710.0" mnemonicParsing="false" onAction="#btnInformOnAction" prefHeight="40.0" prefWidth="155.0" styleClass="btn-40" text="Inform" />
+      <Label layoutX="1046.0" layoutY="210.0" prefHeight="16.0" prefWidth="163.0" text="Borrow ID :">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBorrow" layoutX="1216.0" layoutY="214.0" prefHeight="16.0" prefWidth="264.0" textFill="#316ff6" />
    </children>
 </AnchorPane>

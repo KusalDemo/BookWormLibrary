@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import animatefx.animation.FadeIn;
+import jakarta.persistence.PersistenceException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import org.example.dto.UserDto;
 import org.example.dto.tm.BorrowBookTM;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewBorrowedBooksFormController {
@@ -39,6 +41,9 @@ public class ViewBorrowedBooksFormController {
     public Label lblBookTitle;
     public Label lblBranch;
     public Label lblBranchEmail;
+    public Button btnReturn;
+    public Button btnInform;
+    public Label lblBorrow;
 
     BorrowBooksBO borrowBooksBO = (BorrowBooksBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BORROWBOOKS);
     BookBO bookBO = (BookBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BOOK);
@@ -65,6 +70,7 @@ public class ViewBorrowedBooksFormController {
         tblBorrowBooks.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue() >= 0){
                 BorrowBookTM selectedBorrowBook = tblBorrowBooks.getItems().get(newValue.intValue());
+                lblBorrow.setText(selectedBorrowBook.getId());
                 try {
                     BookDto bookDto = bookBO.searchBook(String.valueOf(selectedBorrowBook.getBookId()));
                     lblBookID.setText(bookDto.getId());
@@ -76,8 +82,8 @@ public class ViewBorrowedBooksFormController {
                 }
                 try{
                     UserDto userDto = userBO.searchUser(String.valueOf(selectedBorrowBook.getUserId()));
-                    lblUserID.setText(userDto.getEmail());
-                    lblUserName.setText(userDto.getUserName());
+                    lblUserID.setText(userDto.getUserName());
+                    lblUserName.setText(userDto.getEmail());
                     lblUserEmail.setText(userDto.getBranchDto().getBranchName());
                 } catch (ClassNotFoundException e) {
                     throw new RuntimeException(e);
@@ -99,7 +105,7 @@ public class ViewBorrowedBooksFormController {
         for(BorrowBooksDto borrowBooksDto:allBorrowBooks){
             obList.add(new BorrowBookTM(
                     borrowBooksDto.getId(),
-                    borrowBooksDto.getUser().getUserName(),
+                    borrowBooksDto.getUser().getEmail(),
                     borrowBooksDto.getBook().getAuthor(),
                     borrowBooksDto.getBorrowDate().toString(),
                     borrowBooksDto.getReturnDate().toString(),
@@ -155,5 +161,39 @@ public class ViewBorrowedBooksFormController {
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    public void btnReturnOnAction(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("You have chosen : " + lblBookTitle.getText()+", Burrowed by :"+lblUserName.getText());
+        alert.setContentText("Do you want to confirm the return ?");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == buttonTypeYes) {
+                try{
+                    boolean isReturningDone = borrowBooksBO.updateBorrowBook(lblBorrow.getText());
+                    if(isReturningDone){
+                        new Alert(Alert.AlertType.INFORMATION, "Book Returned").show();
+                        loadAllBorrowedBooks();
+                        loadAllReturnDateExceededBooks();
+                    }else{
+                        new Alert(Alert.AlertType.ERROR, "Something went wrong..").show();
+                    }
+                }catch (ClassNotFoundException e){
+                    e.printStackTrace();
+                }
+            } else if (response == buttonTypeNo) {
+                System.out.println("Admin cancelled the operation.");
+            }
+        });
+    }
+
+    public void btnInformOnAction(ActionEvent actionEvent) {
     }
 }

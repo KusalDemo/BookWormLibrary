@@ -15,7 +15,7 @@
             <Font name="System Bold" size="39.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="userManagePane" layoutX="1161.0" layoutY="167.0" onMouseClicked="#userManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
+      <AnchorPane fx:id="userManagePane" layoutX="818.0" layoutY="523.0" onMouseClicked="#userManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
          <effect>
             <DropShadow />
          </effect>
@@ -26,7 +26,7 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane fx:id="bookManagePane" layoutX="38.0" layoutY="168.0" onMouseClicked="#bookManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
+      <AnchorPane fx:id="bookManagePane" layoutX="145.0" layoutY="168.0" onMouseClicked="#bookManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
          <effect>
             <DropShadow />
          </effect>
@@ -37,7 +37,7 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane fx:id="branchManagePane" layoutX="409.0" layoutY="168.0" onMouseClicked="#branchManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
+      <AnchorPane fx:id="branchManagePane" layoutX="579.0" layoutY="168.0" onMouseClicked="#branchManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
          <effect>
             <DropShadow />
          </effect>
@@ -48,7 +48,7 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane fx:id="borrowBookManagePane" layoutX="787.0" layoutY="168.0" onMouseClicked="#borrowBookManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
+      <AnchorPane fx:id="borrowBookManagePane" layoutX="1014.0" layoutY="168.0" onMouseClicked="#borrowBookManagePaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
          <effect>
             <DropShadow />
          </effect></AnchorPane>
@@ -58,44 +58,44 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="194.0" fitWidth="285.0" layoutX="815.0" layoutY="200.0">
+      <ImageView fitHeight="194.0" fitWidth="285.0" layoutX="1042.0" layoutY="200.0">
          <image>
             <Image url="@../assets/images/borrowBooks-management.png" />
          </image>
       </ImageView>
-      <Label layoutX="137.0" layoutY="449.0" opacity="0.69" text="Manage Books" textAlignment="CENTER">
+      <Label layoutX="244.0" layoutY="449.0" opacity="0.69" text="Manage Books" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="496.0" layoutY="452.0" opacity="0.69" text="Manage Branches" textAlignment="CENTER">
+      <Label layoutX="666.0" layoutY="452.0" opacity="0.69" text="Manage Branches" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="845.0" layoutY="452.0" opacity="0.69" text="Manage Borrowing Books" textAlignment="CENTER">
+      <Label fx:id="lblBorrowBookManage" layoutX="1072.0" layoutY="452.0" opacity="0.69" text="Manage Borrowing Books" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="1279.0" layoutY="449.0" opacity="0.69" text="Manage Users" textAlignment="CENTER">
+      <Label fx:id="lblManageUser" layoutX="936.0" layoutY="805.0" opacity="0.69" text="Manage Users" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="viewBooksPane" layoutX="32.0" layoutY="497.0" onMouseClicked="#viewBorrowedBooksPaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
+      <AnchorPane fx:id="viewBooksPane" layoutX="342.0" layoutY="517.0" onMouseClicked="#viewBorrowedBooksPaneOnAction" prefHeight="264.0" prefWidth="327.0" style="-fx-background-color: #ecf0f1;" stylesheets="@../assets/loginFormStyles.css">
          <effect>
             <DropShadow />
          </effect>
          <children>
-            <ImageView fitHeight="214.0" fitWidth="294.0" layoutX="14.0" layoutY="25.0">
+            <ImageView fitHeight="194.0" fitWidth="285.0" layoutX="26.0" layoutY="38.0">
                <image>
-                  <Image url="@../assets/images/user-management.png" />
+                  <Image url="@../assets/images/view-borrowed-books.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <Label layoutX="124.0" layoutY="778.0" opacity="0.69" text="View Books Status" textAlignment="CENTER">
+      <Label fx:id="lblViewBooksStatus" layoutX="434.0" layoutY="798.0" opacity="0.69" text="View Books Status" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>

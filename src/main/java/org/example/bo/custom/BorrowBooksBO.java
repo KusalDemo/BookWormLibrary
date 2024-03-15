@@ -9,7 +9,7 @@ import java.util.List;
 public interface BorrowBooksBO extends SuperBO {
     boolean saveBorrowBook(BorrowBooksDto borrowBooksDto) throws ClassNotFoundException;
 
-    boolean updateBorrowBook(BorrowBooksDto borrowBooksDto) throws ClassNotFoundException;
+    boolean updateBorrowBook(String borrowID) throws ClassNotFoundException;
 
     boolean deleteBorrowBook(String id) throws ClassNotFoundException;
 

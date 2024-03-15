@@ -30,6 +30,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.example.controller.LoginFormController.loggedPerson;
+
 public class BorrowBooksManagementFormController {
 
     public TextField txtSearch;
@@ -59,8 +61,9 @@ public class BorrowBooksManagementFormController {
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
 
     public void initialize() throws ClassNotFoundException {
-        txtUserId.setText("boosri@gmail.com");
-        /*txtUserId.setText(loggedUser.getEmail());*/
+        /*txtUserId.setText("boosri@gmail.com");*/
+        UserDto currentUserDto = LoginFormController.currentUserDto;
+        txtUserId.setText(currentUserDto.getUserName());
         checkEligible();
         ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
         for(BranchDto branchDto : allBranches){
@@ -209,28 +212,32 @@ public class BorrowBooksManagementFormController {
 
     public void txtSearchOnAction(KeyEvent keyEvent) throws ClassNotFoundException {
         clearFields();
-        String selectedBranch =(String)cmbBranch.getValue();
-        String[] parts = selectedBranch.split(" - ");
-        String branchId = parts[0];
-        String branchName = parts[1];
-        ArrayList<BookDto> allBooks = bookBO.getAllAvailableBooksFromBranchId(branchId);
-        for (BookDto book:allBooks){
-            if(book.getTitle().toLowerCase().equals(txtSearch.getText().toLowerCase())){
-                txtBorrowId.setText(borrowIdGenerator());
-                txtBookId.setText(book.getId());
-                txtBookName.setText(book.getTitle());
-                txtLocation.setText(branchName);
-                //Time Today
-                LocalDate currentDate = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                String dateString = currentDate.format(formatter);
-                txtToday.setText(dateString);
-                //Return Date
-                LocalDate currentDate1 = LocalDate.now();
-                LocalDate twoWeeksAhead = currentDate1.plusWeeks(2);
-                String dateString1 = twoWeeksAhead.format(formatter);
-                txtReturnDate.setText(dateString1);
+        if(cmbBranch.getValue()!=null){
+            String selectedBranch =(String)cmbBranch.getValue();
+            String[] parts = selectedBranch.split(" - ");
+            String branchId = parts[0];
+            String branchName = parts[1];
+            ArrayList<BookDto> allBooks = bookBO.getAllAvailableBooksFromBranchId(branchId);
+            for (BookDto book:allBooks){
+                if(book.getTitle().toLowerCase().equals(txtSearch.getText().toLowerCase())){
+                    txtBorrowId.setText(borrowIdGenerator());
+                    txtBookId.setText(book.getId());
+                    txtBookName.setText(book.getTitle());
+                    txtLocation.setText(branchName);
+                    //Time Today
+                    LocalDate currentDate = LocalDate.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    String dateString = currentDate.format(formatter);
+                    txtToday.setText(dateString);
+                    //Return Date
+                    LocalDate currentDate1 = LocalDate.now();
+                    LocalDate twoWeeksAhead = currentDate1.plusWeeks(2);
+                    String dateString1 = twoWeeksAhead.format(formatter);
+                    txtReturnDate.setText(dateString1);
+                }
             }
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Select Branch First").show();
         }
     }
     public void clearFields(){

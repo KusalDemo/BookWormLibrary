@@ -20,7 +20,9 @@ import lombok.Setter;
 @Entity
 public class User {
     @Id
+    @Column(name = "email")
     private String email;
+    @Column(name = "userName", unique = true)
     private String userName;
     private String password;
 

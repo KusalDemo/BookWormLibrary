@@ -34,10 +34,17 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
         UserDto userDto = borrowBooksDto.getUser();
         System.out.println(userDto.getUserName()+" "+userDto.getEmail());
         Branch branch = new Branch(userDto.getBranchDto().getBranchId(),userDto.getBranchDto().getBranchName(),userDto.getBranchDto().getLocation(),userDto.getBranchDto().getEmail(),null,null);
-        User user = new User(userDto.getEmail(),userDto.getUserName(),userDto.getPassword(),branch,null);
+        User user = new User(userDto.getUserName(),userDto.getEmail(),userDto.getPassword(),branch,null);
 
         BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDto.getId(),user,book,borrowBooksDto.getBorrowDate(),borrowBooksDto.getReturnDate(),borrowBooksDto.getStatus());
-
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        book.setAvailability(false);
+        session.update(book);
+        session.merge(borrowBooks);
+        transaction.commit();
+        session.close();
+        return true;
        /* Boolean isBorroweBookProcceed= false;
         Session session = FactoryConfiguration.getInstance().getSession();
         try {
@@ -59,25 +66,32 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
                 session.close();
             }
         }return isBorroweBookProcceed;*/
-
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        book.setAvailability(false);
-        session.update(book);
-        session.merge(borrowBooks);
-        transaction.commit();
-        session.close();
-        return true;
     }
 
     @Override
-    public boolean updateBorrowBook(BorrowBooksDto borrowBooksDto) throws ClassNotFoundException {
+    public boolean updateBorrowBook(String borrowID) throws ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        BorrowBooks borrowBooks = session.get(BorrowBooks.class, borrowID);
+
+        Book book = borrowBooks.getBook();
+        book.setAvailability(true);
+        session.update(book);
+
+        borrowBooks.setStatus("Returned");
+        session.merge(borrowBooks);
+
+        transaction.commit();
+        session.close();
+        return true;
         /*BookDto bookDto = borrowBooksDto.getBook();
         Book book = new Book(bookDto.getId(),bookDto.getTitle(),bookDto.getAuthor(),bookDto.getGenre(),bookDto.isAvailability(),null,null);
         UserDto userDto = borrowBooksDto.getUser();
         Branch branch = new Branch(userDto.getBranchDto().getBranchId(),userDto.getBranchDto().getBranchName(),userDto.getBranchDto().getLocation(),userDto.getBranchDto().getEmail(),null,null);
         User user = new User(userDto.getEmail(),userDto.getUserName(),userDto.getPassword(),branch,null);
-        *//*BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDto.getId(),user,book,borrowBooksDto.getBorrowDate(),borrowBooksDto.getReturnDate(),borrowBooksDto.getStatus());*//*
+        */
+        /*BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDto.getId(),user,book,borrowBooksDto.getBorrowDate(),borrowBooksDto.getReturnDate(),borrowBooksDto.getStatus());*//*
         // Create a new BorrowBooks entity
         BorrowBooks borrowBooks = new BorrowBooks();
         borrowBooks.setId(borrowBooksDto.getId());
@@ -110,7 +124,6 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
                 session.close();
             }
         }return isBorroweBookReturn;*/
-        return true;
     }
 
     @Override

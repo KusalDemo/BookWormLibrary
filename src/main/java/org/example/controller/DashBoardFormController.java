@@ -25,10 +25,19 @@ public class DashBoardFormController {
     public Label lblLoggedPersonName;
     public AnchorPane branchManagePane;
     public AnchorPane viewBooksPane;
+    public Label lblManageUser;
+    public Label lblViewBooksStatus;
+    public Label lblBorrowBookManage;
 
     public void initialize() {
         if(LoginFormController.whoIsLogged=="User"){
             userManagePane.setVisible(false);
+            viewBooksPane.setVisible(false);
+            lblManageUser.setVisible(false);
+            lblViewBooksStatus.setVisible(false);
+        }else{
+            borrowBookManagePane.setVisible(false);
+            lblBorrowBookManage.setVisible(false);
         }
         String loggedPerson = LoginFormController.loggedPerson;
         lblLoggedPersonName.setText(loggedPerson);
