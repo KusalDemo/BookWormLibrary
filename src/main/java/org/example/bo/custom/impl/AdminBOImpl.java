@@ -42,4 +42,9 @@ public class AdminBOImpl implements AdminBO {
         }
         return adminDtos;
     }
+
+    @Override
+    public boolean updatePassword(String username, String password) throws ClassNotFoundException {
+        return adminDAO.updatePassword(username,password);
+    }
 }

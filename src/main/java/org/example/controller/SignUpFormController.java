@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.Util.Mail;
 import org.example.Util.Regex;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.AdminBO;
@@ -78,7 +79,8 @@ public class SignUpFormController {
                     AdminDto adminDto = new AdminDto(adminId, userName, email, password);
                     try {
                         if (adminBO.saveAdmin(adminDto)) {
-                            new Alert(Alert.AlertType.INFORMATION, "Sign Up Successful").show();
+                            boolean isMailSent = sendMail(email, adminId);
+                            new Alert(Alert.AlertType.INFORMATION, "Sign Up Successful , Your Admin ID is sent to your email..").show();
                             clearFields();
                             btnAlreadyHaveAnAccountOnAction(actionEvent);
                         } else {
@@ -148,5 +150,22 @@ public class SignUpFormController {
         DateTimeFormatter formatStyle = DateTimeFormatter.ofPattern("MMddHHmmss");
         String formattedDate = now.format(formatStyle);
         return "AD"+formattedDate;
+    }
+    private boolean sendMail(String email,String id){
+        try {
+            Mail mail = new Mail();
+            mail.setMsg("Hi there,"+ "\n\n\tADMIN : "+email+"\n\n\tYour Admin ID : "+id +"\n\n\tDate & Time : "+ LocalDateTime.now() + "\n\n\t Don't Share Your Admin ID with Anyone \n\nThank You,\n" +
+                    "BookWorm Support Team");
+            mail.setTo(email);
+            mail.setSubject("ADMIN Verification [private and confidential]");
+
+
+            Thread thread = new Thread(mail);
+            thread.start();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

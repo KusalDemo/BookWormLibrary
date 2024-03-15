@@ -16,6 +16,8 @@ public interface UserBO extends SuperBO {
     List<UserDto> getAllUsers() throws ClassNotFoundException;
 
     UserDto searchUser(String userEmail) throws ClassNotFoundException;
-    boolean updatePassword(String username, String password);
+
+    UserDto searchUserFromUserName(String userName) throws ClassNotFoundException;
+    boolean updatePassword(String username, String password) throws ClassNotFoundException;
 
 }

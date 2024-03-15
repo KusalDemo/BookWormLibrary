@@ -67,4 +67,18 @@ public class AdminDAOImpl implements AdminDAO {
         session.close();
         return admin;
     }
+
+    @Override
+    public boolean updatePassword(String username, String password) throws ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "update Admin set password=:password where username=:username";
+        Query query = session.createQuery(hql);
+        query.setParameter("password", password);
+        query.setParameter("username", username);
+        int isUpdated = query.executeUpdate();
+        transaction.commit();
+        session.close();
+        return isUpdated > 0;
+    }
 }

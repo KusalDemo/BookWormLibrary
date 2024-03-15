@@ -57,6 +57,20 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public boolean updatePassword(String username, String password) throws ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "update User set password=:password where userName=:username";
+        Query query = session.createQuery(hql);
+        query.setParameter("password", password);
+        query.setParameter("username", username);
+        int isUpdated = query.executeUpdate();
+        transaction.commit();
+        session.close();
+        return isUpdated > 0;
+    }
+
+    @Override
     public boolean delete(String email) throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
@@ -81,6 +95,18 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    @Override
+    public User searchFromName(String name) throws ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from User where userName=:user";
+        Query query = session.createQuery(hql);
+        query.setParameter("user", name);
+        User user = (User) query.uniqueResult();
+        transaction.commit();
+        session.close();
+        return user;
+    }
 
 
     @Override

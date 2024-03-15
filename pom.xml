@@ -55,6 +55,10 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.26</version> <!-- Use the latest version available -->
         </dependency>
-
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version> <!-- Use the latest version available -->
+        </dependency>
     </dependencies>
 </project>

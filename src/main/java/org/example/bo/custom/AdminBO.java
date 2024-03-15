@@ -15,4 +15,6 @@ public interface AdminBO extends SuperBO {
 
     List<AdminDto> getAllAdmins() throws ClassNotFoundException;
 
+    boolean updatePassword(String username, String password) throws ClassNotFoundException;
+
 }
