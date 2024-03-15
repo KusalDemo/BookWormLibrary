@@ -59,7 +59,7 @@ public class BorrowBooksManagementFormController {
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
 
     public void initialize() throws ClassNotFoundException {
-        txtUserId.setText("gunasekara@gmail.com");
+        txtUserId.setText("boosri@gmail.com");
         /*txtUserId.setText(loggedUser.getEmail());*/
         checkEligible();
         ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
@@ -126,6 +126,7 @@ public class BorrowBooksManagementFormController {
                             selectedBookDto = bookDto;
                         }
                     }
+                    System.out.println(selectedUserDto.getEmail()+" "+selectedUserDto.getUserName()+" "+selectedUserDto.getBranchDto().getBranchId()+" "+selectedUserDto.getBranchDto().getBranchName()+" "+selectedUserDto.getBranchDto().getEmail()+" "+selectedUserDto.getPassword());
 
                     LocalDate today = LocalDate.parse(txtToday.getText());
                     LocalDate returnDate = LocalDate.parse(txtReturnDate.getText());

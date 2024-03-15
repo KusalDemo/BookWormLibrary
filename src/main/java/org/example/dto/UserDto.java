@@ -11,8 +11,8 @@ import java.util.List;
 @Setter
 @ToString
 public class UserDto {
-    private String userName;
     private String email;
+    private String userName;
     private String password;
     // Assuming you want to transfer the ID of the branch associated with the user
     BranchDto branchDto;

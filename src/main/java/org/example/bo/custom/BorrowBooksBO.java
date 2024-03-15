@@ -19,6 +19,7 @@ public interface BorrowBooksBO extends SuperBO {
 
     List<BorrowBooksDto> getAllAvailableBooksFromBranchId(String id) throws ClassNotFoundException;
 
+    List<BorrowBooksDto> getReturnDateExceededBooks() throws ClassNotFoundException;
     List<BorrowBooksDto> getReturnDateExceededBooks(String id) throws ClassNotFoundException;
 
 }

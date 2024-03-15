@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 public class AdminDto {
     private String adminId;
-    private String username;
     private String email;
     private String password;
+    private String username;
 }
 

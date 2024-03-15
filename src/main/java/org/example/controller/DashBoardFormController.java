@@ -24,6 +24,7 @@ public class DashBoardFormController {
     public Button btnLogOut;
     public Label lblLoggedPersonName;
     public AnchorPane branchManagePane;
+    public AnchorPane viewBooksPane;
 
     public void initialize() {
         if(LoginFormController.whoIsLogged=="User"){
@@ -93,6 +94,20 @@ public class DashBoardFormController {
             System.out.println(e);
         }
     }
+    public void viewBorrowedBooksPaneOnAction(MouseEvent mouseEvent) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/viewBorrowedBooks_form.fxml"));
+            Scene scene1 = new Scene(root);
+            Stage stage1 = (Stage) viewBooksPane.getScene().getWindow();
+            stage1.setScene(scene1);
+            stage1.setTitle("Find Not Returned Books");
+            stage1.centerOnScreen();
+
+            new FadeIn(root).play();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 
     public void btnLogOutOnAction(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -124,4 +139,6 @@ public class DashBoardFormController {
             }
         });
     }
+
+
 }

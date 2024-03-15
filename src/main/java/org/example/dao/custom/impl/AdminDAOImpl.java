@@ -1,11 +1,9 @@
 package org.example.dao.custom.impl;
 
 import org.example.config.FactoryConfiguration;
-import org.example.dao.HQLUtil;
 import org.example.dao.custom.AdminDAO;
 import org.example.entity.Admin;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 

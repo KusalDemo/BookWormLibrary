@@ -29,10 +29,13 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
     @Override
     public boolean saveBorrowBook(BorrowBooksDto borrowBooksDto) throws ClassNotFoundException {
         BookDto bookDto = borrowBooksDto.getBook();
-        Book book = new Book(bookDto.getId(),bookDto.getTitle(),bookDto.getAuthor(),bookDto.getGenre(),bookDto.isAvailability(),null,null);
+        Branch branchOfSelectedBook = new Branch(bookDto.getBranch().getBranchId(),bookDto.getBranch().getBranchName(),bookDto.getBranch().getEmail(),bookDto.getBranch().getLocation(),null,null);
+        Book book = new Book(bookDto.getId(),bookDto.getTitle(),bookDto.getAuthor(),bookDto.getGenre(),bookDto.isAvailability(),branchOfSelectedBook,null);
         UserDto userDto = borrowBooksDto.getUser();
+        System.out.println(userDto.getUserName()+" "+userDto.getEmail());
         Branch branch = new Branch(userDto.getBranchDto().getBranchId(),userDto.getBranchDto().getBranchName(),userDto.getBranchDto().getLocation(),userDto.getBranchDto().getEmail(),null,null);
         User user = new User(userDto.getEmail(),userDto.getUserName(),userDto.getPassword(),branch,null);
+
         BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDto.getId(),user,book,borrowBooksDto.getBorrowDate(),borrowBooksDto.getReturnDate(),borrowBooksDto.getStatus());
 
        /* Boolean isBorroweBookProcceed= false;
@@ -59,9 +62,9 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
 
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        session.persist(borrowBooks);
         book.setAvailability(false);
         session.update(book);
+        session.merge(borrowBooks);
         transaction.commit();
         session.close();
         return true;
@@ -69,12 +72,12 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
 
     @Override
     public boolean updateBorrowBook(BorrowBooksDto borrowBooksDto) throws ClassNotFoundException {
-        BookDto bookDto = borrowBooksDto.getBook();
+        /*BookDto bookDto = borrowBooksDto.getBook();
         Book book = new Book(bookDto.getId(),bookDto.getTitle(),bookDto.getAuthor(),bookDto.getGenre(),bookDto.isAvailability(),null,null);
         UserDto userDto = borrowBooksDto.getUser();
         Branch branch = new Branch(userDto.getBranchDto().getBranchId(),userDto.getBranchDto().getBranchName(),userDto.getBranchDto().getLocation(),userDto.getBranchDto().getEmail(),null,null);
         User user = new User(userDto.getEmail(),userDto.getUserName(),userDto.getPassword(),branch,null);
-        /*BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDto.getId(),user,book,borrowBooksDto.getBorrowDate(),borrowBooksDto.getReturnDate(),borrowBooksDto.getStatus());*/
+        *//*BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDto.getId(),user,book,borrowBooksDto.getBorrowDate(),borrowBooksDto.getReturnDate(),borrowBooksDto.getStatus());*//*
         // Create a new BorrowBooks entity
         BorrowBooks borrowBooks = new BorrowBooks();
         borrowBooks.setId(borrowBooksDto.getId());
@@ -106,7 +109,8 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
             if (session != null) {
                 session.close();
             }
-        }return isBorroweBookReturn;
+        }return isBorroweBookReturn;*/
+        return true;
     }
 
     @Override
@@ -116,7 +120,19 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
 
     @Override
     public List<BorrowBooksDto> getAllBorrowBooks() throws ClassNotFoundException {
-        return null;
+        List<BorrowBooks> all = borrowBooksDAO.getAll();
+        List<BorrowBooksDto> borrowBooksDtos = new ArrayList<>();
+        for (BorrowBooks borrowBooks : all) {
+            User user = borrowBooks.getUser();
+            Book book = borrowBooks.getBook();
+            BranchDto branchDto = new BranchDto(user.getBranch().getBranchId(),user.getBranch().getBranchName(),user.getBranch().getEmail(),user.getBranch().getLocation());
+            UserDto userDto = new UserDto(user.getEmail(),user.getUserName(),user.getPassword(),branchDto);
+            BranchDto branchDto1 = new BranchDto(book.getBranch().getBranchId(),book.getBranch().getBranchName(),book.getBranch().getEmail(),book.getBranch().getLocation());
+            BookDto bookDto = new BookDto(book.getId(),book.getAuthor(),book.getTitle(),book.getGenre(),book.isAvailability(),branchDto1);
+            BorrowBooksDto borrowBooksDto = new BorrowBooksDto(borrowBooks.getId(),userDto,bookDto,borrowBooks.getBorrowDate(),borrowBooks.getReturnDate(),borrowBooks.getStatus());
+            borrowBooksDtos.add(borrowBooksDto);
+        }
+        return borrowBooksDtos;
     }
 
     @Override
@@ -149,6 +165,21 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
             borrowBooksDtos.add(new BorrowBooksDto(borrowBooks.getId(),userDto,bookDto,borrowBooks.getBorrowDate(),borrowBooks.getReturnDate(),borrowBooks.getStatus()));
         }
         return borrowBooksDtos;
+    }
+
+    @Override
+    public List<BorrowBooksDto> getReturnDateExceededBooks() throws ClassNotFoundException {
+        List<BorrowBooks> returnDateExceededBooks = borrowBooksDAO.getReturnDateExceededBooks();
+        List<BorrowBooksDto> borrowBooksDtos = new ArrayList<>();
+        for (BorrowBooks borrowBooks : returnDateExceededBooks) {
+            User user = borrowBooks.getUser();
+            Book book = borrowBooks.getBook();
+            BranchDto branchDto = new BranchDto(user.getBranch().getBranchId(),user.getBranch().getBranchName(),user.getBranch().getEmail(),user.getBranch().getLocation());
+            UserDto userDto = new UserDto(user.getEmail(),user.getUserName(),user.getPassword(),branchDto);
+            BranchDto branchDto1 = new BranchDto(book.getBranch().getBranchId(),book.getBranch().getBranchName(),book.getBranch().getEmail(),book.getBranch().getLocation());
+            BookDto bookDto = new BookDto(book.getId(),book.getAuthor(),book.getTitle(),book.getGenre(),book.isAvailability(),branchDto1);
+            borrowBooksDtos.add(new BorrowBooksDto(borrowBooks.getId(),userDto,bookDto,borrowBooks.getBorrowDate(),borrowBooks.getReturnDate(),borrowBooks.getStatus()));
+        }return borrowBooksDtos;
     }
 
     @Override

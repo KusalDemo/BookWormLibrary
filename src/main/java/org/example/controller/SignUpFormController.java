@@ -71,10 +71,6 @@ public class SignUpFormController {
         String rePassword = txtRePassword.getText();
         String role = cmbRole.getValue().toString();
 
-        String branch = cmbBranch.getValue().toString();
-        String[] parts = branch.split(" - ");
-        String branchId = parts[0];
-
         if (role.equals("Admin")) {
             if (Regex.isEmailValid(email) && Regex.isPasswordValid(password)) {
                 if (password.equals(rePassword)) {
@@ -97,6 +93,9 @@ public class SignUpFormController {
                 }
             }
         } else if (role.equals("User")) {
+            String branch = cmbBranch.getValue().toString();
+            String[] parts = branch.split(" - ");
+            String branchId = parts[0];
             if (Regex.isEmailValid(email) && Regex.isPasswordValid(password)) {
                 if (password.equals(rePassword)) {
                     BranchDto branchDto = branchBO.searchBranch(branchId);

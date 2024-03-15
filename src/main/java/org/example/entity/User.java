@@ -19,9 +19,9 @@ import lombok.Setter;
 @Setter
 @Entity
 public class User {
-    private String userName;
     @Id
     private String email;
+    private String userName;
     private String password;
 
     @ManyToOne

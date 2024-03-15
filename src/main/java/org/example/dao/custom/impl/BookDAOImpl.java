@@ -1,10 +1,8 @@
 package org.example.dao.custom.impl;
 
 import org.example.config.FactoryConfiguration;
-import org.example.dao.HQLUtil;
 import org.example.dao.custom.BookDAO;
 import org.example.entity.Book;
-import org.example.entity.Branch;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;

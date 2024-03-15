@@ -1,7 +1,6 @@
 package org.example.dao.custom.impl;
 
 import org.example.config.FactoryConfiguration;
-import org.example.dao.HQLUtil;
 import org.example.dao.custom.BranchDAO;
 import org.example.entity.Branch;
 import org.hibernate.Session;
