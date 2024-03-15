@@ -41,7 +41,7 @@ public class SignUpFormController {
 
     public void initialize() throws ClassNotFoundException {
         cmbRole.getItems().addAll("User", "Admin");
-        cmbRole.getSelectionModel().select(0);
+        cmbRole.getSelectionModel().select(1);
 
         ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
         for (BranchDto branchDto : allBranches) {
@@ -148,6 +148,6 @@ public class SignUpFormController {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatStyle = DateTimeFormatter.ofPattern("MMddHHmmss");
         String formattedDate = now.format(formatStyle);
-        return formattedDate;
+        return "AD"+formattedDate;
     }
 }

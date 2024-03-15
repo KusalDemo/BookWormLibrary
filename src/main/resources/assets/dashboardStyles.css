@@ -1,11 +1,11 @@
- #userManagePane ,#bookManagePane , #borrowBookManagePane , #branchManagePane{
+ #userManagePane ,#bookManagePane , #borrowBookManagePane , #branchManagePane, #viewBooksPane{
      -fx-background-color: #ecf0f1;
      -fx-background-radius: 10px;
      -fx-border-radius: 10px;
      -fx-border-width: 1px;
      transition: transform 0.5s ease-in-out;
  }
- #userManagePane ,#bookManagePane , #borrowBookManagePane , #branchManagePane:hover{
+ #userManagePane ,#bookManagePane , #borrowBookManagePane , #branchManagePane ,#viewBooksPane:hover{
      transform: scale(1.1);
  }
 
@@ -22,6 +22,10 @@
      -fx-background-color: #bdc3c7;
  }
  #branchManagePane:hover{
+     -fx-border-color: #00FFFF;
+     -fx-background-color: #bdc3c7;
+ }
+ #viewBooksPane:hover{
      -fx-border-color: #00FFFF;
      -fx-background-color: #bdc3c7;
  }

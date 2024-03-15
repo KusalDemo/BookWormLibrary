@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import animatefx.animation.FadeIn;
+import jakarta.persistence.PersistenceException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.BookBO;
@@ -47,7 +49,7 @@ public class BorrowBooksManagementFormController {
     public TableColumn<?,?> colAuthor;
     public TableColumn<?,?> colGenre;
 
-    public UserDto loggedUser=LoginFormController.currentUserDto;
+    /*public UserDto loggedUser=LoginFormController.currentUserDto;*/
     public Button btnBack;
 
 
@@ -57,15 +59,15 @@ public class BorrowBooksManagementFormController {
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
 
     public void initialize() throws ClassNotFoundException {
-        txtUserId.setText("gunasekarakusal@gmail.com");
+        txtUserId.setText("gunasekara@gmail.com");
         /*txtUserId.setText(loggedUser.getEmail());*/
         checkEligible();
         ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
         for(BranchDto branchDto : allBranches){
             cmbBranch.getItems().add(branchDto.getBranchId()+" - "+branchDto.getBranchName());
         }
-
         cmbBranch.setOnAction(event -> {
+            clearFields();
             loadTableDetailsFromBranch();
         });
         setCellValueFactory();
@@ -112,13 +114,8 @@ public class BorrowBooksManagementFormController {
         alert.showAndWait().ifPresent(response -> {
             if (response == buttonTypeYes) {
                 try {
-                    UserDto selectedUserDto = new UserDto();
-                    List<UserDto> allUsers = userBO.getAllUsers();
-                    for(UserDto userDto : allUsers){
-                        if(userDto.getEmail().equals(txtUserId.getText())){
-                            selectedUserDto = userDto;
-                        }
-                    }
+                    UserDto selectedUserDto = userBO.searchUser(txtUserId.getText());
+
                     BookDto selectedBookDto = new BookDto();
                     String selectedBranch = (String)cmbBranch.getValue();
                     String[] parts = selectedBranch.split(" - ");
@@ -132,7 +129,7 @@ public class BorrowBooksManagementFormController {
 
                     LocalDate today = LocalDate.parse(txtToday.getText());
                     LocalDate returnDate = LocalDate.parse(txtReturnDate.getText());
-                    boolean isSaved = borrowBooksBO.saveBorrowBook(new BorrowBooksDto(txtBorrowId.getText(), loggedUser, selectedBookDto, today, returnDate, "Pending"));
+                    boolean isSaved = borrowBooksBO.saveBorrowBook(new BorrowBooksDto(txtBorrowId.getText(), selectedUserDto, selectedBookDto, today, returnDate, "Pending"));
                     if(isSaved){
                         tblBorrowBooks.refresh();
                         new Alert(Alert.AlertType.INFORMATION, "Your Book borrowing request has been accepted.. Return your book within 2 weeks. Thank you").show();
@@ -140,8 +137,10 @@ public class BorrowBooksManagementFormController {
                     else{
                         new Alert(Alert.AlertType.ERROR, "Something went wrong. Please try again").show();
                     }
-                }catch (Exception e){
-                    System.out.println(e);
+                }catch (PersistenceException e){
+                    throw e;
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
             } else if (response == buttonTypeNo) {
                 System.out.println("User cancelled the operation.");
@@ -205,5 +204,39 @@ public class BorrowBooksManagementFormController {
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    public void txtSearchOnAction(KeyEvent keyEvent) throws ClassNotFoundException {
+        clearFields();
+        String selectedBranch =(String)cmbBranch.getValue();
+        String[] parts = selectedBranch.split(" - ");
+        String branchId = parts[0];
+        String branchName = parts[1];
+        ArrayList<BookDto> allBooks = bookBO.getAllAvailableBooksFromBranchId(branchId);
+        for (BookDto book:allBooks){
+            if(book.getTitle().toLowerCase().equals(txtSearch.getText().toLowerCase())){
+                txtBorrowId.setText(borrowIdGenerator());
+                txtBookId.setText(book.getId());
+                txtBookName.setText(book.getTitle());
+                txtLocation.setText(branchName);
+                //Time Today
+                LocalDate currentDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String dateString = currentDate.format(formatter);
+                txtToday.setText(dateString);
+                //Return Date
+                LocalDate currentDate1 = LocalDate.now();
+                LocalDate twoWeeksAhead = currentDate1.plusWeeks(2);
+                String dateString1 = twoWeeksAhead.format(formatter);
+                txtReturnDate.setText(dateString1);
+            }
+        }
+    }
+    public void clearFields(){
+        txtBookId.clear();
+        txtBookName.clear();
+        txtBorrowId.clear();
+        txtReturnDate.clear();
+        txtToday.clear();
     }
 }

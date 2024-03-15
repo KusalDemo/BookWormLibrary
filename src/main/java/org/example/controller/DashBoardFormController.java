@@ -21,11 +21,14 @@ public class DashBoardFormController {
     public AnchorPane bookManagePane;
     public AnchorPane userManagePane;
     public AnchorPane borrowBookManagePane;
-    public AnchorPane branchPane;
     public Button btnLogOut;
     public Label lblLoggedPersonName;
+    public AnchorPane branchManagePane;
 
     public void initialize() {
+        if(LoginFormController.whoIsLogged=="User"){
+            userManagePane.setVisible(false);
+        }
         String loggedPerson = LoginFormController.loggedPerson;
         lblLoggedPersonName.setText(loggedPerson);
     }
@@ -65,7 +68,7 @@ public class DashBoardFormController {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/BranchManagement_form.fxml"));
             Scene scene1 = new Scene(root);
-            Stage stage1 = (Stage) branchPane.getScene().getWindow();
+            Stage stage1 = (Stage) branchManagePane.getScene().getWindow();
             stage1.setScene(scene1);
             stage1.setTitle("Branch Management");
             stage1.centerOnScreen();

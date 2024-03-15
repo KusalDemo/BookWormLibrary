@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="920.0" prefWidth="1520.0" stylesheets="@../assets/managementStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.BorrowBooksManagementFormController">
    <children>
-      <TextField fx:id="txtSearch" layoutX="783.0" layoutY="61.0" prefHeight="24.0" prefWidth="248.0" text="Search" />
+      <TextField fx:id="txtSearch" layoutX="783.0" layoutY="61.0" onKeyReleased="#txtSearchOnAction" prefHeight="24.0" prefWidth="248.0" promptText="Search" />
       <ComboBox fx:id="cmbBranch" layoutX="555.0" layoutY="61.0" prefHeight="24.0" prefWidth="203.0" />
       <Label fx:id="lblNotice" layoutX="147.0" layoutY="135.0" prefHeight="16.0" prefWidth="1269.0" />
       <TextField fx:id="txtBorrowId" layoutX="913.0" layoutY="243.0" prefHeight="24.0" prefWidth="483.0" />

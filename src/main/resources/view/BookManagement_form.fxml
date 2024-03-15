@@ -58,9 +58,9 @@
          </font>
       </Label>
       <ComboBox fx:id="cmbBranches" layoutX="66.0" layoutY="701.0" prefHeight="32.0" prefWidth="480.0" />
-      <Button layoutX="59.0" layoutY="788.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="42.0" prefWidth="140.0" styleClass="btn-20" text="SAVE" />
-      <Button layoutX="219.0" layoutY="788.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="42.0" prefWidth="158.0" styleClass="btn-30" text="UPDATE" />
-      <Button layoutX="393.0" layoutY="787.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="42.0" prefWidth="158.0" styleClass="btn-40" text="DELETE" />
+      <Button fx:id="btnSave" layoutX="59.0" layoutY="788.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="42.0" prefWidth="140.0" styleClass="btn-20" text="SAVE" />
+      <Button fx:id="btnUpdate" layoutX="219.0" layoutY="788.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="42.0" prefWidth="158.0" styleClass="btn-30" text="UPDATE" />
+      <Button fx:id="btnDelete" layoutX="393.0" layoutY="787.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="42.0" prefWidth="158.0" styleClass="btn-40" text="DELETE" />
       <Label layoutX="66.0" layoutY="212.0" prefHeight="24.0" prefWidth="210.0" text="Book ID :">
          <font>
             <Font size="19.0" />
@@ -74,7 +74,7 @@
          <font>
             <Font size="25.0" />
          </font></TextField>
-      <TableView fx:id="tblBook" layoutX="625.0" layoutY="77.0" prefHeight="760.0" prefWidth="863.0">
+      <TableView fx:id="tblBook" layoutX="623.0" layoutY="87.0" prefHeight="760.0" prefWidth="863.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="92.0" text="Id" />
           <TableColumn fx:id="colTitle" prefWidth="222.66668701171875" text="Title" />
@@ -85,5 +85,6 @@
         </columns>
       </TableView>
       <Button fx:id="btnBack" layoutX="45.0" layoutY="869.0" mnemonicParsing="false" onAction="#btnBackOnAction" styleClass="btn-30" text="BACK" />
+      <Label fx:id="lblNotice" layoutX="507.0" layoutY="50.0" prefHeight="16.0" prefWidth="808.0" />
    </children>
 </AnchorPane>

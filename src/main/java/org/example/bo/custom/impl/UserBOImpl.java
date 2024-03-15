@@ -92,6 +92,15 @@ public class UserBOImpl implements UserBO {
         return userDtos;
     }
 
+    @Override
+    public UserDto searchUser(String userEmail) throws ClassNotFoundException {
+        User searchedUserEntity = userDAO.search(userEmail);
+        Branch branch = searchedUserEntity.getBranch();
+        BranchDto branchDto = new BranchDto(branch.getBranchId(), branch.getBranchName(), branch.getLocation(), branch.getEmail());
+        UserDto searchedUserDTO = new UserDto(searchedUserEntity.getUserName(), searchedUserEntity.getEmail(), searchedUserEntity.getPassword(), branchDto);
+        return searchedUserDTO;
+    }
+
 
     @Override
     public boolean updatePassword(String username, String password) {

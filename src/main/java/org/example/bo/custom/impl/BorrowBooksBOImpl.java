@@ -35,13 +35,13 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
         User user = new User(userDto.getEmail(),userDto.getUserName(),userDto.getPassword(),branch,null);
         BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDto.getId(),user,book,borrowBooksDto.getBorrowDate(),borrowBooksDto.getReturnDate(),borrowBooksDto.getStatus());
 
-        Boolean isBorroweBookProcceed= false;
+       /* Boolean isBorroweBookProcceed= false;
         Session session = FactoryConfiguration.getInstance().getSession();
         try {
             Transaction transaction = session.beginTransaction();
             session.persist(borrowBooks);
 
-            bookDto.setAvailability(false);
+            book.setAvailability(false);
             session.update(book);
 
             transaction.commit();
@@ -55,7 +55,16 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
             if (session != null) {
                 session.close();
             }
-        }return isBorroweBookProcceed;
+        }return isBorroweBookProcceed;*/
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.persist(borrowBooks);
+        book.setAvailability(false);
+        session.update(book);
+        transaction.commit();
+        session.close();
+        return true;
     }
 
     @Override
@@ -65,7 +74,15 @@ public class BorrowBooksBOImpl implements BorrowBooksBO {
         UserDto userDto = borrowBooksDto.getUser();
         Branch branch = new Branch(userDto.getBranchDto().getBranchId(),userDto.getBranchDto().getBranchName(),userDto.getBranchDto().getLocation(),userDto.getBranchDto().getEmail(),null,null);
         User user = new User(userDto.getEmail(),userDto.getUserName(),userDto.getPassword(),branch,null);
-        BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDto.getId(),user,book,borrowBooksDto.getBorrowDate(),borrowBooksDto.getReturnDate(),borrowBooksDto.getStatus());
+        /*BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDto.getId(),user,book,borrowBooksDto.getBorrowDate(),borrowBooksDto.getReturnDate(),borrowBooksDto.getStatus());*/
+        // Create a new BorrowBooks entity
+        BorrowBooks borrowBooks = new BorrowBooks();
+        borrowBooks.setId(borrowBooksDto.getId());
+        borrowBooks.setUser(user);
+        borrowBooks.setBook(book);
+        borrowBooks.setBorrowDate(borrowBooksDto.getBorrowDate());
+        borrowBooks.setReturnDate(borrowBooksDto.getReturnDate());
+        borrowBooks.setStatus(borrowBooksDto.getStatus());
 
         Boolean isBorroweBookReturn = false;
 

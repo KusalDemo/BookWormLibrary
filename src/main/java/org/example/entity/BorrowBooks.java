@@ -15,6 +15,7 @@ public class BorrowBooks{
     @Id
     private String id;
     @ManyToOne
+    @JoinColumn(name = "user_email", referencedColumnName = "email")
     private User user;
     @ManyToOne
     private Book book;

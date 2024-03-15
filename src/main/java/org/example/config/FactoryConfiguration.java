@@ -10,7 +10,7 @@ public class FactoryConfiguration {
     private SessionFactory sessionFactory;
 
     private FactoryConfiguration(){
-        org.hibernate.cfg.Configuration configuration = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Book.class).addAnnotatedClass(Branch.class).addAnnotatedClass(User.class).addAnnotatedClass(Admin.class).addAnnotatedClass(BorrowBooks.class);
+        org.hibernate.cfg.Configuration configuration = new Configuration().addAnnotatedClass(Book.class).addAnnotatedClass(Branch.class).addAnnotatedClass(User.class).addAnnotatedClass(Admin.class).addAnnotatedClass(BorrowBooks.class);
         sessionFactory = configuration.buildSessionFactory();
     }
     public static FactoryConfiguration getInstance(){

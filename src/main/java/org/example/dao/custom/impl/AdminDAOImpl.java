@@ -16,10 +16,10 @@ public class AdminDAOImpl implements AdminDAO {
     public boolean save(Admin dto) throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        Boolean isSaved = (Boolean) session.save(dto);
+        session.persist(dto);
         transaction.commit();
         session.close();
-        return isSaved;
+        return true;
     }
 
     @Override
@@ -61,7 +61,7 @@ public class AdminDAOImpl implements AdminDAO {
     public Admin search(String id) throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "from Admin where id=:id";
+        String hql = "from Admin where adminId=:id";
         Query query = session.createQuery(hql);
         query.setParameter("id", id);
         Admin admin = (Admin) query.uniqueResult();

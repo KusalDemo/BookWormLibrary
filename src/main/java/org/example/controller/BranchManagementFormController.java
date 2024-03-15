@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
@@ -35,13 +36,29 @@ public class BranchManagementFormController {
     public TableColumn<?,?> colLocation;
     public TableColumn<?,?> colEmail;
     public Button btnBack;
+    public TextField txtSearch;
+    public Button btnSave;
+    public Button btnUpdate;
+    public Button btnDelete;
+    public Label lblNotice;
 
     BranchBO branchBO=(BranchBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BRANCH);
     BookBO bookBO=(BookBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BOOK);
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
     public void initialize() throws ClassNotFoundException {
+        if(LoginFormController.whoIsLogged=="User"){
+            btnSave.setVisible(false);
+            btnUpdate.setVisible(false);
+            btnDelete.setVisible(false);
+            lblNotice.setText("Search to find branches and get details of them");
+            txtId.setEditable(false);
+            txtEmail.setEditable(false);
+            txtLocation.setEditable(false);
+            txtName.setEditable(false);
+        }
         loadAllBranches();
         setCellValueFactory();
+        txtId.setEditable(false);
 
         tblBranch.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue()>=0){
@@ -64,6 +81,7 @@ public class BranchManagementFormController {
     public void txtIdOnAction(MouseEvent mouseEvent) {
         txtId.setText(generateBranchId());
     }
+    public void txtNameOnAction(MouseEvent mouseEvent) {txtId.setText(generateBranchId());}
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
         if(txtId.getText().equals("")||txtName.getText().equals("")||txtLocation.getText().equals("")||txtEmail.getText().equals("")){
@@ -186,4 +204,19 @@ public class BranchManagementFormController {
             System.out.println(e);
         }
     }
+
+    public void txtSearchOnAction(KeyEvent keyEvent) throws ClassNotFoundException {
+        clearFields();
+        ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
+        for(BranchDto branch:allBranches){
+            if(branch.getBranchId().toLowerCase().equals(txtSearch.getText().toLowerCase())||branch.getBranchName().toLowerCase().equals(txtSearch.getText().toLowerCase())){
+                txtId.setText(branch.getBranchId());
+                txtName.setText(branch.getBranchName());
+                txtLocation.setText(branch.getLocation());
+                txtEmail.setText(branch.getEmail());
+            }
+        }
+    }
+
+
 }

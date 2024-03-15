@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User dto) throws ClassNotFoundException {
-        Session session = FactoryConfiguration.getInstance().getSession();
+        /*Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         String hql = "update User set userName=:name, password=:password where email=:email";
         Query query = session.createQuery(hql);
@@ -34,7 +34,13 @@ public class UserDAOImpl implements UserDAO {
         int isUpdated = query.executeUpdate();
         transaction.commit();
         session.close();
-        return isUpdated > 0;
+        return isUpdated > 0;*/
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.update(dto);
+        transaction.commit();
+        session.close();
+        return true;
     }
     @Override
     public boolean updateMinor(User dto) throws ClassNotFoundException {

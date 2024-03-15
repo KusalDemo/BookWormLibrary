@@ -27,6 +27,8 @@ public class LoginFormController {
     public static String loggedPerson;
     public static UserDto currentUserDto;
 
+    public static AdminDto currentAdminDto;
+    public static String whoIsLogged;
     AdminBO adminBO=(AdminBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.ADMIN);
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
 
@@ -59,6 +61,7 @@ public class LoginFormController {
                         isFoundInDB = true;
                         loggedPerson=userDto.getUserName();
                         currentUserDto=userDto;
+                        whoIsLogged="User";
                     }
                 }
                 if(isFoundInDB == true){
@@ -76,23 +79,30 @@ public class LoginFormController {
                 System.out.println("User Error bng");
                 System.out.println(e.getMessage());
             }
-        } else if (cmbRole.getValue().equals("Admin")) {
+        } else {
             try {
-                List<AdminDto> allAdmins = adminBO.getAllAdmins();
+               /* List<AdminDto> allAdmins = adminBO.getAllAdmins();
                 for(AdminDto searchedAdmin : allAdmins){
                     if(searchedAdmin.getEmail().equals(txtEmail.getText()) && searchedAdmin.getPassword().equals(txtPassword.getText())){
                         isFoundInDB = true;
                         loggedPerson=searchedAdmin.getUsername();
                     }
+                }*/
+                AdminDto admin = adminBO.getAdmin(txtEmail.getText());
+                if (admin.getEmail().equals(txtPassword.getText())) {
+                    isFoundInDB = true;
+                    loggedPerson = admin.getUsername();
+                    currentAdminDto = admin;
+                    whoIsLogged = "Admin";
                 }
-                if(isFoundInDB == true){
+                if (isFoundInDB == true) {
                     Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
                     Scene scene1 = new Scene(root);
                     Stage stage1 = (Stage) btnLogin.getScene().getWindow();
                     stage1.setScene(scene1);
                     stage1.setTitle("DASHBOARD");
                     stage1.centerOnScreen();
-                }else{
+                } else {
                     new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
                 }
             } catch (Exception e) {
@@ -100,8 +110,6 @@ public class LoginFormController {
                 System.out.println("Admin Error bng");
                 System.out.println(e.getMessage());
             }
-        }else{
-            new Alert(Alert.AlertType.ERROR, "Invalid Role").show();
         }
     }
 

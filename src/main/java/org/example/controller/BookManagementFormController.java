@@ -40,6 +40,10 @@ public class BookManagementFormController {
     public TableColumn<?,?> colAvailability;
     public TableColumn<?,?> colBranch;
     public Button btnBack;
+    public Label lblNotice;
+    public Button btnSave;
+    public Button btnUpdate;
+    public Button btnDelete;
 
     private Branch branch;
 
@@ -48,6 +52,18 @@ public class BookManagementFormController {
     BranchBO branchBO=(BranchBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BRANCH);
 
     public void initialize() throws ClassNotFoundException {
+        if(LoginFormController.whoIsLogged=="User"){
+            btnSave.setVisible(false);
+            btnUpdate.setVisible(false);
+            btnDelete.setVisible(false);
+            lblNotice.setText("Search for your book in mind and find out it's availability , Happy reading");
+            txtBookId.setEditable(false);
+            txtBookName.setEditable(false);
+            txtAuthor.setEditable(false);
+            txtGenre.setEditable(false);
+            txtAvailability.setEditable(false);
+            cmbBranches.setEditable(false);
+        }
         try {
             ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
             for(BranchDto branchDto:allBranches){

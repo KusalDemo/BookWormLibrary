@@ -28,8 +28,8 @@ public class AdminBOImpl implements AdminBO {
     }
 
     @Override
-    public AdminDto getAdmin(String email) throws ClassNotFoundException {
-        Admin admin = adminDAO.search(email);
+    public AdminDto getAdmin(String id) throws ClassNotFoundException {
+        Admin admin = adminDAO.search(id);
         return new AdminDto(admin.getAdminId(),admin.getEmail(),admin.getPassword(),admin.getUsername());
     }
 
