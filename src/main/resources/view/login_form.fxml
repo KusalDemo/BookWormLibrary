@@ -19,7 +19,7 @@
                 <Image url="@../assets/images/Animated-login-background.gif" />
             </image>
         </ImageView>
-        <AnchorPane layoutX="794.0" layoutY="144.0" prefHeight="659.0" prefWidth="630.0" style="-fx-background-color: #aed5ff; -fx-background-radius: 25;">
+        <AnchorPane layoutX="794.0" layoutY="144.0" prefHeight="694.0" prefWidth="630.0" style="-fx-background-color: #aed5ff; -fx-background-radius: 25;">
             <children>
                 <TextField fx:id="txtEmail" layoutX="68.0" layoutY="283.0" prefHeight="36.0" prefWidth="506.0">
                     <font>
@@ -30,7 +30,7 @@
                         <Font size="20.0" />
                     </font></Button>
                 <Button fx:id="btnSignUp" layoutX="168.0" layoutY="580.0" mnemonicParsing="false" onAction="#btnSignUpOnAction" prefHeight="55.0" prefWidth="297.0" styleClass="btn-30" text="SIGN UP" />
-                <Text layoutX="245.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN" textAlignment="CENTER" wrappingWidth="181.011474609375">
+                <Text layoutX="245.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN" textAlignment="CENTER" wrappingWidth="181.011474609375">
                     <font>
                         <Font name="System Bold" size="46.0" />
                     </font>
@@ -47,7 +47,7 @@
                 </Text>
                 <Line endX="-33.6666259765625" layoutX="318.0" layoutY="558.0" startX="-197.66668701171875" />
                 <PasswordField fx:id="txtPassword" layoutX="69.0" layoutY="378.0" prefHeight="37.0" prefWidth="505.0" />
-                <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="191.0" layoutY="41.0">
+                <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="191.0" layoutY="30.0">
                     <image>
                         <Image url="@../assets/icons/icons8-login-100.png" />
                     </image>
@@ -60,7 +60,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Label layoutX="161.0" layoutY="105.0" text="Book worm Library Management System">
+            <Label layoutX="161.0" layoutY="94.0" text="Book worm Library Management System">
                <font>
                   <Font size="16.0" />
                </font>
@@ -85,6 +85,7 @@
                   <Font name="System Italic" size="15.0" />
                </font>
             </Label>
+            <Label layoutX="278.0" layoutY="664.0" text="\@bookworm" textFill="#797777" />
             </children>
         </AnchorPane>
     </children>

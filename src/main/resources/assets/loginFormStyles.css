@@ -67,6 +67,9 @@
     -fx-background-radius: 99;
     -fx-cursor: hand;
 }
+#lblForgetPassword:hover{
+    -fx-text-fill: #192a56;
+}
 
 
 
