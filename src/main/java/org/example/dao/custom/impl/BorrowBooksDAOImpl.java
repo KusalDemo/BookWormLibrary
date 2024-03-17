@@ -72,7 +72,7 @@ public class BorrowBooksDAOImpl implements BorrowBooksDAO {
     public List<BorrowBooks> getAllBorrowBooksFromUserId(String id) throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "from BorrowBooks where user=:userId" ;
+        String hql = "from BorrowBooks where user.email=:userId" ;
         Query query = session.createQuery(hql);
         query.setParameter("userId", id);
         List<BorrowBooks> borrowBooks = query.list();

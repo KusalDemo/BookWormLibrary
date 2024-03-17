@@ -60,7 +60,7 @@
             </ImageView>
          </children></AnchorPane>
       <Button fx:id="btnLogOut" layoutX="60.0" layoutY="858.0" mnemonicParsing="false" onAction="#btnLogOutOnAction" prefHeight="40.0" prefWidth="203.0" styleClass="btn-40" text="LOG OUT" />
-      <Label fx:id="lblLoggedPersonName" layoutX="297.0" layoutY="71.0" prefHeight="19.0" prefWidth="251.0">
+      <Label fx:id="lblLoggedPersonName" layoutX="294.0" layoutY="71.0" prefHeight="19.0" prefWidth="251.0">
          <font>
             <Font size="15.0" />
          </font>
@@ -102,36 +102,36 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="997.0" layoutY="513.0" prefHeight="286.0" prefWidth="438.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
+      <AnchorPane layoutX="997.0" layoutY="513.0" prefHeight="286.0" prefWidth="424.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
          <children>
-            <Label layoutX="49.0" layoutY="121.0" text="Books">
+            <Label layoutX="38.0" layoutY="127.0" text="Books">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="168.0" layoutY="121.0" text="Customers">
+            <Label layoutX="157.0" layoutY="127.0" text="Customers">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label layoutX="314.0" layoutY="123.0" text="Branches">
+            <Label layoutX="303.0" layoutY="129.0" text="Branches">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="lblBookCount" layoutX="55.0" layoutY="190.0" text="Label" textAlignment="CENTER" textFill="#57606f">
+            <Label fx:id="lblBookCount" layoutX="48.0" layoutY="185.0" text="Label" textAlignment="CENTER" textFill="#57606f">
                <font>
-                  <Font name="System Bold" size="27.0" />
+                  <Font name="System Bold" size="37.0" />
                </font>
             </Label>
-            <Label fx:id="lblCustomerCount" layoutX="193.0" layoutY="190.0" text="Label" textAlignment="CENTER" textFill="#57606f">
+            <Label fx:id="lblCustomerCount" layoutX="186.0" layoutY="186.0" text="Label" textAlignment="CENTER" textFill="#57606f">
                <font>
-                  <Font name="System Bold" size="27.0" />
+                  <Font name="System Bold" size="37.0" />
                </font>
             </Label>
-            <Label fx:id="lblBranchesCount" layoutX="332.0" layoutY="190.0" text="Label" textAlignment="CENTER" textFill="#57606f">
+            <Label fx:id="lblBranchesCount" layoutX="319.0" layoutY="186.0" text="Label" textAlignment="CENTER" textFill="#57606f">
                <font>
-                  <Font name="System Bold" size="27.0" />
+                  <Font name="System Bold" size="37.0" />
                </font>
             </Label>
             <Label layoutX="24.0" layoutY="22.0" prefHeight="16.0" prefWidth="372.0" text="We are Improving...">
@@ -149,5 +149,10 @@
             <DropShadow />
          </effect>
       </AnchorPane>
+      <Label fx:id="lblTime" layoutX="1264.0" layoutY="54.0" prefHeight="16.0" prefWidth="203.0">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

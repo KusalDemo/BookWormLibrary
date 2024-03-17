@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.Util.Mail;
@@ -35,6 +36,12 @@ public class SignUpFormController {
     public ComboBox cmbBranch;
     public Text lblBranch;
     public ImageView imgBranch;
+    public TextField txtPasswordView;
+    public TextField txtRePasswordView;
+    public ImageView imgLockedPassword;
+    public ImageView imgLockedPassword2;
+    public ImageView imgViewPassword;
+    public ImageView imgViewPassword2;
 
     AdminBO adminBO = (AdminBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.ADMIN);
     UserBO userBO = (UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
@@ -169,5 +176,33 @@ public class SignUpFormController {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void imgViewPassword(MouseEvent mouseEvent) {
+        txtPasswordView.setText(txtPassword.getText());
+        txtPassword.setVisible(false);
+        imgViewPassword.setVisible(false);
+        txtPasswordView.setVisible(true);
+    }
+
+    public void imgViewPassword2OnAction(MouseEvent mouseEvent) {
+        txtRePasswordView.setText(txtRePassword.getText());
+        txtRePassword.setVisible(false);
+        imgViewPassword2.setVisible(false);
+        txtRePasswordView.setVisible(true);
+    }
+
+    public void imgLockedPasswordOnAction(MouseEvent mouseEvent) {
+        txtPassword.setText(txtPasswordView.getText());
+        txtPasswordView.setVisible(false);
+        imgViewPassword.setVisible(true);
+        txtPassword.setVisible(true);
+    }
+
+    public void imgLockedPassword2OnAction(MouseEvent mouseEvent) {
+        txtRePassword.setText(txtRePasswordView.getText());
+        txtRePasswordView.setVisible(false);
+        imgViewPassword2.setVisible(true);
+        txtRePassword.setVisible(true);
     }
 }

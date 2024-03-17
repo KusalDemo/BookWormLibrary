@@ -142,13 +142,16 @@ public class BranchManagementFormController {
             alert.showAndWait().ifPresent(response -> {
                 if (response == buttonTypeYes) {
                     try {
-                        boolean isDeleted = branchBO.deleteBranch(txtId.getText());
-                        if (isDeleted) {
-                            new Alert(Alert.AlertType.INFORMATION, "Branch Deleted").show();
-                            loadAllBranches();
-                            clearFields();
+                        if(txtId.getText().equals("BR-1")){
+                            new Alert(Alert.AlertType.ERROR, "You cannot delete Main Branch").show();
                         }else{
-                            new Alert(Alert.AlertType.ERROR, "Branch Not Deleted, Check Again").show();
+                            ArrayList<BookDto> allBooksFromBranchId = bookBO.getAllBooksFromBranchId(txtId.getText());
+                            BranchDto mainBranch = branchBO.searchBranch("BR-1");
+                            for (BookDto bookDto : allBooksFromBranchId) {
+                                bookBO.updateBook(new BookDto(bookDto.getId(), bookDto.getTitle(), bookDto.getAuthor(),bookDto.getGenre(),bookDto.isAvailability(),mainBranch));
+                            }
+                            new Alert(Alert.AlertType.INFORMATION, "All books from this branch are moved to Main Branch").showAndWait();
+                            clearFields();
                         }
                     }catch (Exception e){
                         new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

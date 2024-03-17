@@ -21,6 +21,26 @@
       </ImageView>
       <AnchorPane layoutX="812.0" layoutY="43.0" prefHeight="841.0" prefWidth="600.0" style="-fx-background-color: #aed5ff; -fx-background-radius: 25;" stylesheets="@../assets/loginFormStyles.css">
          <children>
+            <TextField fx:id="txtPasswordView" layoutX="50.0" layoutY="415.0" prefHeight="44.0" prefWidth="505.0" styleClass="text-field">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtRePasswordView" layoutX="52.0" layoutY="509.0" prefHeight="44.0" prefWidth="505.0" styleClass="text-field">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <ImageView fx:id="imgLockedPassword" layoutX="499.0" layoutY="423.0" onMouseClicked="#imgLockedPasswordOnAction">
+               <image>
+                  <Image url="@../assets/icons/icons8-password-view99.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgLockedPassword2" layoutX="501.0" layoutY="516.0" onMouseClicked="#imgLockedPassword2OnAction">
+               <image>
+                  <Image url="@../assets/icons/icons8-password-view99.png" />
+               </image>
+            </ImageView>
             <TextField fx:id="txtEmail" layoutX="50.0" layoutY="326.0" prefHeight="36.0" prefWidth="506.0" promptText="kusal@gmail.com" styleClass="text-field">
                <font>
                   <Font size="16.0" />
@@ -107,6 +127,16 @@
             <ImageView fx:id="imgBranch" fitHeight="23.0" fitWidth="20.0" layoutX="68.0" layoutY="559.0" visible="false">
                <image>
                   <Image url="@../assets/icons/icons8-branch-30.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgViewPassword" fitHeight="30.0" fitWidth="30.0" layoutX="503.0" layoutY="421.0" onMouseClicked="#imgViewPassword">
+               <image>
+                  <Image url="@../assets/icons/icons8-show-password-50.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgViewPassword2" fitHeight="30.0" fitWidth="30.0" layoutX="503.0" layoutY="515.0" onMouseClicked="#imgViewPassword2OnAction">
+               <image>
+                  <Image url="@../assets/icons/icons8-show-password-50.png" />
                </image>
             </ImageView>
          </children>

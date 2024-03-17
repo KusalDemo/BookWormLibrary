@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -44,6 +45,9 @@ public class LoginFormController {
 
 
     public static String otp;
+    public TextField txtPasswordView;
+    public ImageView imgViewPassword;
+    public ImageView imgLockedPassword;
     AdminBO adminBO=(AdminBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.ADMIN);
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
 
@@ -70,7 +74,7 @@ public class LoginFormController {
                     System.out.println(userDto.getEmail());
                     if (userDto.getEmail().equals(txtEmail.getText()) && userDto.getPassword().equals(txtPassword.getText())) {
                         isFoundInDB = true;
-                        loggedPerson=userDto.getUserName();
+                        loggedPerson=userDto.getEmail();
                         currentUserDto=userDto;
                         whoIsLogged="User";
                     }
@@ -203,5 +207,19 @@ public class LoginFormController {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public void imgViewPasswordOnAction(MouseEvent mouseEvent) {
+        txtPasswordView.setText(txtPassword.getText());
+        txtPassword.setVisible(false);
+        imgViewPassword.setVisible(false);
+        txtPasswordView.setVisible(true);
+    }
+
+    public void imgLockedPasswordOnAction(MouseEvent mouseEvent) {
+        txtPassword.setText(txtPasswordView.getText());
+        txtPasswordView.setVisible(false);
+        imgViewPassword.setVisible(true);
+        txtPassword.setVisible(true);
     }
 }

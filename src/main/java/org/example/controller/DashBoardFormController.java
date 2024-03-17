@@ -1,6 +1,8 @@
 package org.example.controller;
 
 import animatefx.animation.FadeIn;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -13,16 +15,21 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.example.bo.BoFactory;
+import org.example.bo.custom.AdminBO;
 import org.example.bo.custom.BookBO;
 import org.example.bo.custom.BranchBO;
 import org.example.bo.custom.UserBO;
+import org.example.dto.AdminDto;
 import org.example.dto.BookDto;
 import org.example.dto.BranchDto;
 import org.example.dto.UserDto;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DashBoardFormController {
@@ -40,6 +47,7 @@ public class DashBoardFormController {
     public Label lblBookCount;
     public Label lblCustomerCount;
     public Label lblBranchesCount;
+    public Label lblTime;
 
     BranchBO branchBO=(BranchBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BRANCH);
     BookBO bookBO=(BookBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BOOK);
@@ -58,7 +66,14 @@ public class DashBoardFormController {
         String loggedPerson = LoginFormController.loggedPerson;
         lblLoggedPersonName.setText(loggedPerson);
 
-       /* getCounts();*/
+        getCounts();
+
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(1), event -> clock())
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+        clock();
     }
 
     public void userManagePaneOnAction(MouseEvent mouseEvent) {
@@ -78,17 +93,30 @@ public class DashBoardFormController {
 
 
     public void bookManagePaneOnAction(MouseEvent mouseEvent) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/BookManagement_form.fxml"));
-            Scene scene1 = new Scene(root);
-            Stage stage1 = (Stage) bookManagePane.getScene().getWindow();
-            stage1.setScene(scene1);
-            stage1.setTitle("Book Management");
-            stage1.centerOnScreen();
+        if(LoginFormController.whoIsLogged=="User"){
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/view/userBorrowedBooks_form.fxml"));
+                Scene scene1 = new Scene(root);
+                Stage stage1 = (Stage) bookManagePane.getScene().getWindow();
+                stage1.setScene(scene1);
+                stage1.setTitle("View History");
+                stage1.centerOnScreen();
+            }catch (Exception e){
+                System.out.println(e);
+            }
+        }else{
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/view/BookManagement_form.fxml"));
+                Scene scene1 = new Scene(root);
+                Stage stage1 = (Stage) bookManagePane.getScene().getWindow();
+                stage1.setScene(scene1);
+                stage1.setTitle("Book Management");
+                stage1.centerOnScreen();
 
-            new FadeIn(root).play();
-        }catch (Exception e){
-            System.out.println(e);
+                new FadeIn(root).play();
+            }catch (Exception e){
+                System.out.println(e);
+            }
         }
     }
 
@@ -174,7 +202,11 @@ public class DashBoardFormController {
         lblBookCount.setText(allBooks.size()+"");
         lblCustomerCount.setText(allUsers.size()+"");
         lblBranchesCount.setText(allBranches.size()+"");
-
     }
-
+    private void clock(){
+        Date now = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        String formattedTime = dateFormat.format(now);
+        lblTime.setText( formattedTime);
+    }
 }

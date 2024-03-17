@@ -96,6 +96,44 @@
     -fx-background-radius: 99;
     -fx-cursor: hand;
 }
+.btn-50 {
+    -fx-background-color: #f6b93b;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-text-transform: uppercase;
+    -fx-border-radius: 99;
+    -fx-border-width: 2;
+    -fx-padding: 0.8em 3em;
+    -fx-background-radius: 99;
+    -fx-cursor: hand;
+}
+
+.btn-50:disabled {
+    -fx-opacity: 0.5;
+    -fx-cursor: default;
+}
+
+.btn-50:hover {
+    -fx-background-color: #f6b93b;
+    -fx-border-color: #fa983a; /* Neon green border */
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(gaussian, #fad390, 10, 0.5, 0, 0); /* Neon green shadow */
+}
+.btn-50 {
+    -fx-background-color: #f6b93b;
+    -fx-text-fill: #fff;
+    -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 900;
+    -fx-text-transform: uppercase;
+    -fx-border-radius: 99;
+    -fx-border-width: 2;
+    -fx-padding: 0.8em 3em;
+    -fx-background-radius: 99;
+    -fx-cursor: hand;
+}
 #tblUsers ,#tblBook ,#tblBranch ,#tblBorrowBooks .column-header-background .label {
     -fx-text-fill: white; /* Set text color of the table headers to white */
     -fx-font-size: 14px; /* Set font size of the table headers */

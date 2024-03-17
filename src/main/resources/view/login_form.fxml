@@ -21,6 +21,16 @@
         </ImageView>
         <AnchorPane layoutX="794.0" layoutY="144.0" prefHeight="694.0" prefWidth="630.0" style="-fx-background-color: #aed5ff; -fx-background-radius: 25;">
             <children>
+            <TextField fx:id="txtPasswordView" layoutX="69.0" layoutY="382.0" prefHeight="36.0" prefWidth="506.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <ImageView fx:id="imgLockedPassword" fitHeight="28.0" fitWidth="30.0" layoutX="529.0" layoutY="389.0" onMouseClicked="#imgLockedPasswordOnAction">
+               <image>
+                  <Image url="@../assets/icons/icons8-password-view99.png" />
+               </image>
+            </ImageView>
                 <TextField fx:id="txtEmail" layoutX="68.0" layoutY="283.0" prefHeight="36.0" prefWidth="506.0">
                     <font>
                         <Font size="16.0" />
@@ -46,7 +56,7 @@
                     </font>
                 </Text>
                 <Line endX="-33.6666259765625" layoutX="318.0" layoutY="558.0" startX="-197.66668701171875" />
-                <PasswordField fx:id="txtPassword" layoutX="69.0" layoutY="378.0" prefHeight="37.0" prefWidth="505.0" />
+                <PasswordField fx:id="txtPassword" layoutX="69.0" layoutY="382.0" prefHeight="37.0" prefWidth="505.0" />
                 <ImageView fitHeight="56.0" fitWidth="55.0" layoutX="191.0" layoutY="30.0">
                     <image>
                         <Image url="@../assets/icons/icons8-login-100.png" />
@@ -86,6 +96,11 @@
                </font>
             </Label>
             <Label layoutX="278.0" layoutY="664.0" text="\@bookworm" textFill="#797777" />
+            <ImageView fx:id="imgViewPassword" fitHeight="28.0" fitWidth="30.0" layoutX="527.0" layoutY="391.0" onMouseClicked="#imgViewPasswordOnAction">
+               <image>
+                  <Image url="@../assets/icons/icons8-show-password-50.png" />
+               </image>
+            </ImageView>
             </children>
         </AnchorPane>
     </children>

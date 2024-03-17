@@ -18,6 +18,8 @@ public interface BookBO extends SuperBO {
 
     ArrayList<BookDto> getAllBooks() throws ClassNotFoundException;
 
+    ArrayList<BookDto>getAllBooksFromBranchId(String branch) throws ClassNotFoundException;
+
     ArrayList<BookDto> getAllAvailableBooksFromBranchId(String branch) throws ClassNotFoundException;
 
     BookDto searchBook(String id) throws ClassNotFoundException;

@@ -67,6 +67,18 @@ public class BookBOImpl implements BookBO {
     }
 
     @Override
+    public ArrayList<BookDto> getAllBooksFromBranchId(String branchName) throws ClassNotFoundException {
+        ArrayList<Book> allBooksFromBranchId = bookDAO.getAllBooksFromBranchId(branchName);
+        ArrayList<BookDto> bookDtos = new ArrayList<>();
+        for (Book book : allBooksFromBranchId) {
+            Branch branch = book.getBranch();
+            BranchDto branchDto = new BranchDto(branch.getBranchId(), branch.getBranchName(), branch.getLocation(), branch.getEmail());
+            bookDtos.add(new BookDto(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.isAvailability(),branchDto));
+        }
+        return bookDtos;
+    }
+
+    @Override
     public ArrayList<BookDto> getAllAvailableBooksFromBranchId(String branchId) throws ClassNotFoundException {
         ArrayList<Book> books = (ArrayList<Book>) bookDAO.getAllAvailableBooksFromBranchId(branchId);
         ArrayList<BookDto> bookDtos = new ArrayList<>();

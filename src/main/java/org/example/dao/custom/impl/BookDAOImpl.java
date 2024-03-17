@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookDAOImpl implements BookDAO {
@@ -55,6 +56,19 @@ public class BookDAOImpl implements BookDAO {
         transaction.commit();
         session.close();
         return isUpdated > 0;
+    }
+
+    @Override
+    public ArrayList<Book> getAllBooksFromBranchId(String id) throws ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Book where branch.id=:id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", id);
+        List<Book> books = query.list();
+        transaction.commit();
+        session.close();
+        return (ArrayList<Book>) books;
     }
 
     @Override

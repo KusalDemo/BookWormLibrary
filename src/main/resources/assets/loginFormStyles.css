@@ -53,7 +53,7 @@
     -fx-border-width: 2;
     -fx-effect: dropshadow(gaussian, #00FFFF, 10, 0.5, 0, 0); /* Neon green shadow */
 }
-#txtEmail , #txtPassword ,#cmbRole ,#txtRePassword, #txtUserName ,#cmbBranch{
+#txtEmail , #txtPassword ,#cmbRole ,#txtRePassword, #txtUserName ,#cmbBranch, #txtPasswordView, #txtRePasswordView{
     -fx-background-color: white;
     -fx-text-fill: black;
     -fx-font-family: "Segoe UI", "Roboto", "Helvetica Neue", "Arial", sans-serif;
