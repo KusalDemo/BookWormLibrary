@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,66 +14,71 @@
 
 <AnchorPane prefHeight="920.0" prefWidth="1520.0" stylesheets="@../assets/managementStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.BookManagementFormController">
    <children>
+      <AnchorPane layoutX="37.0" layoutY="209.0" prefHeight="474.0" prefWidth="518.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
       <Label layoutX="45.0" layoutY="29.0" text="Book Management ">
          <font>
             <Font name="System Bold" size="41.0" />
          </font>
       </Label>
-      <Label layoutX="66.0" layoutY="303.0" prefHeight="24.0" prefWidth="210.0" text="Book Name :">
+      <Label layoutX="66.0" layoutY="297.0" prefHeight="24.0" prefWidth="210.0" text="Book Name :">
          <font>
-            <Font size="19.0" />
+            <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtBookName" layoutX="66.0" layoutY="333.0" prefHeight="32.0" prefWidth="481.0">
+      <TextField fx:id="txtBookName" layoutX="66.0" layoutY="319.0" prefHeight="32.0" prefWidth="458.0">
          <font>
             <Font size="12.0" />
          </font></TextField>
-      <Label layoutX="66.0" layoutY="397.0" prefHeight="24.0" prefWidth="210.0" text="Book Author :">
+      <Label layoutX="66.0" layoutY="366.0" prefHeight="24.0" prefWidth="210.0" text="Book Author :">
          <font>
-            <Font size="19.0" />
+            <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtAuthor" layoutX="66.0" layoutY="428.0" prefHeight="32.0" prefWidth="480.0">
+      <TextField fx:id="txtAuthor" layoutX="66.0" layoutY="391.0" prefHeight="32.0" prefWidth="458.0">
          <font>
             <Font size="12.0" />
          </font></TextField>
-      <Label layoutX="66.0" layoutY="491.0" prefHeight="24.0" prefWidth="210.0" text="Book Genre :">
+      <Label layoutX="66.0" layoutY="440.0" prefHeight="24.0" prefWidth="210.0" text="Book Genre :">
          <font>
-            <Font size="19.0" />
+            <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtGenre" layoutX="66.0" layoutY="519.0" prefHeight="32.0" prefWidth="481.0">
+      <TextField fx:id="txtGenre" layoutX="66.0" layoutY="460.0" prefHeight="32.0" prefWidth="458.0">
          <font>
             <Font size="12.0" />
          </font></TextField>
-      <Label layoutX="66.0" layoutY="578.0" prefHeight="24.0" prefWidth="210.0" text="Book Availability :">
+      <Label layoutX="66.0" layoutY="507.0" prefHeight="24.0" prefWidth="210.0" text="Book Availability :">
          <font>
-            <Font size="19.0" />
+            <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtAvailability" layoutX="66.0" layoutY="611.0" prefHeight="32.0" prefWidth="477.0">
+      <TextField fx:id="txtAvailability" layoutX="66.0" layoutY="530.0" prefHeight="32.0" prefWidth="458.0">
          <font>
             <Font size="12.0" />
          </font></TextField>
-      <Label layoutX="66.0" layoutY="667.0" prefHeight="24.0" prefWidth="210.0" text="Branch :">
+      <Label layoutX="66.0" layoutY="570.0" prefHeight="24.0" prefWidth="210.0" text="Branch :">
          <font>
-            <Font size="19.0" />
+            <Font size="17.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbBranches" layoutX="66.0" layoutY="701.0" prefHeight="32.0" prefWidth="480.0" />
-      <Button fx:id="btnSave" layoutX="59.0" layoutY="788.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="42.0" prefWidth="140.0" styleClass="btn-20" text="SAVE" />
-      <Button fx:id="btnUpdate" layoutX="219.0" layoutY="788.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="42.0" prefWidth="158.0" styleClass="btn-30" text="UPDATE" />
-      <Button fx:id="btnDelete" layoutX="393.0" layoutY="787.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="42.0" prefWidth="158.0" styleClass="btn-40" text="DELETE" />
-      <Label layoutX="66.0" layoutY="212.0" prefHeight="24.0" prefWidth="210.0" text="Book ID :">
+      <ComboBox fx:id="cmbBranches" layoutX="66.0" layoutY="597.0" prefHeight="32.0" prefWidth="458.0" />
+      <Button fx:id="btnSave" layoutX="50.0" layoutY="705.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="42.0" prefWidth="140.0" styleClass="btn-20" text="SAVE" />
+      <Button fx:id="btnUpdate" layoutX="210.0" layoutY="705.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="42.0" prefWidth="158.0" styleClass="btn-30" text="UPDATE" />
+      <Button fx:id="btnDelete" layoutX="384.0" layoutY="704.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="42.0" prefWidth="158.0" styleClass="btn-40" text="DELETE" />
+      <Label layoutX="66.0" layoutY="233.0" prefHeight="24.0" prefWidth="210.0" text="Book ID :">
          <font>
-            <Font size="19.0" />
+            <Font size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="txtBookId" layoutX="66.0" layoutY="244.0" onMouseClicked="#txtBookIdOnAction" prefHeight="32.0" prefWidth="483.0">
+      <TextField fx:id="txtBookId" layoutX="66.0" layoutY="253.0" onMouseClicked="#txtBookIdOnAction" prefHeight="32.0" prefWidth="458.0">
          <font>
             <Font size="12.0" />
          </font></TextField>
-      <TextField fx:id="txtSearchBook" layoutX="69.0" layoutY="127.0" onKeyReleased="#txtSearchBookOnAction" prefHeight="32.0" prefWidth="484.0" promptText="Search">
+      <TextField fx:id="txtSearchBook" layoutX="69.0" layoutY="145.0" onKeyReleased="#txtSearchBookOnAction" prefHeight="3.0" prefWidth="458.0" promptText="Search">
          <font>
             <Font size="25.0" />
          </font></TextField>
@@ -86,9 +92,9 @@
             <TableColumn fx:id="colBranch" prefWidth="116.3333740234375" text="Branch" />
         </columns>
       </TableView>
-      <Button fx:id="btnBack" layoutX="45.0" layoutY="869.0" mnemonicParsing="false" onAction="#btnBackOnAction" styleClass="btn-30" text="BACK" />
+      <Button fx:id="btnBack" layoutX="38.0" layoutY="865.0" mnemonicParsing="false" onAction="#btnBackOnAction" styleClass="btn-30" text="BACK" />
       <Label fx:id="lblNotice" layoutX="507.0" layoutY="50.0" prefHeight="16.0" prefWidth="808.0" />
-      <ImageView fitHeight="32.0" fitWidth="39.0" layoutX="508.0" layoutY="122.0">
+      <ImageView fitHeight="32.0" fitWidth="31.0" layoutX="534.0" layoutY="138.0">
          <image>
             <Image url="@../assets/icons/icons8-search-100.png" />
          </image>

@@ -13,8 +13,17 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.example.bo.BoFactory;
+import org.example.bo.custom.BookBO;
+import org.example.bo.custom.BranchBO;
+import org.example.bo.custom.UserBO;
+import org.example.dto.BookDto;
+import org.example.dto.BranchDto;
+import org.example.dto.UserDto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashBoardFormController {
 
@@ -28,8 +37,15 @@ public class DashBoardFormController {
     public Label lblManageUser;
     public Label lblViewBooksStatus;
     public Label lblBorrowBookManage;
+    public Label lblBookCount;
+    public Label lblCustomerCount;
+    public Label lblBranchesCount;
 
-    public void initialize() {
+    BranchBO branchBO=(BranchBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BRANCH);
+    BookBO bookBO=(BookBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BOOK);
+    UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
+
+    public void initialize() throws ClassNotFoundException {
         if(LoginFormController.whoIsLogged=="User"){
             userManagePane.setVisible(false);
             viewBooksPane.setVisible(false);
@@ -41,6 +57,8 @@ public class DashBoardFormController {
         }
         String loggedPerson = LoginFormController.loggedPerson;
         lblLoggedPersonName.setText(loggedPerson);
+
+       /* getCounts();*/
     }
 
     public void userManagePaneOnAction(MouseEvent mouseEvent) {
@@ -148,6 +166,15 @@ public class DashBoardFormController {
             }
         });
     }
+    private void getCounts() throws ClassNotFoundException {
+        ArrayList<BookDto> allBooks = bookBO.getAllBooks();
+        ArrayList<BranchDto> allBranches = branchBO.getAllBranches();
+        List<UserDto> allUsers = userBO.getAllUsers();
 
+        lblBookCount.setText(allBooks.size()+"");
+        lblCustomerCount.setText(allUsers.size()+"");
+        lblBranchesCount.setText(allBranches.size()+"");
+
+    }
 
 }

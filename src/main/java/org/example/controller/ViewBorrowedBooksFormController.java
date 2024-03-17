@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.example.Util.Mail;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.BookBO;
 import org.example.bo.custom.BorrowBooksBO;
@@ -21,6 +22,7 @@ import org.example.dto.UserDto;
 import org.example.dto.tm.BorrowBookTM;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,22 +53,25 @@ public class ViewBorrowedBooksFormController {
 
     public void initialize(){
         cmbLoadBooks.getItems().addAll("All Borrowed Books","Return Date Exceeded Books");
-        cmbLoadBooks.setValue("All Borrowed Books");
-        if(cmbLoadBooks.getValue().equals("All Borrowed Books")){
-            try {
-                loadAllBorrowedBooks();
-                setCellValueFactory();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+
+        cmbLoadBooks.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(cmbLoadBooks.getValue().equals("All Borrowed Books")){
+                try {
+                    loadAllBorrowedBooks();
+                    setCellValueFactory();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }else if(cmbLoadBooks.getValue().equals("Return Date Exceeded Books")){
+                try {
+                    loadAllReturnDateExceededBooks();
+                    setCellValueFactory();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
-        }else if(cmbLoadBooks.getValue().equals("Return Date Exceeded Books")){
-            try {
-                loadAllReturnDateExceededBooks();
-                setCellValueFactory();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
+        });
+
         tblBorrowBooks.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue() >= 0){
                 BorrowBookTM selectedBorrowBook = tblBorrowBooks.getItems().get(newValue.intValue());
@@ -195,5 +200,34 @@ public class ViewBorrowedBooksFormController {
     }
 
     public void btnInformOnAction(ActionEvent actionEvent) {
+        System.out.println(lblUserID);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Informing to " +lblUserName.getText()+" to return the book : "+lblBookTitle.getText());
+        alert.setContentText("Do you want to confirm the information ?");
+
+        ButtonType buttonTypeYes = new ButtonType("Yes");
+        ButtonType buttonTypeNo = new ButtonType("No");
+
+        alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+        alert.showAndWait().ifPresent(response -> {
+            String userEmail = lblUserID.getText();
+            if (response == buttonTypeYes) {
+                Mail mail = new Mail();
+                mail.setMsg("Hi there,"+ "\n\n\tWe hope this email finds you well. " +
+                        "We wanted to bring to your attention that according to our records, there are currently" +
+                        " some books from our library that have not been returned yet.\n\n\tThe Book is : "+lblBookTitle.getText()+"\n\n\tInformed Date & Time : "+ LocalDateTime.now() + " \n\nThank You,\n" +
+                        "BookWorm Support Team");
+                mail.setTo(userEmail);
+                mail.setSubject("Reminder for Unreturned Books");
+
+
+                Thread thread = new Thread(mail);
+                thread.start();
+            } else if (response == buttonTypeNo) {
+                System.out.println("Admin cancelled the operation.");
+            }
+        });
     }
 }

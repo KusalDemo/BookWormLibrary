@@ -5,6 +5,9 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -15,33 +18,38 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="92.0" layoutY="238.0" text="Branch ID :">
+      <AnchorPane layoutX="59.0" layoutY="228.0" prefHeight="357.0" prefWidth="493.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+      <Label layoutX="92.0" layoutY="254.0" text="Branch ID :">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtId" layoutX="90.0" layoutY="263.0" onMouseClicked="#txtIdOnAction" prefHeight="24.0" prefWidth="428.0" />
-      <Label layoutX="92.0" layoutY="305.0" text="Branch Name :">
+      <TextField fx:id="txtId" layoutX="90.0" layoutY="277.0" onMouseClicked="#txtIdOnAction" prefHeight="24.0" prefWidth="428.0" />
+      <Label layoutX="92.0" layoutY="324.0" text="Branch Name :">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtName" layoutX="91.0" layoutY="332.0" onMouseClicked="#txtNameOnAction" prefHeight="24.0" prefWidth="428.0" />
-      <Label layoutX="93.0" layoutY="376.0" text="Location :">
+      <TextField fx:id="txtName" layoutX="91.0" layoutY="346.0" onMouseClicked="#txtNameOnAction" prefHeight="24.0" prefWidth="428.0" />
+      <Label layoutX="93.0" layoutY="388.0" text="Location :">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtLocation" layoutX="92.0" layoutY="405.0" prefHeight="24.0" prefWidth="428.0" />
-      <Label layoutX="94.0" layoutY="444.0" text="email :">
+      <TextField fx:id="txtLocation" layoutX="92.0" layoutY="415.0" prefHeight="24.0" prefWidth="428.0" />
+      <Label layoutX="94.0" layoutY="456.0" text="email :">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEmail" layoutX="93.0" layoutY="473.0" prefHeight="24.0" prefWidth="428.0" />
-      <Button fx:id="btnSave" layoutX="77.0" layoutY="547.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="40.0" prefWidth="136.0" styleClass="btn-20" text="SAVE" />
-      <Button fx:id="btnUpdate" layoutX="221.0" layoutY="547.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="160.0" styleClass="btn-30" text="UPDATE" />
-      <Button fx:id="btnDelete" layoutX="389.0" layoutY="547.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="151.0" styleClass="btn-40" text="DELETE" />
+      <TextField fx:id="txtEmail" layoutX="93.0" layoutY="483.0" prefHeight="24.0" prefWidth="428.0" />
+      <Button fx:id="btnSave" layoutX="74.0" layoutY="617.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="40.0" prefWidth="136.0" styleClass="btn-20" text="SAVE" />
+      <Button fx:id="btnUpdate" layoutX="218.0" layoutY="617.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="160.0" styleClass="btn-30" text="UPDATE" />
+      <Button fx:id="btnDelete" layoutX="386.0" layoutY="617.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="151.0" styleClass="btn-40" text="DELETE" />
       <TableView fx:id="tblBranch" layoutX="594.0" layoutY="104.0" prefHeight="746.0" prefWidth="854.0" stylesheets="@../assets/managementStyles.css">
         <columns>
           <TableColumn fx:id="colId" prefWidth="90.0" text="Id" />
@@ -50,8 +58,13 @@
             <TableColumn fx:id="colEmail" prefWidth="264.0" text="Email" />
         </columns>
       </TableView>
-      <TextField fx:id="txtSearch" layoutX="92.0" layoutY="175.0" onKeyReleased="#txtSearchOnAction" onMouseClicked="#txtIdOnAction" prefHeight="24.0" prefWidth="428.0" promptText="Search" />
+      <TextField fx:id="txtSearch" layoutX="92.0" layoutY="163.0" onKeyReleased="#txtSearchOnAction" onMouseClicked="#txtIdOnAction" prefHeight="24.0" prefWidth="428.0" promptText="Search" />
       <Button fx:id="btnBack" layoutX="59.0" layoutY="846.0" mnemonicParsing="false" onAction="#btnBackOnAction" styleClass="btn-30" text="BACK" />
       <Label fx:id="lblNotice" layoutX="511.0" layoutY="53.0" prefHeight="16.0" prefWidth="821.0" />
+      <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="478.0" layoutY="165.0">
+         <image>
+            <Image url="@../assets/icons/icons8-search-100.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

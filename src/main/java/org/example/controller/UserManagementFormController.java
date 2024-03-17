@@ -118,7 +118,13 @@ public class UserManagementFormController {
                     new Alert(Alert.AlertType.ERROR, "Please provide User Name and Branch").show();
                 }else{
                     try{
-                        boolean isDeleted = userBO.updateUser(new UserDto(txtUserName.getText(), txtEmail.getText(), null, null));
+                        String branch = (String) cmbBranch.getValue();
+                        String[] splittedBranchDetail = branch.split(" - ");
+                        String branchId = splittedBranchDetail[0];
+                        System.out.println(branchId);
+                        BranchDto branchDto = branchBO.searchBranch(branchId);
+
+                        boolean isDeleted = userBO.updateUser(new UserDto(txtUserName.getText(), txtEmail.getText(),null, branchDto));
                         if(isDeleted){
                             new Alert(Alert.AlertType.INFORMATION, "User Deleted Successfully").show();
                             clearFields();

@@ -23,17 +23,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User dto) throws ClassNotFoundException {
-        /*Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "update User set userName=:name, password=:password where email=:email";
-        Query query = session.createQuery(hql);
-        query.setParameter("name", dto.getUserName());
-        query.setParameter("password", dto.getPassword());
-        query.setParameter("email", dto.getEmail());
-        int isUpdated = query.executeUpdate();
-        transaction.commit();
-        session.close();
-        return isUpdated > 0;*/
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         session.update(dto);
@@ -46,9 +35,10 @@ public class UserDAOImpl implements UserDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         System.out.println(dto.getUserName()+" "+dto.getEmail());
-        String hql = "update User set userName=:name where email=:email";
+        String hql = "update User set userName=:name, branch=:branch where email=:email";
         Query query = session.createQuery(hql);
         query.setParameter("name", dto.getUserName());
+        query.setParameter("branch", dto.getBranch());
         query.setParameter("email", dto.getEmail());
         int isUpdated = query.executeUpdate();
         transaction.commit();
@@ -58,9 +48,10 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean updatePassword(String username, String password) throws ClassNotFoundException {
+        System.out.println(username+" "+password);
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        String hql = "update User set password=:password where userName=:username";
+        String hql = "update User set password=:password where email=:username";
         Query query = session.createQuery(hql);
         query.setParameter("password", password);
         query.setParameter("username", username);

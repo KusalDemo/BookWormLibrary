@@ -22,7 +22,7 @@
       <TextField fx:id="txtLocation" layoutX="915.0" layoutY="595.0" prefHeight="24.0" prefWidth="483.0" />
       <TextField fx:id="txtToday" layoutX="914.0" layoutY="653.0" prefHeight="24.0" prefWidth="483.0" />
       <TextField fx:id="txtReturnDate" layoutX="915.0" layoutY="712.0" prefHeight="24.0" prefWidth="483.0" />
-      <Button fx:id="btnBorrow" layoutX="1072.0" layoutY="792.0" mnemonicParsing="false" onAction="#btnBorrowOnAction" prefHeight="40.0" prefWidth="163.0" styleClass="btn-20" text="Borrow" />
+      <Button fx:id="btnBorrow" layoutX="1072.0" layoutY="785.0" mnemonicParsing="false" onAction="#btnBorrowOnAction" prefHeight="40.0" prefWidth="163.0" styleClass="btn-20" text="Borrow" />
       <TableView fx:id="tblBorrowBooks" layoutX="92.0" layoutY="262.0" prefHeight="527.0" prefWidth="748.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="145.6666717529297" text="Id" />
@@ -58,7 +58,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="lblNotice" layoutX="160.0" layoutY="10.0" prefHeight="16.0" prefWidth="1087.0" />
+            <Label fx:id="lblNotice" layoutX="142.0" layoutY="11.0" prefHeight="16.0" prefWidth="1087.0" />
          </children>
       </AnchorPane>
       <Label layoutX="1068.0" layoutY="250.0" prefHeight="24.0" prefWidth="142.0" text="Your Selection" textAlignment="CENTER" underline="true">
@@ -66,5 +66,6 @@
             <Font size="19.0" />
          </font>
       </Label>
+      <Label layoutX="874.0" layoutY="832.0" prefHeight="59.0" prefWidth="569.0" text="Please note that the borrow function will only be available after the book has been returned. Thank you for your understanding and cooperation" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

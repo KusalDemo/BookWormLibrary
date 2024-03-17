@@ -100,6 +100,7 @@ public class BookManagementFormController {
         colBranch.setCellValueFactory(new PropertyValueFactory<>("branchId"));
     }
     public void btnSaveOnAction(ActionEvent actionEvent) throws ClassNotFoundException {
+        System.out.println("hello..");
         String bookId = generateBookId();
         String author = txtAuthor.getText();
         String genre = txtGenre.getText();
@@ -119,8 +120,7 @@ public class BookManagementFormController {
             new Alert(Alert.AlertType.ERROR, "Please provide all the details").show();
         } else {
             try {
-                // Assuming you have a way to get the selected branch's ID
-                String selectedBranchId = (String) cmbBranches.getValue(); // Implement this method based on your UI setup
+                String selectedBranchId = (String) cmbBranches.getValue();
                 System.out.println("Selected Branch ID: " + selectedBranchId);
 
                 ArrayList<BookDto> allBooks = bookBO.getAllBooks();
@@ -129,7 +129,7 @@ public class BookManagementFormController {
                     if (bookDto.getTitle().equalsIgnoreCase(bookName)) {
                         new Alert(Alert.AlertType.ERROR, "Book Already Exists").show();
                         isBookAlreadyExist = true;
-                        break; // Exit the loop if the book already exists
+                        break;
                     }
                 }
                 if(!isBookAlreadyExist){

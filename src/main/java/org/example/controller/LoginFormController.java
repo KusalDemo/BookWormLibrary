@@ -38,8 +38,8 @@ public class LoginFormController {
     public Text lblCredential;
     public Label lblForgetPassword;
 
-    public static UserDto passwordChangeRequestedUserDto;
-    public static AdminDto passwordChangeRequestedAdminDto;
+    public static UserDto passwordChangeRequestedUserDto=null;
+    public static AdminDto passwordChangeRequestedAdminDto=null;
 
 
 
@@ -62,19 +62,6 @@ public class LoginFormController {
     }
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws ClassNotFoundException, IOException {
-       /* List<UserDto> allUsers = userBO.getAllUsers();
-        for (UserDto userDto : allUsers) {
-            System.out.println(userDto.getEmail());
-            if (userDto.getEmail().equals(txtEmail.getText()) && userDto.getPassword().equals(txtPassword.getText())) {
-                Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
-                Scene scene1 = new Scene(root);
-                Stage stage1 = (Stage) btnLogin.getScene().getWindow();
-                stage1.setScene(scene1);
-                stage1.setTitle("DASHBOARD");
-                stage1.centerOnScreen();
-            }else{
-                new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
-            }*/
         Boolean isFoundInDB = false;
         if (cmbRole.getValue().equals("User")) {
             try {
@@ -105,13 +92,6 @@ public class LoginFormController {
             }
         } else {
             try {
-               /* List<AdminDto> allAdmins = adminBO.getAllAdmins();
-                for(AdminDto searchedAdmin : allAdmins){
-                    if(searchedAdmin.getEmail().equals(txtEmail.getText()) && searchedAdmin.getPassword().equals(txtPassword.getText())){
-                        isFoundInDB = true;
-                        loggedPerson=searchedAdmin.getUsername();
-                    }
-                }*/
                 AdminDto admin = adminBO.getAdmin(txtEmail.getText());
                 if (admin.getPassword().equals(txtPassword.getText())) {
                     isFoundInDB = true;
@@ -159,8 +139,9 @@ public class LoginFormController {
                 boolean isSend = sendMail(userDto.getEmail());
                 if(isSend){
                     new Alert(Alert.AlertType.INFORMATION, "OTP Sent Successfully").showAndWait();
-                    loadPasswordForm();
                     passwordChangeRequestedUserDto=userDto;
+                    System.out.println("This User is tying to change his/her password : "+passwordChangeRequestedUserDto.getEmail());
+                    loadPasswordForm();
                 }else{
                     new Alert(Alert.AlertType.ERROR, "OTP Sending Failed").show();
                 }
@@ -174,6 +155,7 @@ public class LoginFormController {
                 if(isSend){
                     new Alert(Alert.AlertType.INFORMATION, "OTP Sent Successfully").showAndWait();
                     loadPasswordForm();
+                    System.out.println("This User is tying to change his/her password : "+passwordChangeRequestedAdminDto.getEmail());
                     passwordChangeRequestedAdminDto=adminDto;
                 }else{
                     new Alert(Alert.AlertType.ERROR, "OTP Sending Failed").show();

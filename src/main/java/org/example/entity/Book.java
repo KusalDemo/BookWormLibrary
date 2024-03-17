@@ -21,6 +21,7 @@ public class Book {
     @ManyToOne
     private Branch branch;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    /*@OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)*/
+    @OneToMany(mappedBy = "book", cascade = CascadeType.MERGE)
     private List<BorrowBooks> borrowBooks;
 }

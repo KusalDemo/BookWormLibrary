@@ -72,54 +72,57 @@ public class SignUpFormController {
         String rePassword = txtRePassword.getText();
         String role = cmbRole.getValue().toString();
 
-        if (role.equals("Admin")) {
-            if (Regex.isEmailValid(email) && Regex.isPasswordValid(password)) {
-                if (password.equals(rePassword)) {
-                    String adminId = AdminIdGenerator();
-                    AdminDto adminDto = new AdminDto(adminId, userName, email, password);
-                    try {
-                        if (adminBO.saveAdmin(adminDto)) {
-                            boolean isMailSent = sendMail(email, adminId);
-                            new Alert(Alert.AlertType.INFORMATION, "Sign Up Successful , Your Admin ID is sent to your email..").show();
-                            clearFields();
-                            btnAlreadyHaveAnAccountOnAction(actionEvent);
-                        } else {
-                            new Alert(Alert.AlertType.ERROR, "Sign Up Failed").show();
+        if(Regex.isNameValid(userName)){
+            if(Regex.isEmailValid(email)){
+                if(Regex.isPasswordValid(password)){
+                    if(password.equals(rePassword)){
+                        if (role.equals("Admin")) {
+                            String adminId = AdminIdGenerator();
+                            AdminDto adminDto = new AdminDto(adminId, userName, email, password);
+                            try {
+                                if (adminBO.saveAdmin(adminDto)) {
+                                    boolean isMailSent = sendMail(email, adminId);
+                                    new Alert(Alert.AlertType.INFORMATION, "Sign Up Successful , Your Admin ID is sent to your email..").show();
+                                    clearFields();
+                                    btnAlreadyHaveAnAccountOnAction(actionEvent);
+                                } else {
+                                    new Alert(Alert.AlertType.ERROR, "Sign Up Failed").show();
+                                }
+                            } catch (Exception e) {
+                                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+                                System.out.println(e.getMessage());
+                            }
+
+                        } else if (role.equals("User")) {
+                            String branch = cmbBranch.getValue().toString();
+                            String[] parts = branch.split(" - ");
+                            String branchId = parts[0];
+                            BranchDto branchDto = branchBO.searchBranch(branchId);
+                            UserDto userDto = new UserDto(userName, email, password, branchDto);
+                            try {
+                                if (userBO.saveUser(userDto)) {
+                                    new Alert(Alert.AlertType.INFORMATION, "Sign Up Successful").show();
+                                    clearFields();
+                                    btnAlreadyHaveAnAccountOnAction(actionEvent);
+                                } else {
+                                    new Alert(Alert.AlertType.ERROR, "Sign Up Failed").show();
+                                }
+                            } catch (Exception e) {
+                                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+                                System.out.println(e.getMessage());
+                            }
                         }
-                    } catch (Exception e) {
-                        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-                        System.out.println(e.getMessage());
+                    }else{
+                        new Alert(Alert.AlertType.ERROR, "Password does not match").show();
                     }
-                } else {
-                    new Alert(Alert.AlertType.ERROR, "Passwords do not match").show();
+                }else{
+                    new Alert(Alert.AlertType.ERROR, "Invalid Password , Please enter a valid password").show();
                 }
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Invalid Email , Please enter a valid email").show();
             }
-        } else if (role.equals("User")) {
-            String branch = cmbBranch.getValue().toString();
-            String[] parts = branch.split(" - ");
-            String branchId = parts[0];
-            if (Regex.isEmailValid(email) && Regex.isPasswordValid(password)) {
-                if (password.equals(rePassword)) {
-                    BranchDto branchDto = branchBO.searchBranch(branchId);
-                    UserDto userDto = new UserDto(userName, email, password, branchDto);
-                    try {
-                        if (userBO.saveUser(userDto)) {
-                            new Alert(Alert.AlertType.INFORMATION, "Sign Up Successful").show();
-                            clearFields();
-                            btnAlreadyHaveAnAccountOnAction(actionEvent);
-                        } else {
-                            new Alert(Alert.AlertType.ERROR, "Sign Up Failed").show();
-                        }
-                    } catch (Exception e) {
-                        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-                        System.out.println(e.getMessage());
-                    }
-                } else {
-                    new Alert(Alert.AlertType.ERROR, "Passwords do not match").show();
-                }
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Invalid Email or Password").show();
-            }
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Invalid User Name , Please enter a username containing only letters, numbers, and underscores. The username must be between 3 and 20 characters long.").show();
         }
     }
 
@@ -158,7 +161,6 @@ public class SignUpFormController {
                     "BookWorm Support Team");
             mail.setTo(email);
             mail.setSubject("ADMIN Verification [private and confidential]");
-
 
             Thread thread = new Thread(mail);
             thread.start();
