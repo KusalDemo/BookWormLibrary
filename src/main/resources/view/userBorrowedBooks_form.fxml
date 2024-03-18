@@ -11,84 +11,34 @@
 
 <AnchorPane prefHeight="920.0" prefWidth="1520.0" stylesheets="@../assets/managementStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.UserBorrowedBooksFormController">
    <children>
-      <TableView fx:id="tblBorrowBooks" layoutX="118.0" layoutY="122.0" prefHeight="684.0" prefWidth="820.0">
+      <TableView fx:id="tblBorrowBooks" layoutX="280.0" layoutY="242.0" prefHeight="621.0" prefWidth="1078.0">
          <columns>
-            <TableColumn fx:id="colBorrowID" prefWidth="150.0" text="Borrow ID" />
-            <TableColumn fx:id="colBookID" prefWidth="244.66668701171875" text="Book" />
-            <TableColumn fx:id="colBorrowDate" prefWidth="198.33331298828125" text="Borrow date" />
-            <TableColumn fx:id="colReturnDate" prefWidth="227.0" text="Return Date" />
+            <TableColumn fx:id="colBorrowID" prefWidth="175.0" text="Borrow ID" />
+            <TableColumn fx:id="colBookID" prefWidth="315.0" text="Book" />
+            <TableColumn fx:id="colBorrowDate" prefWidth="259.0" text="Borrow date" />
+            <TableColumn fx:id="colReturnDate" prefWidth="328.0" text="Return Date" />
          </columns>
       </TableView>
       <Button fx:id="btnBack" layoutX="53.0" layoutY="852.0" mnemonicParsing="false" onAction="#btnBackOnAction" prefHeight="40.0" prefWidth="163.0" styleClass="btn-30" text="BACK" />
-      <AnchorPane layoutX="997.0" layoutY="150.0" prefHeight="451.0" prefWidth="467.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
+      <AnchorPane layoutX="577.0" layoutY="63.0" prefHeight="146.0" prefWidth="467.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15;">
          <effect>
             <DropShadow />
          </effect>
          <children>
-            <Label layoutX="194.0" layoutY="424.0" text="\@bookworm" textFill="#808080" />
+            <Label layoutX="194.0" layoutY="138.0" text="\@bookworm" textFill="#808080" />
          </children>
       </AnchorPane>
-      <Label layoutX="1014.0" layoutY="341.0" prefHeight="16.0" prefWidth="163.0" text="Selected Book :">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label layoutX="1034.0" layoutY="380.0" prefHeight="16.0" prefWidth="114.0" text="Book ID : ">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblBookID" layoutX="1178.0" layoutY="381.0" prefHeight="21.0" prefWidth="258.0" textFill="#316ff6">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="1034.0" layoutY="410.0" prefHeight="16.0" prefWidth="114.0" text="Book Title :">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblBookTitle" layoutX="1178.0" layoutY="409.0" prefHeight="20.0" prefWidth="258.0" textFill="#316ff6" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="1034.0" layoutY="440.0" prefHeight="16.0" prefWidth="114.0" text="Branch  :">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblBranch" layoutX="1178.0" layoutY="441.0" prefHeight="21.0" prefWidth="259.0" textFill="#316ff6">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="1034.0" layoutY="471.0" prefHeight="21.0" prefWidth="137.0" text="Branch email :">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblBranchEmail" layoutX="1178.0" layoutY="471.0" prefHeight="20.0" prefWidth="262.0" textFill="#316ff6" wrapText="true">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
       <Label layoutX="44.0" layoutY="33.0" prefHeight="36.0" prefWidth="352.0" text="Borrowing History">
          <font>
             <Font name="System Bold" size="32.0" />
          </font>
       </Label>
-      <Label layoutX="1178.0" layoutY="164.0" text="Details" textAlignment="CENTER" underline="true">
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnClear" layoutX="1155.0" layoutY="633.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="40.0" prefWidth="163.0" text="Clear">
+      <Button fx:id="btnClear" layoutX="1065.0" layoutY="173.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="40.0" prefWidth="163.0" text="Clear">
          <styleClass>
             <String fx:value="btn-20" />
             <String fx:value="btn-50" />
          </styleClass></Button>
-      <Label layoutX="1014.0" layoutY="276.0" prefHeight="16.0" prefWidth="163.0" text="Borrow ID :">
+      <Label layoutX="594.0" layoutY="96.0" prefHeight="16.0" prefWidth="163.0" text="Borrow ID :">
          <font>
             <Font size="17.0" />
          </font>

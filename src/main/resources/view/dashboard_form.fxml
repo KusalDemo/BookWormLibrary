@@ -59,18 +59,18 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-      <Button fx:id="btnLogOut" layoutX="60.0" layoutY="858.0" mnemonicParsing="false" onAction="#btnLogOutOnAction" prefHeight="40.0" prefWidth="203.0" styleClass="btn-40" text="LOG OUT" />
+      <Button fx:id="btnLogOut" layoutX="42.0" layoutY="853.0" mnemonicParsing="false" onAction="#btnLogOutOnAction" prefHeight="40.0" prefWidth="203.0" styleClass="btn-40" text="LOG OUT" />
       <Label fx:id="lblLoggedPersonName" layoutX="294.0" layoutY="71.0" prefHeight="19.0" prefWidth="251.0">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="244.0" layoutY="449.0" opacity="0.69" text="Manage Books" textAlignment="CENTER">
+      <Label layoutX="269.0" layoutY="449.0" opacity="0.69" text="Books" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="666.0" layoutY="452.0" opacity="0.69" text="Manage Branches" textAlignment="CENTER">
+      <Label layoutX="705.0" layoutY="452.0" opacity="0.69" text="Branches" textAlignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
@@ -154,5 +154,11 @@
             <Font size="37.0" />
          </font>
       </Label>
+      <Button fx:id="btnSettings" layoutX="1264.0" layoutY="855.0" mnemonicParsing="false" onAction="#btnSettingsOnAction" prefHeight="40.0" prefWidth="211.0" styleClass="btn-40" text="Settings" textAlignment="RIGHT" />
+      <ImageView fitHeight="30.0" fitWidth="33.0" layoutX="1277.0" layoutY="861.0">
+         <image>
+            <Image url="@../assets/icons/icons8-settings-50.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

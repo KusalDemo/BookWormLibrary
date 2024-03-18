@@ -25,7 +25,7 @@ public class UserDAOImpl implements UserDAO {
     public boolean update(User dto) throws ClassNotFoundException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
-        session.update(dto);
+        session.merge(dto);
         transaction.commit();
         session.close();
         return true;

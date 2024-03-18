@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.Util.Mail;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.AdminBO;
 import org.example.bo.custom.BookBO;
@@ -26,11 +27,13 @@ import org.example.dto.BookDto;
 import org.example.dto.BranchDto;
 import org.example.dto.UserDto;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class DashBoardFormController {
 
@@ -48,7 +51,9 @@ public class DashBoardFormController {
     public Label lblCustomerCount;
     public Label lblBranchesCount;
     public Label lblTime;
+    public Button btnSettings;
 
+    public static String otp;
     BranchBO branchBO=(BranchBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BRANCH);
     BookBO bookBO=(BookBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.BOOK);
     UserBO userBO=(UserBO) BoFactory.getBoFactory().getBO(BoFactory.BOType.USER);
@@ -209,4 +214,22 @@ public class DashBoardFormController {
         String formattedTime = dateFormat.format(now);
         lblTime.setText( formattedTime);
     }
+
+    public void btnSettingsOnAction(ActionEvent actionEvent) {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/changeCredentials_form.fxml"));
+            Scene scene1 = new Scene(root);
+            Stage stage1 = (Stage) btnSettings.getScene().getWindow();
+            stage1.setScene(scene1);
+            stage1.setTitle("Settings");
+            stage1.centerOnScreen();
+    } catch (IOException e) {
+            throw new RuntimeException(e);
+        }}
+
+
+
 }
+
+

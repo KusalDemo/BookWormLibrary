@@ -44,7 +44,7 @@ public class UserBOImpl implements UserBO {
             }
         }
         List<BorrowBooks> allBorrowedBooks = borrowBooksDAO.getAll();
-        List<BorrowBooks> filteredBorrowBooks = null;
+        List<BorrowBooks> filteredBorrowBooks = new ArrayList<>();
         for(BorrowBooks borrowBooks : allBorrowedBooks){
            if(borrowBooks.getUser().getUserName().equals(userDto.getUserName())){
                /*filteredBorrowBooks = allBorrowedBooks.stream().filter(borrowBooks1 -> borrowBooks1.getUser().getUserName().equals(userDto.getUserName())).collect(Collectors.toList());*/

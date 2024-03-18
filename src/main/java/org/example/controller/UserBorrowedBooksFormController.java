@@ -103,7 +103,7 @@ public class UserBorrowedBooksFormController {
         ObservableList<BorrowBookTM> obList = FXCollections.observableArrayList();
        for(BorrowBooksDto b:allBorrowBooksFromUserId){
            System.out.println(b.getBook().getId());
-           obList.add(new BorrowBookTM(b.getId(),b.getBook().getId(),b.getBook().getId(),String.valueOf(b.getBorrowDate()),String.valueOf(b.getReturnDate()),b.getStatus()));
+           obList.add(new BorrowBookTM(b.getId(),b.getBook().getTitle(),b.getBook().getId(),String.valueOf(b.getBorrowDate()),String.valueOf(b.getReturnDate()),b.getStatus()));
        }
        tblBorrowBooks.setItems(obList);
     }

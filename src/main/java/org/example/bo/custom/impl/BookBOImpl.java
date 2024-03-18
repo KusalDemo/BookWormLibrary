@@ -93,7 +93,10 @@ public class BookBOImpl implements BookBO {
     @Override
     public BookDto searchBook(String id) throws ClassNotFoundException {
         Book search = bookDAO.search(id);
-        BranchDto branchDto = new BranchDto(search.getBranch().getBranchId(), search.getBranch().getBranchName(), search.getBranch().getLocation(), search.getBranch().getEmail());
+        BranchDto branchDto=new BranchDto();
+        if(search.getBranch()!=null){
+            branchDto = new BranchDto(search.getBranch().getBranchId(), search.getBranch().getBranchName(), search.getBranch().getLocation(), search.getBranch().getEmail());
+        }
         return new BookDto(search.getId(), search.getTitle(), search.getAuthor(), search.getGenre(), search.isAvailability(),branchDto);
     }
 }
